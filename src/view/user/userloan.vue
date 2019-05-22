@@ -42,7 +42,7 @@ export default {
     data(){
         return{
             activeName2:'first',
-            activeName:'1',
+            activeName:'',
             producet:'m001',//产品
         }
     },

@@ -2,7 +2,8 @@
     <div class="loan-wapper">
         <div class="heading-top">
         <el-row>
-        <el-col :span="12">我要借款 <i class="el-icon-arrow-right"></i><router-link to="/user/userloan"> 产品选择</router-link> <i class="el-icon-arrow-right"></i> 信息录入</el-col>
+        <el-col :span="12">我要借款 <i class="el-icon-arrow-right"></i><router-link to="/user/userloan"> 产品选择</router-link>
+         <i class="el-icon-arrow-right"></i> 订单申请</el-col>
         </el-row>
         </div>
         <el-card class="box-card">
@@ -265,7 +266,8 @@
                 </div>
                 
             <!-- 按钮 -->
-            <div class="in-button"><el-button type="primary" style="margin-top: 12px;" @click="next">下一步</el-button></div>
+            <div class="in-button">
+            <el-button type="primary" style="margin-top: 12px;" @click="next">下一步</el-button></div>
             </div>
 
 
@@ -363,7 +365,9 @@
                 </el-row>
                 
             <!-- 按钮 -->
-            <div class="in-button"><el-button type="primary" style="margin-top: 12px;" @click="next">下一步</el-button></div>
+            <div class="in-button">
+                <el-button type="primary" style="margin-top: 12px;" @click="last">上一步</el-button>
+                <el-button type="primary" style="margin-top: 12px;" @click="next">下一步</el-button></div>
             </div>
 
             <!-- 第三页 -->
@@ -377,6 +381,7 @@
                 <el-col :span="12">
                     <el-form-item label="前十大合作客户名单及年交易额：">
                         <el-upload
+                        accept="application/zip"
                         list-type="picture"
                         class="upload-demo"
                         action="https://jsonplaceholder.typicode.com/posts/"
@@ -386,13 +391,14 @@
                         :on-success="afterupload"
                         :before-upload="beforeAvatarUpload">
                         <el-button size="small" type="primary">点击上传</el-button>
-                        <div slot="tip" class="el-upload__tip">请上传压缩包，大小不可大于20M，至少上传1份</div>
+                        <div slot="tip" class="el-upload__tip">请将所需提供文件压缩，上传一份压缩包即可，文件大小为20M以内</div>
                         </el-upload>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="人力服务合同：">
                         <el-upload
+                        accept="application/zip"
                         list-type="picture"
                         class="upload-demo"
                         action="https://jsonplaceholder.typicode.com/posts/"
@@ -402,7 +408,7 @@
                         :on-success="afterupload"
                         :before-upload="beforeAvatarUpload">
                         <el-button size="small" type="primary">点击上传</el-button>
-                        <div slot="tip" class="el-upload__tip">请上传压缩包，大小不可大于20M，至少上传1份</div>
+                        <div slot="tip" class="el-upload__tip">请将所需提供文件压缩，上传一份压缩包即可，文件大小为20M以内</div>
                         </el-upload>
                     </el-form-item>
                 </el-col>
@@ -412,6 +418,7 @@
                 <el-col :span="12">
                     <el-form-item label="5份以上劳动合同：">
                         <el-upload
+                        accept="application/zip"
                         list-type="picture"
                         class="upload-demo"
                         action="https://jsonplaceholder.typicode.com/posts/"
@@ -421,13 +428,14 @@
                         :on-success="afterupload"
                         :before-upload="beforeAvatarUpload">
                         <el-button size="small" type="primary">点击上传</el-button>
-                        <div slot="tip" class="el-upload__tip">请上传压缩包，大小不可大于20M，至少上传1份</div>
+                        <div slot="tip" class="el-upload__tip">请将所需提供文件压缩，上传一份压缩包即可，文件大小为20M以内</div>
                         </el-upload>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="近一年的核心企业回款记录：">
                         <el-upload
+                        accept="application/zip"
                         list-type="picture"
                         class="upload-demo"
                         action="https://jsonplaceholder.typicode.com/posts/"
@@ -437,7 +445,7 @@
                         :on-success="afterupload"
                         :before-upload="beforeAvatarUpload">
                         <el-button size="small" type="primary">点击上传</el-button>
-                        <div slot="tip" class="el-upload__tip">请上传压缩包，大小不可大于20M，至少上传1份</div>
+                        <div slot="tip" class="el-upload__tip">请将所需提供文件压缩，上传一份压缩包即可，文件大小为20M以内</div>
                         </el-upload>
                     </el-form-item>
                 </el-col>
@@ -447,6 +455,7 @@
                 <el-col :span="12">
                     <el-form-item label="本次融资对应的发薪名单、金额：">
                         <el-upload
+                        accept="application/zip"
                         list-type="picture"
                         class="upload-demo"
                         action="https://jsonplaceholder.typicode.com/posts/"
@@ -456,13 +465,14 @@
                         :on-success="afterupload"
                         :before-upload="beforeAvatarUpload">
                         <el-button size="small" type="primary">点击上传</el-button>
-                        <div slot="tip" class="el-upload__tip">请上传压缩包，大小不可大于20M，至少上传1份</div>
+                        <div slot="tip" class="el-upload__tip">请将所需提供文件压缩，上传一份压缩包即可，文件大小为20M以内</div>
                         </el-upload>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="应收款对账凭证：">
                         <el-upload
+                        accept="application/zip"
                         list-type="picture"
                         class="upload-demo"
                         action="https://jsonplaceholder.typicode.com/posts/"
@@ -472,14 +482,17 @@
                         :on-success="afterupload"
                         :before-upload="beforeAvatarUpload">
                         <el-button size="small" type="primary">点击上传</el-button>
-                        <div slot="tip" class="el-upload__tip">请上传压缩包，大小不可大于20M，至少上传1份</div>
+                        <div slot="tip" class="el-upload__tip">请将所需提供文件压缩，上传一份压缩包即可，文件大小为20M以内</div>
                         </el-upload>
                     </el-form-item>
                 </el-col>
                 </el-row>
                 
             <!-- 按钮 -->
-            <div class="in-button"><el-button type="primary" style="margin-top: 12px;" @click="next">下一步</el-button></div>
+            <div class="in-button">
+                <el-button type="primary" style="margin-top: 12px;" @click="last">上一步</el-button>
+                <el-button type="primary" style="margin-top: 12px;" @click="next">下一步</el-button>
+                </div>
             </div>
 
             <!-- 第四页 -->
@@ -868,7 +881,10 @@
                 
                 
             <!-- 按钮 -->
-            <div class="in-button"><el-button type="primary" style="margin-top: 12px;" @click="next">提交</el-button></div>
+            <div class="in-button">
+                <el-button type="primary" style="margin-top: 12px;" @click="last">上一步</el-button>
+                <el-button type="primary" style="margin-top: 12px;" @click="next">提交</el-button>
+                </div>
             </div>
             
             
@@ -943,6 +959,59 @@ export default {
             this.active = 0;
         }
       },
+
+      //上一步
+      last(){
+        if (this.active-- < 1) 
+        this.active = 0;
+
+        //跳转返回顶部
+        if(document.body.scrollTop > 0) {
+                window.scrollTo(0, -1);
+                document.body.scrollTop = 0;
+            }
+            window.scrollTo(0, -1);
+            document.body.scrollTop = 0;
+
+            //第一页
+        if(this.active==0){
+            this.firstshow=true;
+            this.secondshow=false;
+            this.thirdshow=false;
+            this.fourshow=false;
+        }
+            //第二页
+        else if(this.active==1){
+            this.firstshow=false;
+            this.secondshow=true;
+            this.thirdshow=false;
+            this.fourshow=false;
+        }
+            //第三页
+        else if(this.active==2){
+            this.firstshow=false;
+            this.secondshow=false;
+            this.thirdshow=true;
+            this.fourshow=false;
+        }
+            //第四页
+        else if(this.active==3){
+            this.firstshow=false;
+            this.secondshow=false;
+            this.thirdshow=false;
+            this.fourshow=true;
+        }else if(this.active==4){
+            alert("提交成功。")
+            this.firstshow=true;
+            this.secondshow=false;
+            this.thirdshow=false;
+            this.fourshow=false;
+            this.active = 0;
+        }
+      },
+
+
+
       handleRemove(file, fileList) {
         console.log(file, fileList);
       },
@@ -953,12 +1022,16 @@ export default {
         return this.$confirm(`确定移除 ${ file.name }？`);
       },
       beforeAvatarUpload(file) {
+        const iszip = file.type === 'application/zip';
         const isLt20M = file.size / 1024 / 1024 < 20;
 
+        if (!iszip) {
+        this.$message.error('上传文件只能是压缩包(.zip)格式!');
+      }
         if (!isLt20M) {
-          this.$message.error('上传头像图片大小不能超过 20MB!');
+          this.$message.error('上传文件大小不能超过 20MB!');
         }
-        return isLt20M;
+        return iszip && isLt20M;
       },
       afterupload(res,file,fileList){
           if(res.code===20000){

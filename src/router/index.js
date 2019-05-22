@@ -64,7 +64,31 @@ export default new Router({
                   meta: {
                     auth: true
                   }
-                }],
+                },{
+                  // detail
+                    path: '/user/details/detail',
+                    name: '信息',
+                    component: require('../view/user/details/detail.vue').default,
+                    meta: {
+                      auth: true
+                    }
+                  },{
+                  // 订单信息
+                    path: '/user/details/userbase/detailmore',
+                    name: '订单信息',
+                    component: require('../view/user/details/userbase/detailmore.vue').default,
+                    meta: {
+                      auth: true
+                    }
+                  },{
+                    // 基本信息
+                      path: '/user/details/userbase/userbase',
+                      name: '基本信息',
+                      component: require('../view/user/details/userbase/userbase.vue').default,
+                      meta: {
+                        auth: true
+                      }
+                    }],
     },
   ]
 })
