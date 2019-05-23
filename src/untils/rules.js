@@ -45,6 +45,12 @@ var mobile = (rule, value, callback) => {
     }
   }
   export default {
+    enterpriseName:[{ required: true, message: '此处不能为空。', trigger: 'blur'}],
+    kong: [{ required: true, message: '此处不能为空。', trigger: 'blur'}],
+    number: [
+        { required: true, message: '此处不能为空。', trigger: 'blur'},
+        { pattern:/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入数字。', trigger: 'blur'},
+      ],
     mobile: [{ required: true, validator: mobile, trigger: 'blur' }],
     phone: [{ required: true, pattern: /^1[34578]\d{9}$/, message: '目前只支持中国大陆的手机号码', trigger: 'blur' }],
     numPot2: [{ required: true, validator: checkNumPot2, trigger: 'blur' }],

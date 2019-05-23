@@ -42,8 +42,8 @@ export default {
 }
 .home-box{
     position: absolute;
-    top: 30%;
-    left: 36%;
+    top: 24%;
+    left: 30%;
     text-align: center;
     padding: 50px;
 }
