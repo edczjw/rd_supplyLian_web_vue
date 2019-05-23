@@ -244,6 +244,14 @@ export default {
         // 我要还款
         reloan(){
             this.show=!this.show;
+            
+            //跳转返回顶部
+            if(document.body.scrollTop > 0) {
+                    window.scrollTo(0, -1);
+                    document.body.scrollTop = 0;
+                }
+                window.scrollTo(0, -1);
+                document.body.scrollTop = 0;
         },
 
         //手动上传

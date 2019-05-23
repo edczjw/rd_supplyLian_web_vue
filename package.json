@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "animate.css": "^3.7.0",
     "element-ui": "^2.8.2",
     "jquery": "^3.4.1",
     "sass-loader": "^7.1.0",

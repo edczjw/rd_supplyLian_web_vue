@@ -25,6 +25,14 @@ export default new Router({
       },
       // 含有文件夹的文件children
       children:[{
+        // 主题home
+          path: '/mshome',
+          name: '主页',
+          component: require('../view/index/home.vue').default,
+          meta: {
+            auth: true
+          }
+        },{
         // 创建账户
           path: '/creatuser/creatus',
           name: '创建账户',
