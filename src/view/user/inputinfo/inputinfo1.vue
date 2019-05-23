@@ -907,9 +907,11 @@
     </div>
 </template>
 <script>
+import rules from '../../../untils/rules'
 export default {
     data(){
         return{
+            rules,  
             active: 0,
             firstshow:true,//第一页显示
             secondshow:false,//第二页显示
