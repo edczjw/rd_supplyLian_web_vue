@@ -20,10 +20,6 @@
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-cebianlanshousuo"></use>
       </svg></p>
-    <p class='right' @click="returntop" title="返回顶部">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-fanhuidingbu"></use>
-      </svg></p>
     
   </div>
 </template>
@@ -49,18 +45,6 @@ export default {
     //返回上一页
     lastpage(){
       window.history.go(-1);
-    },
-    
-    //返回顶部
-    returntop(){
-      //返回顶部
-      if(document.body.scrollTop > 0) {
-                console.log(1);
-                window.scrollTo(0, -1);
-                document.body.scrollTop = 0;
-            }
-            window.scrollTo(0, -1);
-            document.body.scrollTop = 0;
     },
      /**
      * 全屏事件
@@ -168,7 +152,7 @@ p {
 
   float: right;
 
-  margin-right: 22px;
+  margin-right: 5px;
 
   cursor: pointer;
 
@@ -183,6 +167,10 @@ svg {
   width: 30px;
   height: 30px;
   padding: 3px 8px;
+  color: #fff;
 }
 
+svg:hover {
+  color: #eee;
+}
 </style>

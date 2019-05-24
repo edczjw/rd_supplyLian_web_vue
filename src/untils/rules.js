@@ -33,6 +33,19 @@ var mobile = (rule, value, callback) => {
     }
   }
   
+  //邮箱
+  export function emailValue(rule, value, callback) {
+    let temp = /^[\w.\-]+@(?:[a-z0-9]+(?:-[a-z0-9]+)*\.)+[a-z]{2,3}$/
+    let tempOne = /^[A-Za-zd]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$/
+    if (!value) {
+        return callback(new Error('请填写邮箱'))
+    }else if (value && (!(temp).test(value))) {
+      callback(new Error('邮箱格式不符合规范'))
+    } else {
+      callback()
+    }
+  }
+
   // 整数
   export function checkInterNum(rule, value, callback) {
     const reg = /^[0-9]*[1-9][0-9]*$/
@@ -44,6 +57,7 @@ var mobile = (rule, value, callback) => {
       callback()
     }
   }
+
   export default {
     enterpriseName:[{ required: true, message: '此处不能为空。', trigger: 'blur'}],
     kong: [{ required: true, message: '此处不能为空。', trigger: 'blur'}],
@@ -52,7 +66,14 @@ var mobile = (rule, value, callback) => {
         { pattern:/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入数字。', trigger: 'blur'},
       ],
     mobile: [{ required: true, validator: mobile, trigger: 'blur' }],
-    phone: [{ required: true, pattern: /^1[34578]\d{9}$/, message: '目前只支持中国大陆的手机号码', trigger: 'blur' }],
-    numPot2: [{ required: true, validator: checkNumPot2, trigger: 'blur' }],
+    phone: [ 
+        { required: true, message: '账号不能为空。', trigger: 'blur'},
+        { max: 11, message: '长度 11 个字符。', trigger: 'blur' },
+        { pattern: /^1[34578]\d{9}$/, message: '请输入正确的手机号码。', trigger: 'blur'}
+    ],
+    mail: [
+        { required: true, validator: emailValue, trigger: 'blur' }
+    ],
+    checkid: [{ required: true, validator: checkIdNum, trigger: 'blur' }],
     InterNum: [{ required: true, validator: checkInterNum, trigger: 'blur' }]
   }

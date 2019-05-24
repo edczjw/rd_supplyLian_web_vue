@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+
         <div class="home-box animated zoomIn">
             <h1  class="animated zoomIn">
                 欢
@@ -29,7 +30,16 @@
 </template>
 <script>
 export default {
-    
+    data(){
+        return{
+
+        }
+    },
+    mounted() {
+    },
+    methods: {
+       
+    },
 }
 </script>
 <style lang="less" scoped>

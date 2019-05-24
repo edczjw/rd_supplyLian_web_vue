@@ -15,7 +15,7 @@
             </el-steps>
 
 
-            <el-form ref="form" :model="form" label-width="245px" status-icon>
+            <el-form ref="form" :model="form" label-width="255px" status-icon>
             <!-- 第一页 -->
             <div v-if="firstshow">
                 <!-- 企业基本信息栏 -->
@@ -27,138 +27,139 @@
                 <div>
                 <el-row>
                 <el-col :span="12">
-                    <el-form-item label="企业名称" prop="enterpriseName"  :rules="rules.kong">
-                        <el-input v-model="form.enterpriseName" placeholder="填写企业全称"></el-input>
+                    <el-form-item label="企业名称：" prop="enterpriseName"  :rules="rules.kong">
+                        <el-input v-model="form.enterpriseName" size="mini" placeholder="填写企业全称"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="统一社会征信号码或营业执照号码" prop="socialCode" :rules="rules.kong">
-                        <el-input v-model="form.socialCode" ></el-input>
-                    </el-form-item>
-                </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
-                    <el-form-item label="注册地址" prop="registeredAddress" :rules="rules.kong">
-                        <el-input v-model="form.registeredAddress" ></el-input>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item label="实际经营地址" prop="businessAddress" :rules="rules.kong">
-                        <el-input v-model="form.businessAddress" ></el-input>
+                    <el-form-item label="统一社会征信号码或营业执照号码：" prop="socialCode" :rules="rules.kong">
+                        <el-input v-model="form.socialCode" size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 </el-row>
 
                 <el-row>
                 <el-col :span="12">
-                    <el-form-item label="注册资本" prop="registeredCapital" :rules="rules.number">
-                        <el-input v-model="form.registeredCapital" placeholder="填写数字值"></el-input>
+                    <el-form-item label="注册地址：" prop="registeredAddress" :rules="rules.kong">
+                        <el-input v-model="form.registeredAddress" size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="实缴资本" prop="paidCapital" :rules="rules.number">
-                        <el-input v-model="form.paidCapital" placeholder="填写数字值"></el-input>
-                    </el-form-item>
-                </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
-                    <el-form-item label="成立开始日期" prop="startingDate" :rules="rules.kong">
-                        <el-input v-model="form.startingDate" ></el-input>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item label="成立有效截止日期" prop="endingDate" :rules="rules.kong">
-                        <el-input v-model="form.endingDate" ></el-input>
+                    <el-form-item label="实际经营地址：" prop="businessAddress" :rules="rules.kong">
+                        <el-input v-model="form.businessAddress" size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 </el-row>
 
                 <el-row>
                 <el-col :span="12">
-                    <el-form-item label="是否为一般纳税人" prop="generalTaxpayers" :rules="rules.kong">
-                        <el-input v-model="form.generalTaxpayers" ></el-input>
+                    <el-form-item label="注册资本：" prop="registeredCapital" :rules="rules.number">
+                        <el-input v-model="form.registeredCapital" placeholder="填写数字值" size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="法定代表人姓名" prop="legalName" :rules="rules.kong">
-                        <el-input v-model="form.legalName" ></el-input>
-                    </el-form-item>
-                </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
-                    <el-form-item label="法定代表人身份证号码" prop="idCard" :rules="rules.kong">
-                        <el-input v-model="form.idCard" ></el-input>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item label="法定代表人联系电话" prop="phone" :rules="rules.kong">
-                        <el-input v-model="form.phone" ></el-input>
+                    <el-form-item label="实缴资本：" prop="paidCapital" :rules="rules.number">
+                        <el-input v-model="form.paidCapital" placeholder="填写数字值" size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 </el-row>
 
                 <el-row>
                 <el-col :span="12">
-                    <el-form-item label="实际控制人姓名" prop="controlName" :rules="rules.kong">
-                        <el-input v-model="form.controlName" ></el-input>
+                    <el-form-item label="成立开始日期：" prop="startingDate" :rules="rules.kong">
+                        <el-input v-model="form.startingDate" placeholder="yyyy-mm-dd" size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="实际控制人身份证号码" prop="idCard" :rules="rules.kong">
-                        <el-input v-model="form.idCard" ></el-input>
-                    </el-form-item>
-                </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
-                    <el-form-item label="实际控制人联系电话" prop="phone" :rules="rules.kong">
-                        <el-input v-model="form.phone" ></el-input>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item label="业务对接人姓名" prop="businessName" :rules="rules.kong">
-                        <el-input v-model="form.businessName" ></el-input>
+                    <el-form-item label="成立有效截止日期：" prop="endingDate" :rules="rules.kong">
+                        <el-input v-model="form.endingDate" placeholder="yyyy-mm-dd" size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 </el-row>
 
                 <el-row>
                 <el-col :span="12">
-                    <el-form-item label="业务对接人联系电话" prop="phone" :rules="rules.kong">
-                        <el-input v-model="form.phone" ></el-input>
+                    <el-form-item label="是否为一般纳税人：" prop="generalTaxpayers" :rules="rules.kong">
+                        <el-radio v-model="form.generalTaxpayers" label="1">是</el-radio>
+                        <el-radio v-model="form.generalTaxpayers" label="2">否</el-radio>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="业务对接人联系邮箱" prop="mail" :rules="rules.kong">
-                        <el-input v-model="form.mail" ></el-input>
-                    </el-form-item>
-                </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
-                    <el-form-item label="财务对接人姓名" prop="financeName" :rules="rules.kong">
-                        <el-input v-model="form.financeName" ></el-input>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item label="财务对接人联系电话" prop="phone" :rules="rules.kong">
-                        <el-input v-model="form.phone" ></el-input>
+                    <el-form-item label="法定代表人姓名：" prop="legalName" :rules="rules.kong">
+                        <el-input v-model="form.legalName"  size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 </el-row>
 
                 <el-row>
                 <el-col :span="12">
-                    <el-form-item label="财务对接人联系邮箱" prop="mail" :rules="rules.kong">
-                        <el-input v-model="form.mail" ></el-input>
+                    <el-form-item label="法定代表人身份证号码：" prop="idCard" :rules="rules.checkid">
+                        <el-input v-model="form.idCard"  size="mini"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="法定代表人联系电话：" prop="phone" :rules="rules.phone">
+                        <el-input v-model="form.phone" placeholder="请输入正确的电话号码"  size="mini"></el-input>
+                    </el-form-item>
+                </el-col>
+                </el-row>
+
+                <el-row>
+                <el-col :span="12">
+                    <el-form-item label="实际控制人姓名：" prop="controlName" :rules="rules.kong">
+                        <el-input v-model="form.controlName"  size="mini"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="实际控制人身份证号码：" prop="idCard" :rules="rules.checkid">
+                        <el-input v-model="form.idCard"  size="mini"></el-input>
+                    </el-form-item>
+                </el-col>
+                </el-row>
+
+                <el-row>
+                <el-col :span="12">
+                    <el-form-item label="实际控制人联系电话：" prop="phone" :rules="rules.phone">
+                        <el-input v-model="form.phone" size="mini" ></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="业务对接人姓名：" prop="businessName" :rules="rules.kong">
+                        <el-input v-model="form.businessName"  size="mini"></el-input>
+                    </el-form-item>
+                </el-col>
+                </el-row>
+
+                <el-row>
+                <el-col :span="12">
+                    <el-form-item label="业务对接人联系电话：" prop="phone" :rules="rules.phone">
+                        <el-input v-model="form.phone" placeholder="请输入正确的电话号码" size="mini"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="业务对接人联系邮箱：" prop="mail" :rules="rules.mail">
+                        <el-input v-model="form.mail" placeholder="请输入正确的邮箱" size="mini"></el-input>
+                    </el-form-item>
+                </el-col>
+                </el-row>
+
+                <el-row>
+                <el-col :span="12">
+                    <el-form-item label="财务对接人姓名：" prop="financeName" :rules="rules.kong">
+                        <el-input v-model="form.financeName" size="mini" ></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="财务对接人联系电话：" prop="phone" :rules="rules.phone">
+                        <el-input v-model="form.phone"  placeholder="请输入正确的电话号码" size="mini"></el-input>
+                    </el-form-item>
+                </el-col>
+                </el-row>
+
+                <el-row>
+                <el-col :span="12">
+                    <el-form-item label="财务对接人联系邮箱：" prop="mail" :rules="rules.mail">
+                        <el-input v-model="form.mail" placeholder="请输入正确的邮箱" size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 </el-row>
@@ -173,26 +174,26 @@
                 <div>
                 <el-row>
                 <el-col :span="12">
-                    <el-form-item label="银行卡卡号" prop="cardNo" :rules="rules.kong">
-                        <el-input v-model="form.cardNo" ></el-input>
+                    <el-form-item label="银行卡卡号：" prop="cardNo" :rules="rules.kong">
+                        <el-input v-model="form.cardNo"  size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="银行名称" prop="bankName" :rules="rules.kong">
-                        <el-input v-model="form.bankName" ></el-input>
+                    <el-form-item label="银行名称：" prop="bankName" :rules="rules.kong">
+                        <el-input v-model="form.bankName"  size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 </el-row>
 
                 <el-row>
                 <el-col :span="12">
-                    <el-form-item label="账户户名" prop="accountName" :rules="rules.kong">
-                        <el-input v-model="form.accountName" ></el-input>
+                    <el-form-item label="账户户名：" prop="accountName" :rules="rules.kong">
+                        <el-input v-model="form.accountName"  size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="银行支行名称" prop="bankBranchName" :rules="rules.kong">
-                        <el-input v-model="form.bankBranchName" ></el-input>
+                    <el-form-item label="银行支行名称：" prop="bankBranchName" :rules="rules.kong">
+                        <el-input v-model="form.bankBranchName"  size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 </el-row>
@@ -208,65 +209,65 @@
                 <div>
                 <el-row>
                 <el-col :span="12">
-                    <el-form-item label="近三年经营收入金额" prop="threeYearIncome" :rules="rules.number">
-                        <el-input v-model="form.threeYearIncome"  placeholder="填写数字值,按年度填写"></el-input>
+                    <el-form-item label="近三年经营收入金额：" prop="threeYearIncome" :rules="rules.number">
+                        <el-input v-model="form.threeYearIncome"  placeholder="填写数字值,按年度填写" size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="近三年的利润金额" prop="threeYearProfit" :rules="rules.number">
-                        <el-input v-model="form.threeYearProfit"  placeholder="填写数字值,按年度填写"></el-input>
-                    </el-form-item>
-                </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
-                    <el-form-item label="近三年的开票金额" prop="threeYearInvoice" :rules="rules.number">
-                        <el-input v-model="form.threeYearInvoice"  placeholder="填写数字值,按年度填写"></el-input>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item label="近三年的纳税金额" prop="threeYearTaxes" :rules="rules.number">
-                        <el-input v-model="form.threeYearTaxes"  placeholder="填写数字值,按年度填写"></el-input>
+                    <el-form-item label="近三年的利润金额：" prop="threeYearProfit" :rules="rules.number">
+                        <el-input v-model="form.threeYearProfit"  placeholder="填写数字值,按年度填写" size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 </el-row>
 
                 <el-row>
                 <el-col :span="12">
-                    <el-form-item label="当前金融机构借贷余额" prop="financialLendingBalance" :rules="rules.number">
-                        <el-input v-model="form.financialLendingBalance" placeholder="填写数字值"></el-input>
+                    <el-form-item label="近三年的开票金额：" prop="threeYearInvoice" :rules="rules.number">
+                        <el-input v-model="form.threeYearInvoice"  placeholder="填写数字值,按年度填写" size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="当前非金融机构融资余额" prop="unfinancialLendingBalance" :rules="rules.number">
-                        <el-input v-model="form.unfinancialLendingBalance" placeholder="填写数字值" ></el-input>
-                    </el-form-item>
-                </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
-                    <el-form-item label="对外担保情况" prop="externalGuarantees" :rules="rules.kong">
-                        <el-input v-model="form.externalGuarantees" ></el-input>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item label="担保人" prop="guarantee" :rules="rules.kong">
-                        <el-input v-model="form.enterpriseName" ></el-input>
+                    <el-form-item label="近三年的纳税金额：" prop="threeYearTaxes" :rules="rules.number">
+                        <el-input v-model="form.threeYearTaxes"  placeholder="填写数字值,按年度填写" size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 </el-row>
 
                 <el-row>
                 <el-col :span="12">
-                    <el-form-item label="担保金额" prop="guaranteeAmount" :rules="rules.kong">
-                        <el-input v-model="form.enterpriseName" ></el-input>
+                    <el-form-item label="当前金融机构借贷余额：" prop="financialLendingBalance" :rules="rules.number">
+                        <el-input v-model="form.financialLendingBalance" placeholder="填写数字值" size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="担保期限" prop="guaranteePeriod" :rules="rules.kong">
-                        <el-input v-model="form.enterpriseName" ></el-input>
+                    <el-form-item label="当前非金融机构融资余额：" prop="unfinancialLendingBalance" :rules="rules.number">
+                        <el-input v-model="form.unfinancialLendingBalance" placeholder="填写数字值"  size="mini"></el-input>
+                    </el-form-item>
+                </el-col>
+                </el-row>
+
+                <el-row>
+                <el-col :span="12">
+                    <el-form-item label="对外担保情况：" prop="externalGuarantees" :rules="rules.kong">
+                        <el-input v-model="form.externalGuarantees"  size="mini"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="担保人：" prop="guarantee" :rules="rules.kong">
+                        <el-input v-model="form.enterpriseName"  size="mini"></el-input>
+                    </el-form-item>
+                </el-col>
+                </el-row>
+
+                <el-row>
+                <el-col :span="12">
+                    <el-form-item label="担保金额：" prop="guaranteeAmount" :rules="rules.kong">
+                        <el-input v-model="form.enterpriseName" size="mini"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="担保期限：" prop="guaranteePeriod" :rules="rules.kong">
+                        <el-input v-model="form.enterpriseName"  size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 </el-row>
@@ -288,86 +289,86 @@
 
                 <el-row>
                 <el-col :span="12">
-                    <el-form-item label="付款主体名称" prop="paymentSubject" :rules="rules.kong">
-                        <el-input v-model="form.paymentSubject"></el-input>
+                    <el-form-item label="付款主体名称：" prop="paymentSubject" :rules="rules.kong">
+                        <el-input v-model="form.paymentSubject" size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="开始合作期限" prop="periodCooperation" :rules="rules.number">
-                        <el-input v-model="form.periodCooperation" placeholder="填写数字值"></el-input>
-                    </el-form-item>
-                </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
-                    <el-form-item label="过去两年交易额" prop="turnover" :rules="rules.number">
-                        <el-input v-model="form.turnover" placeholder="填写数字值"></el-input>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item label="付款账期" prop="paymentPeriod" :rules="rules.number">
-                        <el-input v-model="form.paymentPeriod" placeholder="填写数字值"></el-input>
+                    <el-form-item label="开始合作期限：" prop="periodCooperation" :rules="rules.number">
+                        <el-input v-model="form.periodCooperation" placeholder="填写数字值" size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 </el-row>
 
                 <el-row>
                 <el-col :span="12">
-                    <el-form-item label="项目当前应收款总额" prop="totalReceivables" :rules="rules.number">
-                        <el-input v-model="form.totalReceivables" placeholder="填写数字值"></el-input>
+                    <el-form-item label="过去两年交易额：" prop="turnover" :rules="rules.number">
+                        <el-input v-model="form.turnover" placeholder="填写数字值" size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="项目员工总数" prop="projectEmployees" :rules="rules.number">
-                        <el-input v-model="form.projectEmployees" placeholder="填写数字值"></el-input>
-                    </el-form-item>
-                </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
-                    <el-form-item label="平均员工薪资" prop="averageEmployeeSalary" :rules="rules.number">
-                        <el-input v-model="form.averageEmployeeSalary" placeholder="填写数字值"></el-input>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item label="单个员工薪资上限" prop="capEmployeeSalary" :rules="rules.number">
-                        <el-input v-model="form.capEmployeeSalary" placeholder="填写数字值"></el-input>
+                    <el-form-item label="付款账期：" prop="paymentPeriod" :rules="rules.number">
+                        <el-input v-model="form.paymentPeriod" placeholder="填写数字值" size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 </el-row>
 
                 <el-row>
                 <el-col :span="12">
-                    <el-form-item label="本次申请借款总额" prop="totalApplication" :rules="rules.number">
-                        <el-input v-model="form.totalApplication" placeholder="填写数字值"></el-input>
+                    <el-form-item label="项目当前应收款总额：" prop="totalReceivables" :rules="rules.number">
+                        <el-input v-model="form.totalReceivables" placeholder="填写数字值" size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="本次申请借款最长期限" prop="applicationDeadline" :rules="rules.number">
-                        <el-input v-model="form.applicationDeadline" placeholder="填写数字值"></el-input>
+                    <el-form-item label="项目员工总数：" prop="projectEmployees" :rules="rules.number">
+                        <el-input v-model="form.projectEmployees" placeholder="填写数字值" size="mini"></el-input>
+                    </el-form-item>
+                </el-col>
+                </el-row>
+
+                <el-row>
+                <el-col :span="12">
+                    <el-form-item label="平均员工薪资：" prop="averageEmployeeSalary" :rules="rules.number">
+                        <el-input v-model="form.averageEmployeeSalary" placeholder="填写数字值" size="mini"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="单个员工薪资上限：" prop="capEmployeeSalary" :rules="rules.number">
+                        <el-input v-model="form.capEmployeeSalary" placeholder="填写数字值" size="mini"></el-input>
+                    </el-form-item>
+                </el-col>
+                </el-row>
+
+                <el-row>
+                <el-col :span="12">
+                    <el-form-item label="本次申请借款总额：" prop="totalApplication" :rules="rules.number">
+                        <el-input v-model="form.totalApplication" placeholder="填写数字值" size="mini"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="本次申请借款最长期限：" prop="applicationDeadline" :rules="rules.number">
+                        <el-input v-model="form.applicationDeadline" placeholder="填写数字值" size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 </el-row>
                 <el-row>
 
                 <el-col :span="12">
-                    <el-form-item label="本次借款指定回款及还款账户" prop="repaymentAccount" :rules="rules.kong">
-                        <el-input v-model="form.repaymentAccount" ></el-input>
+                    <el-form-item label="本次借款指定回款及还款账户：" prop="repaymentAccount" :rules="rules.kong">
+                        <el-input v-model="form.repaymentAccount"  size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="本次借款质押的应收款金额" prop="pledgedReceivables" :rules="rules.number">
-                        <el-input v-model="form.pledgedReceivables" placeholder="填写数字值"></el-input>
+                    <el-form-item label="本次借款质押的应收款金额：" prop="pledgedReceivables" :rules="rules.number">
+                        <el-input v-model="form.pledgedReceivables" placeholder="填写数字值" size="mini"></el-input>
                     </el-form-item>
                 </el-col>
                 </el-row>
                 <el-row>
 
                 <el-col :span="12">
-                    <el-form-item label="本次借款担保方式" prop="borrowingGuarantee" :rules="rules.kong">
-                        <el-input v-model="form.borrowingGuarantee" ></el-input>
+                    <el-form-item label="本次借款担保方式：" prop="borrowingGuarantee" :rules="rules.kong">
+                        <el-input v-model="form.borrowingGuarantee" size="mini" ></el-input>
                     </el-form-item>
                 </el-col>
                 </el-row>
@@ -379,12 +380,12 @@
             </div>
 
             <!-- 第三页 -->
-            <div v-if="thirdshow">  
+            <div v-if="thirdshow" >  
                 <el-row>
                 <el-col :span="12"><h4>文件上传</h4>
                 </el-col>
                 </el-row>
-
+            <div class="thirdpage">
                 <el-row>
                 <el-col :span="12">
                     <el-form-item label="前十大合作客户名单及年交易额：">
@@ -398,7 +399,7 @@
                         :before-remove="beforeRemove"
                         :on-success="afterupload"
                         :before-upload="beforeAvatarUpload">
-                        <el-button size="small" type="primary">点击上传</el-button>
+                        <el-button size="mini" type="primary">点击上传</el-button>
                         <div slot="tip" class="el-upload__tip">请将所需提供文件压缩，上传一份压缩包即可，文件大小为20M以内</div>
                         </el-upload>
                     </el-form-item>
@@ -415,7 +416,7 @@
                         :before-remove="beforeRemove"
                         :on-success="afterupload"
                         :before-upload="beforeAvatarUpload">
-                        <el-button size="small" type="primary">点击上传</el-button>
+                        <el-button size="mini" type="primary">点击上传</el-button>
                         <div slot="tip" style="color:red;font-size:12px;"> * 扫描件加盖公章</div>
                         <div slot="tip" class="el-upload__tip">请将所需提供文件压缩，上传一份压缩包即可，文件大小为20M以内</div>
                         </el-upload>
@@ -436,7 +437,7 @@
                         :before-remove="beforeRemove"
                         :on-success="afterupload"
                         :before-upload="beforeAvatarUpload">
-                        <el-button size="small" type="primary">点击上传</el-button>
+                        <el-button size="mini" type="primary">点击上传</el-button>
                         <div slot="tip" style="color:red;font-size:12px;"> * 扫描件加盖公章</div>
                         <div slot="tip" class="el-upload__tip">请将所需提供文件压缩，上传一份压缩包即可，文件大小为20M以内</div>
                         </el-upload>
@@ -454,7 +455,7 @@
                         :before-remove="beforeRemove"
                         :on-success="afterupload"
                         :before-upload="beforeAvatarUpload">
-                        <el-button size="small" type="primary">点击上传</el-button>
+                        <el-button size="mini" type="primary">点击上传</el-button>
                         <div slot="tip" style="color:red;font-size:12px;"> * 银行水单或网银导出数据</div>
                         <div slot="tip" class="el-upload__tip">请将所需提供文件压缩，上传一份压缩包即可，文件大小为20M以内</div>
                         </el-upload>
@@ -475,7 +476,7 @@
                         :before-remove="beforeRemove"
                         :on-success="afterupload"
                         :before-upload="beforeAvatarUpload">
-                        <el-button size="small" type="primary">点击上传</el-button>
+                        <el-button size="mini" type="primary">点击上传</el-button>
                         <div slot="tip" class="el-upload__tip">请将所需提供文件压缩，上传一份压缩包即可，文件大小为20M以内</div>
                         </el-upload>
                     </el-form-item>
@@ -492,14 +493,14 @@
                         :before-remove="beforeRemove"
                         :on-success="afterupload"
                         :before-upload="beforeAvatarUpload">
-                        <el-button size="small" type="primary">点击上传</el-button>
+                        <el-button size="mini" type="primary">点击上传</el-button>
                         <div slot="tip" style="color:red;font-size:12px;"> * 原始邮件或对账单盖章</div>
                         <div slot="tip" class="el-upload__tip">请将所需提供文件压缩，上传一份压缩包即可，文件大小为20M以内</div>
                         </el-upload>
                     </el-form-item>
                 </el-col>
                 </el-row>
-                
+            </div>
             <!-- 按钮 -->
             <div class="in-button">
                 <el-button type="primary" style="margin-top: 12px;" @click="last">上一步</el-button>
@@ -515,7 +516,7 @@
                 </el-col>
                 </el-row>
                 
-                <div>
+                <div class="thirdpage">
                 <el-row>
                 <el-col :span="12">
                     <el-form-item label="企业名称：" >
@@ -662,7 +663,7 @@
                 </el-col>
                 </el-row>
 
-                <div>
+                <div class="thirdpage">
                 <el-row>
                 <el-col :span="12">
                     <el-form-item label="银行卡卡号：">
@@ -691,13 +692,12 @@
                 </div>
 
                 <!-- 企业财务信息栏 -->
-                <div>
-                <el-row>
+                <el-row >
                 <el-col :span="12"><h4>企业财务信息栏</h4>
                 </el-col>
                 </el-row>
 
-                <div>
+                <div class="thirdpage">
                 <el-row>
                 <el-col :span="12">
                     <el-form-item label="近三年经营收入金额：">
@@ -763,13 +763,13 @@
                 </el-col>
                 </el-row>
                 </div>
-                </div>
 
                 <el-row>
                 <el-col :span="12"><h4>人力薪资贷申请</h4>
                 </el-col>
                 </el-row>
 
+                <div class="thirdpage">
                 <el-row>
                 <el-col :span="12">
                     <el-form-item label="付款主体名称：">
@@ -855,12 +855,14 @@
                     </el-form-item>
                 </el-col>
                 </el-row>
+            </div>
 
                 <el-row>
                 <el-col :span="12"><h4>影像信息</h4>
                 </el-col>
                 </el-row>
 
+            <div class="thirdpage">
                 <el-row>
                 <el-col :span="12">
                     <el-form-item label="前十大合作客户名单及年交易额：">
@@ -899,7 +901,7 @@
                     </el-form-item>
                 </el-col>
                 </el-row>
-                
+            </div>
                 
             <!-- 按钮 -->
             <div class="in-button">
@@ -1147,7 +1149,7 @@ export default {
     border-top-right-radius: 4px;
 }
 .el-col h4{
-    padding: 30px 0;
+    padding: 30px 20px;
     color: blue;
 }
 .el-input{
@@ -1156,5 +1158,12 @@ export default {
 .in-button{
     text-align: center;
     margin-bottom: 12px;
+}
+.thirdpage .el-row{
+    border-top: 1px solid rgba(197, 195, 195, 0.637);
+    padding: 20px;
+}
+.thirdpage .el-row .el-col:nth-child(odd){
+    border-right: 1px solid rgba(197, 195, 195, 0.637);
 }
 </style>
