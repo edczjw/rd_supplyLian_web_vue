@@ -84,7 +84,7 @@
 
               <div class="checkbox">
                   <el-checkbox-group v-model="checked">
-                    <el-checkbox >已同意并愿意接受 《XXXXX》 和 《xxxx声明》</el-checkbox>
+                    <el-checkbox >已同意并愿意接受 <router-link to="/agreement">《民盛小贷企业用户服务协议》</router-link></el-checkbox>
                   </el-checkbox-group>
               </div>
 

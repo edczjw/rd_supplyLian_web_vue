@@ -27,7 +27,7 @@ var mobile = (rule, value, callback) => {
     if (!value) {
       return callback(new Error('证件号码不能为空'))
     } else if (!reg.test(value)) {
-      return callback(new Error('证件号码不正确'))
+      return callback(new Error('证件号码格式不正确'))
     } else {
       callback()
     }
@@ -59,17 +59,17 @@ var mobile = (rule, value, callback) => {
   }
 
   export default {
-    enterpriseName:[{ required: true, message: '此处不能为空。', trigger: 'blur'}],
-    kong: [{ required: true, message: '此处不能为空。', trigger: 'blur'}],
+    enterpriseName:[{ required: true, message: '此处不能为空，没有则填无。', trigger: 'blur'}],
+    kong: [{ required: true, message: '此处不能为空，没有则填无。', trigger: 'blur'}],
     number: [
-        { required: true, message: '此处不能为空。', trigger: 'blur'},
+        { required: true, message: '此处不能为空，没有则填0。', trigger: 'blur'},
         { pattern:/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入数字。', trigger: 'blur'},
       ],
     mobile: [{ required: true, validator: mobile, trigger: 'blur' }],
     phone: [ 
         { required: true, message: '电话号码不能为空。', trigger: 'blur'},
         { max: 11, message: '长度 11 个字符。', trigger: 'blur' },
-        { pattern: /^1[34578]\d{9}$/, message: '请输入正确的手机号码。', trigger: 'blur'}
+        { pattern: /^1[34578]\d{9}$/, message: '请输入正确格式的手机号码。', trigger: 'blur'}
     ],
     mail: [
         { required: true, validator: emailValue, trigger: 'blur' }

@@ -17,6 +17,14 @@ export default new Router({
       component: require('../view/login/login.vue').default,
     },{
       // 主页
+      path: '/agreement',
+      name: '主页',
+      component: require('../view/xieyi/xieyi.vue').default,
+      meta: {
+        auth: true
+      }
+    },{
+      // 主页
       path: '/home',
       name: '主页',
       component: require('../view/index/index.vue').default,

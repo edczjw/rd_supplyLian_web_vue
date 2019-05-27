@@ -98,7 +98,6 @@ export default {
   margin-left: 200px;
   padding: 15px 15px;
   transition: all .5s;
-  background-color: rgb(232, 234, 235);
 }
 
 // 右半部分扩张
@@ -119,8 +118,8 @@ export default {
 
 .icon{
     overflow: hidden;
-    width: 4.4em;
-    height: 4.4em;
+    width: 3.1em;
+    height: 3.1em;
     vertical-align: -.9em;
     fill: currentColor;
     padding: 3px 5px;

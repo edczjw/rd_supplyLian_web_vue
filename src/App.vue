@@ -31,7 +31,6 @@ body {
 
 #app {
   height: 100%;
-  background-color: rgb(232, 234, 235);
 }
 
 /* 菜单路径 */

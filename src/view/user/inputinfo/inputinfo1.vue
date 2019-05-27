@@ -111,15 +111,15 @@
                 </el-row>
 
                 <el-row>
-                <el-col :span="13">
+                <el-col :span="12">
                     <el-form-item 
                     v-for="(lawlist, index) in form.lawlist"
                     :label="'法定代表人联系电话'+(index+1)+'：'" 
                     :key="lawlist.key"
                     :prop="'lawlist.' + index + '.phone'"
                     :rules="rules.phone">
-                        <el-input v-model.trim="form.phone" placeholder="请输入正确的电话号码"  size="mini" clearable></el-input>
-                        <el-button plain type="danger" size="mini" @click.prevent="removelaw(lawlist)">删除</el-button>
+                        <el-input v-model.trim="lawlist.phone" placeholder="请输入正确的电话号码"  size="mini" clearable></el-input>
+                        <el-button v-if="deleteshow" plain type="danger" size="mini" @click.prevent="removelaw(lawlist)">删除</el-button>
                     </el-form-item>
                 </el-col>
                 </el-row>
@@ -153,7 +153,7 @@
                 </el-row>
 
                 <el-row>
-                <el-col :span="13">
+                <el-col :span="12">
                     <el-form-item 
                     v-for="(controlList, index) in form.controlList"
                     :label="'实际控制人联系电话'+(index+1)+'：'" 
@@ -161,7 +161,7 @@
                     :prop="'controlList.' + index + '.phone'"
                     :rules="rules.phone">
                         <el-input v-model.trim="controlList.phone" size="mini" clearable></el-input>
-                        <el-button plain type="danger" size="mini" @click.prevent="removelaw(lawlist)">删除</el-button>
+                        <el-button v-if="deleteshow" plain type="danger" size="mini" @click.prevent="removecontrol(controlList)">删除</el-button>
                     </el-form-item>
                 </el-col>
                 </el-row>
@@ -190,7 +190,7 @@
                         <el-input v-model.trim="businessList.phone" placeholder="请输入正确的电话号码" size="mini" clearable></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col :span="13">
+                <el-col :span="12">
                     <el-form-item 
                     v-for="(businessList, index) in form.businessList"
                     :label="'业务对接人联系邮箱'+(index+1)+'：'" 
@@ -198,7 +198,7 @@
                     :prop="'businessList.' + index + '.mail'"
                     :rules="rules.mail">
                         <el-input v-model.trim="businessList.mail" placeholder="请输入正确的邮箱" size="mini" clearable></el-input>
-                        <el-button plain type="danger" size="mini" @click.prevent="removelaw(lawlist)">删除</el-button>
+                        <el-button v-if="deleteshow" plain type="danger" size="mini" @click.prevent="removebussiness(businessList)">删除</el-button>
                     </el-form-item>
                 </el-col>
                 </el-row>
@@ -231,7 +231,7 @@
                 </el-row>
 
                 <el-row>
-                <el-col :span="13">
+                <el-col :span="12">
                     <el-form-item
                     v-for="(financeList, index) in form.financeList"
                     :label="'财务对接人联系邮箱'+(index+1)+'：'" 
@@ -239,7 +239,7 @@
                     :prop="'financeList.' + index + '.mail'"
                     :rules="rules.mail">
                         <el-input v-model.trim="financeList.mail" placeholder="请输入正确的邮箱" size="mini" clearable></el-input>
-                        <el-button plain type="danger" size="mini" @click.prevent="removelaw(lawlist)">删除</el-button>
+                        <el-button v-if="deleteshow" plain type="danger" size="mini" @click.prevent="removefinance(financeList)">删除</el-button>
                     </el-form-item>
                 </el-col>
                 </el-row>
@@ -358,7 +358,7 @@
                 
             <!-- 按钮 -->
             <div class="in-button">
-            <el-button type="primary" style="margin-top: 12px;" @click="next">下一步</el-button></div>
+            <el-button type="primary" style="margin-top: 12px;" @click="next('form')">下一步</el-button></div>
             </div>
 
 
@@ -655,84 +655,39 @@
                         {{form.generalTaxpayers}}
                     </el-form-item>
                 </el-col>
-                <el-col :span="12">
-                    <el-form-item label="法定代表人姓名：">
-                        {{form.legalName}}
-                    </el-form-item>
-                </el-col>
+                </el-row>
+
+
+                <el-row>
+                <el-table :data="this.form.lawlist" border>
+                <el-table-column property="legalName" label="法定代表人姓名" align="center"></el-table-column>
+                <el-table-column property="idCard" label="法定代表人身份证号码" align="center"></el-table-column>
+                <el-table-column property="phone" label="法定代表人联系电话" align="center"></el-table-column>
+                </el-table>
                 </el-row>
 
                 <el-row>
-                <el-col :span="12">
-                    <el-form-item label="法定代表人身份证号码：">
-                        {{form.idCard}}
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item label="法定代表人联系电话：">
-                        {{form.phone}}
-                    </el-form-item>
-                </el-col>
+                <el-table :data="this.form.controlList" border>
+                <el-table-column property="controlName" label="实际控制人姓名" align="center"></el-table-column>
+                <el-table-column property="idCard" label="实际控制人身份证号码" align="center"></el-table-column>
+                <el-table-column property="phone" label="实际控制人联系电话" align="center"></el-table-column>
+                </el-table>
                 </el-row>
 
                 <el-row>
-                <el-col :span="12">
-                    <el-form-item label="实际控制人姓名：">
-                        {{form.controlName}}
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item label="实际控制人身份证号码：">
-                        {{form.idCard}}
-                    </el-form-item>
-                </el-col>
+                <el-table :data="this.form.businessList" border>
+                <el-table-column property="businessName" label="业务对接人姓名" align="center"></el-table-column>
+                <el-table-column property="phone" label="业务对接人联系电话" align="center"></el-table-column>
+                <el-table-column property="mail" label="业务对接人联系邮箱" align="center"></el-table-column>
+                </el-table>
                 </el-row>
 
                 <el-row>
-                <el-col :span="12">
-                    <el-form-item label="实际控制人联系电话：">
-                        {{form.phone}}
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item label="业务对接人姓名：">
-                        {{form.businessName}}
-                    </el-form-item>
-                </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
-                    <el-form-item label="业务对接人联系电话：">
-                        {{form.phone}}
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item label="业务对接人联系邮箱：">
-                        {{form.mail}}
-                    </el-form-item>
-                </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
-                    <el-form-item label="财务对接人姓名：">
-                        {{form.financeName}}
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item label="财务对接人联系电话：">
-                        {{form.phone}}
-                    </el-form-item>
-                </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
-                    <el-form-item label="财务对接人联系邮箱：">
-                        {{form.mail}}
-                    </el-form-item>
-                </el-col>
+                <el-table :data="this.form.financeList" border >
+                <el-table-column property="financeName" label="财务对接人姓名" align="center"></el-table-column>
+                <el-table-column property="phone" label="财务对接人联系电话" align="center"></el-table-column>
+                <el-table-column property="mail" label="财务对接人联系邮箱" align="center"></el-table-column>
+                </el-table>
                 </el-row>
                 </div>
 
@@ -1004,6 +959,7 @@ export default {
             thirdshow:false,//第三页显示
             fourshow:false,//第四页显示
             danbaoinput:false,//担保输入框是否禁用
+            deleteshow:false,
 
             //表单
             form:{
@@ -1105,10 +1061,12 @@ export default {
                 phone:"",               //联系电话
                 key: Date.now()
             });
+            this.deleteshow=true;
         },
 
         //删除法定人
         removelaw(item){
+            //角标值
             var index = this.form.lawlist.indexOf(item)
             if (index !== -1) {
             this.form.lawlist.splice(index, 1)
@@ -1124,6 +1082,7 @@ export default {
                 phone:"",               //联系电话
                 key: Date.now()
             });
+            this.deleteshow=true;
         },
 
         //删除控制人
@@ -1143,6 +1102,7 @@ export default {
                 mail:"",                //联系邮箱
                 key: Date.now()
             });
+            this.deleteshow=true;
         },
 
         //删除业务人
@@ -1161,6 +1121,7 @@ export default {
                 mail:"",                //联系邮箱
                 key: Date.now()
             });
+            this.deleteshow=true;
         },
 
         //删除财务人
@@ -1171,53 +1132,53 @@ export default {
             }
         },
 
-        next() {
-        if (this.active++ > 3) 
-        this.active = 0;
+        next(formName) {
+                if (this.active++ > 3) 
+                this.active = 0;
 
-        //跳转返回顶部
-        if(document.body.scrollTop > 0) {
-                window.scrollTo(0, -1);
-                document.body.scrollTop = 0;
-            }
-            window.scrollTo(0, -1);
-            document.body.scrollTop = 0;
+                //跳转返回顶部
+                if(document.body.scrollTop > 0) {
+                        window.scrollTo(0, -1);
+                        document.body.scrollTop = 0;
+                    }
+                    window.scrollTo(0, -1);
+                    document.body.scrollTop = 0;
 
-            //第一页
-        if(this.active==0){
-            this.firstshow=true;
-            this.secondshow=false;
-            this.thirdshow=false;
-            this.fourshow=false;
-        }
-            //第二页
-        else if(this.active==1){
-            this.firstshow=false;
-            this.secondshow=true;
-            this.thirdshow=false;
-            this.fourshow=false;
-        }
-            //第三页
-        else if(this.active==2){
-            this.firstshow=false;
-            this.secondshow=false;
-            this.thirdshow=true;
-            this.fourshow=false;
-        }
-            //第四页
-        else if(this.active==3){
-            this.firstshow=false;
-            this.secondshow=false;
-            this.thirdshow=false;
-            this.fourshow=true;
-        }else if(this.active==4){
-            alert("提交成功。")
-            this.firstshow=true;
-            this.secondshow=false;
-            this.thirdshow=false;
-            this.fourshow=false;
-            this.active = 0;
-        }
+                    //第一页
+                if(this.active==0){
+                    this.firstshow=true;
+                    this.secondshow=false;
+                    this.thirdshow=false;
+                    this.fourshow=false;
+                }
+                    //第二页
+                else if(this.active==1){
+                    this.firstshow=false;
+                    this.secondshow=true;
+                    this.thirdshow=false;
+                    this.fourshow=false;
+                }
+                    //第三页
+                else if(this.active==2){
+                    this.firstshow=false;
+                    this.secondshow=false;
+                    this.thirdshow=true;
+                    this.fourshow=false;
+                }
+                    //第四页
+                else if(this.active==3){
+                    this.firstshow=false;
+                    this.secondshow=false;
+                    this.thirdshow=false;
+                    this.fourshow=true;
+                }else if(this.active==4){
+                    alert("提交成功。")
+                    this.firstshow=true;
+                    this.secondshow=false;
+                    this.thirdshow=false;
+                    this.fourshow=false;
+                    this.active = 0;
+                }
       },
 
       //上一步
@@ -1334,8 +1295,8 @@ export default {
     margin-bottom: 12px;
 }
 .thirdpage .el-row{
-    border-top: 1px solid rgba(197, 195, 195, 0.637);
-    padding: 20px;
+    // border-top: 1px solid rgba(197, 195, 195, 0.637);
+    padding: 10px;
 }
 .thirdpage .el-row .el-col:nth-child(odd){
     border-right: 1px solid rgba(197, 195, 195, 0.637);
