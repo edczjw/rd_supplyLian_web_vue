@@ -67,7 +67,7 @@ var mobile = (rule, value, callback) => {
       ],
     mobile: [{ required: true, validator: mobile, trigger: 'blur' }],
     phone: [ 
-        { required: true, message: '账号不能为空。', trigger: 'blur'},
+        { required: true, message: '电话号码不能为空。', trigger: 'blur'},
         { max: 11, message: '长度 11 个字符。', trigger: 'blur' },
         { pattern: /^1[34578]\d{9}$/, message: '请输入正确的手机号码。', trigger: 'blur'}
     ],
