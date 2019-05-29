@@ -51,9 +51,9 @@
         <div class="do-regist  animated bounceIn" style="display: none;">
             <h2>账号注册</h2>
 
-            <el-form ref="form" :model="this.registform" status-icon :rules="rules" label-width="80px" class="demo-ruleForm">
+            <el-form ref="form" :model="this.registform" status-icon label-width="80px" class="demo-ruleForm">
               <div class="login-content">
-                <el-form-item label="账号" prop="mobile">
+                <el-form-item label="账号" prop="mobile" :rules="rules.mobile">
                 <el-input class="ell" placeholder="请填写手机号" v-model.trim="registform.mobile">
                   <template slot="prepend">
                     <i class="el-icon-edit"></i>
@@ -63,7 +63,7 @@
               </div>
 
               <div class="login-content">
-                <el-form-item label="密码" prop="password">
+                <el-form-item label="密码" prop="password" :rules="rules.password">
                 <el-input class="ell" type="password" show-password placeholder="请填写注册密码" v-model.trim="registform.password">
                   <template slot="prepend">
                     <i class="el-icon-view"></i>
@@ -73,7 +73,7 @@
               </div>
 
               <div class="login-content">
-                <el-form-item label="确认密码" prop="realpassword">
+                <el-form-item label="确认密码" prop="realpassword" :rules="rules.checkPass">
                 <el-input class="ell" type="password" show-password placeholder="请再次填写注册密码" v-model.trim="registform.realpassword">
                   <template slot="prepend">
                     <i class="el-icon-view"></i>
@@ -83,9 +83,7 @@
               </div>
 
               <div class="checkbox">
-                  <el-checkbox-group v-model="checked">
-                    <el-checkbox >已同意并愿意接受 <router-link to="/agreement">《民盛小贷企业用户服务协议》</router-link></el-checkbox>
-                  </el-checkbox-group>
+                    <el-checkbox v-model="registform.agreementStatus">已同意并愿意接受 <router-link to="/agreement">《民盛小贷企业用户服务协议》</router-link></el-checkbox>                
               </div>
 
               <div class="button-content">
@@ -127,12 +125,11 @@ export default {
           },
           // 注册表单
           registform:{
-              mobile: "",
-              password: "",
-              realpassword:""
+              username: "",  //账号
+              password: "",  //密码
+              realpassword:"",  //确认密码
+              agreementStatus:true,//是否勾选注册协议
           },
-          //是否点击同意
-          checked:true,
 
           //输入框验证
           rules: {
@@ -145,11 +142,9 @@ export default {
                 { required: true, message: '密码不能为空。', trigger: 'blur' },
                 { min: 8, max: 16, message: '长度在 8 到 16 个字符', trigger: 'blur' }
               ],
-              realpassword:[
-                { required: true, message: '此处不能为空', trigger: 'blur' },
-                { min: 8, max: 16, message: '长度在 8 到 16 个字符', trigger: 'blur' },
-                { validator: validatePass2, trigger: 'blur' }
-              ],
+              checkPass: [
+                  { validator: validatePass2, trigger: 'blur' }
+                ],
           }
     }
   },
@@ -157,8 +152,43 @@ export default {
 
   },
   methods: {
+    //注册
+    regist(){
+      this.$axios({
+          method: 'post',
+          url: this.$store.state.domain +"/biz/user/register",
+          data: this.registform,
+        })
+        .then(
+          response => {
+            console.log(response);
+          }
+        )
+        .catch(function (error) {
+            console.log(error);
+        });
+    },
     //登录
     login(){
+      this.$axios({
+          method: 'post',
+          url: this.$store.state.domain +"/biz/user/login",
+          data: this.loginform,
+        })
+        .then(
+          response => {
+            if(response.data.code){
+
+            }else{
+              this.filePath = response.data;
+              
+            }
+          },
+          response => {
+            console.log(response);
+          }
+        );
+
       // loading加载
       const loading = this.$loading({
           lock: true,
