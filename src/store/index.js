@@ -9,6 +9,7 @@ export default new Vuex.Store({
         domain:'http://dev.ms-saas.msxiaodai.com',
         domain:'',
         isLeftHiden:false,//隐藏侧边栏
-        showmenu:true,//是否显示菜单栏
+        buttonshow:true,//开户提交按钮
+        
     }
 })

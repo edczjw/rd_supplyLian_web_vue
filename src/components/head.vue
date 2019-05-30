@@ -11,7 +11,7 @@
     <p class='right' title="用户名">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-character"></use>
-      </svg>admin</p>
+      </svg>{{this.userName}}</p>
     <p class='right' @click="screenfull" title="全屏显示">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-quanping4"></use>
@@ -29,10 +29,12 @@ import screenfull from 'screenfull'
 export default {
   data(){
       return{
+      userName:'admin',
       isFullscreen: false
     }
   },
   mounted() {
+    this.getName();
       window.onresize = () => {
             // 全屏下监控是否按键了ESC
             if (!this.checkFull()) {
@@ -42,6 +44,12 @@ export default {
           }
        },
   methods: {
+    //获取用户名，vue 本地存储数据 sessionStorage
+    getName() {
+      let userName = sessionStorage.getItem("username");
+      this.userName = userName;
+    },
+
     //返回上一页
     lastpage(){
       window.history.go(-1);

@@ -217,12 +217,6 @@ export default {
     text-align: justify;
     font-size: 14px;
 }
-
-
-
-
-
-
 .roulink{
   font-size: 12px;
 }

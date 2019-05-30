@@ -14,10 +14,10 @@
         <div class="do-login animated bounceIn">
             <h2>账号登录</h2>
 
-            <el-form ref="form" :model="this.loginform" status-icon :rules="rules" label-width="55px" class="demo-ruleForm">
+            <el-form ref="loginform" :model="this.loginform" status-icon :rules="rules" label-width="55px" class="demo-ruleForm">
               <div class="login-content">
-                <el-form-item label="账号" prop="mobile">
-                <el-input class="ell" placeholder="请输入手机号" v-model.trim="loginform.mobile">
+                <el-form-item label="账号" prop="username" :rules="rules.username">
+                <el-input class="ell" placeholder="请输入手机号" v-model.trim="loginform.username">
                   <template slot="prepend">
                     <i class="el-icon-edit"></i>
                   </template>
@@ -35,7 +35,7 @@
                 </el-form-item>
               </div>
               <div class="button-content">
-                <el-button type="primary" plain size="medium" @click="login()" >登录</el-button>
+                <el-button type="primary" plain size="medium" @click="login('loginform')" >登录</el-button>
               </div>
             </el-form>
 
@@ -51,10 +51,10 @@
         <div class="do-regist  animated bounceIn" style="display: none;">
             <h2>账号注册</h2>
 
-            <el-form ref="form" :model="this.registform" status-icon label-width="80px" class="demo-ruleForm">
+            <el-form ref="registform" :rules="rules" :model="this.registform" status-icon label-width="80px" class="demo-ruleForm">
               <div class="login-content">
-                <el-form-item label="账号" prop="mobile" :rules="rules.mobile">
-                <el-input class="ell" placeholder="请填写手机号" v-model.trim="registform.mobile">
+                <el-form-item label="账号" prop="username" :rules="rules.username">
+                <el-input class="ell" placeholder="请填写手机号" v-model.trim="registform.username">
                   <template slot="prepend">
                     <i class="el-icon-edit"></i>
                   </template>
@@ -73,7 +73,7 @@
               </div>
 
               <div class="login-content">
-                <el-form-item label="确认密码" prop="realpassword" :rules="rules.checkPass">
+                <el-form-item label="确认密码" prop="realpassword" :rules="rules.realpassword">
                 <el-input class="ell" type="password" show-password placeholder="请再次填写注册密码" v-model.trim="registform.realpassword">
                   <template slot="prepend">
                     <i class="el-icon-view"></i>
@@ -83,20 +83,22 @@
               </div>
 
               <div class="checkbox">
-                    <el-checkbox v-model="registform.agreementStatus">已同意并愿意接受 <router-link to="/agreement">《民盛小贷企业用户服务协议》</router-link></el-checkbox>                
+                    <el-checkbox prop="agreementStatus" :rules="rules.agreementStatus" v-model="registform.agreementStatus">已同意并愿意接受 
+                      <router-link to="/agreement">
+                      《民盛小贷企业用户服务协议》
+                      </router-link> 
+                    </el-checkbox>   
+                                
               </div>
 
               <div class="button-content">
-                <el-button type="primary" plain size="medium"  @click="regist()" >注册</el-button>
+                <el-button type="primary" plain size="medium"  @click="regist('registform')" >注册</el-button>
               </div>
 
               <div class="button-content">
                 <el-button type="primary"  plain size="medium"  @click="tologin()" >已有账号？立即登录</el-button>
               </div>
             </el-form>
-
-            
-
         </div>
     </div>
 
@@ -120,7 +122,7 @@ export default {
     return {
           // 登录表单
           loginform: {
-              mobile: '',
+              username: '',
               password: ""
           },
           // 注册表单
@@ -128,22 +130,26 @@ export default {
               username: "",  //账号
               password: "",  //密码
               realpassword:"",  //确认密码
-              agreementStatus:true,//是否勾选注册协议
+              agreementStatus:false,//是否勾选注册协议
           },
 
           //输入框验证
           rules: {
-              mobile: [
+              username: [
                 { required: true, message: '账号不能为空。', trigger: 'blur'},
                 { max: 11, message: '长度 11 个字符。', trigger: 'blur' },
                 { pattern: /^1[34578]\d{9}$/, message: '请输入正确的手机号码。', trigger: 'blur'},
               ],
               password:[
                 { required: true, message: '密码不能为空。', trigger: 'blur' },
-                { min: 8, max: 16, message: '长度在 8 到 16 个字符', trigger: 'blur' }
+                // { min: 8, max: 16, message: '长度在 8 到 16 个字符', trigger: 'blur' }
               ],
-              checkPass: [
+              realpassword: [
+                  { required: true, message: '不能为空。', trigger: 'blur' },
                   { validator: validatePass2, trigger: 'blur' }
+                ],
+              agreementStatus: [
+                  { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
                 ],
           }
     }
@@ -153,55 +159,109 @@ export default {
   },
   methods: {
     //注册
-    regist(){
-      this.$axios({
-          method: 'post',
-          url: this.$store.state.domain +"/biz/user/register",
-          data: this.registform,
-        })
-        .then(
-          response => {
-            console.log(response);
+    regist(formName){
+       this.$refs[formName].validate((valid) => {
+          if (valid) {
+            this.$axios({
+                method: 'post',
+                url: this.$store.state.domain +"/biz/user/register",
+                data: this.registform,
+              })
+              .then(
+                response => {
+                  if(response.data.code==0){
+                    //注册成功
+                    this.$message({
+                        message: '恭喜你'+response.data.msg+'，欢迎进入登录。',
+                        type: 'success'
+                      });
+                    //切换登录窗口
+                    this.tologin();
+
+                  }else{
+                    this.$message.error(response.data.msg);
+                  }
+                }
+              )
+              .catch(function (error) {
+                  console.log(error);
+              });
+          } else {
+            console.log('error submit!!');
+            return false;
           }
-        )
-        .catch(function (error) {
-            console.log(error);
         });
+      
     },
     //登录
-    login(){
-      this.$axios({
-          method: 'post',
-          url: this.$store.state.domain +"/biz/user/login",
-          data: this.loginform,
-        })
-        .then(
-          response => {
-            if(response.data.code){
+    login(formName){
+      this.$refs[formName].validate((valid) => {
+          if (valid) {
+                this.$axios({
+                    method: 'post',
+                    url: this.$store.state.domain +"/biz/user/login",
+                    data: this.loginform,
+                  })
+                  .then(
+                    response => {
+                      if(response.data.code==0){
+                        
+                        //开户状态、用户名、企业编号
+                        var accountStatus = response.data.detail.accountStatus;
+                        var username = response.data.detail.username;
 
-            }else{
-              this.filePath = response.data;
-              
+                        //未开户时不返回
+                        if(response.data.detail.enterpriseNo != '' || response.data.detail.enterpriseNo!=null){
+                        var enterpriseNo = response.data.detail.enterpriseNo;
+                        }
+
+                        // loading加载
+                        const loading = this.$loading({
+                            text: '请稍等...',
+                            spinner: 'el-icon-loading',
+                            background: 'rgba(238, 238, 238, 0.452)'
+                          });
+                          setTimeout(() => {
+                            loading.close();
+
+                            if(accountStatus == '2'){
+                              //已开户
+                              this.$router.push("/mshome");//跳转
+                            }else if(accountStatus == '0' || accountStatus == '1'  || accountStatus == '3' || accountStatus == '4' || accountStatus == '5' ){
+                              this.$router.push("/creatuser/creatus")
+                              this.$store.state.buttonshow=false;//隐藏开户提交按钮
+                            }
+                          }, 2000);
+
+                        //登录成功
+                        this.$message({
+                        message: '恭喜你'+response.data.msg,
+                        type: 'success'
+                      });
+
+
+                      //存储状态、用户名、企业编号
+                      sessionStorage.setItem("accountStatus", accountStatus);
+                      sessionStorage.setItem("username", username);
+                      sessionStorage.setItem("enterpriseNo", enterpriseNo);
+
+                      //跳转主页
+                      
+                      
+
+                      }else{
+                        this.$message.error(response.data.msg);
+                      }
+                    },
+                    response => {
+                      console.log(response);
+                    }
+                  );
+        } else {
+              console.log('error submit!!');
+              return false;
             }
-          },
-          response => {
-            console.log(response);
-          }
-        );
-
-      // loading加载
-      const loading = this.$loading({
-          lock: true,
-          text: '请稍等...',
-          spinner: 'el-icon-loading',
-          background: 'rgba(0, 0, 0, 0.7)'
-        });
-        setTimeout(() => {
-          loading.close();
-          this.$router.push("/mshome");//跳转
-        }, 2000);
-
-
+        })
     },
     //切换登录
     tologin(){

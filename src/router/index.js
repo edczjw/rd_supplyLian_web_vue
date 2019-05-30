@@ -16,17 +16,22 @@ export default new Router({
       name: '登录页面',
       component: require('../view/login/login.vue').default,
     },{
-      // 主页
+      // 协议
       path: '/agreement',
-      name: '主页',
+      name: '协议',
       component: require('../view/xieyi/xieyi.vue').default,
-      meta: {
-        auth: true
-      }
     },{
+      // 创建账户
+        path: '/creatuser/creatus',
+        name: '创建账户',
+        component: require('../view/createuser/creatuser.vue').default,
+        meta: {
+          auth: true
+        }
+      },{
       // 主页
       path: '/home',
-      name: '主页',
+      name: '空白主页',
       component: require('../view/index/index.vue').default,
       meta: {
         auth: true
@@ -37,14 +42,6 @@ export default new Router({
           path: '/mshome',
           name: '主页',
           component: require('../view/index/home.vue').default,
-          meta: {
-            auth: true
-          }
-        },{
-        // 创建账户
-          path: '/creatuser/creatus',
-          name: '创建账户',
-          component: require('../view/createuser/creatuser.vue').default,
           meta: {
             auth: true
           }
@@ -75,7 +72,7 @@ export default new Router({
               },{
                 // 录入企业信息
                   path: '/user/inputinfo/inputinfo1',
-                  name: '账户设置',
+                  name: '信息录入',
                   component: require('../view/user/inputinfo/inputinfo1.vue').default,
                   meta: {
                     auth: true

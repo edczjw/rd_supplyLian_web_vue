@@ -14,9 +14,7 @@
     <div class="top">
         <head-banner></head-banner>
     </div>
-        <div v-if="this.$store.state.showmenu">
         <me-nu></me-nu>
-        </div>
         <div class="main-ten" :class="{'container-width':this.$store.state.isLeftHiden}">
         <router-view></router-view>
       </div>
