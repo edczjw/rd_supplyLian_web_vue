@@ -156,7 +156,7 @@ p {
 
   cursor: pointer;
 
-  color: rgb(89, 90, 94);
+  color: rgb(182, 21, 231);
 }
 
 .right:hover {

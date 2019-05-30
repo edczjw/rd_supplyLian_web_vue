@@ -124,11 +124,6 @@
                 <el-col :span="12">剩余利息（元）：</el-col>
                 </el-row>
 
-                <el-row :gutter="24">
-                <el-col :span="12">已还服务费（元）：</el-col>
-                <el-col :span="12">剩余服务费（元）：</el-col>
-                </el-row>
-
                 <el-row>
                    <el-col><div class="set-tits"><h3>逾期概要</h3></div></el-col>
                 </el-row>

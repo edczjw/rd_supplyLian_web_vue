@@ -463,7 +463,8 @@
             <!-- 第三页 -->
             <div v-if="thirdshow" >  
                 <el-row>
-                <h4>文件上传</h4>
+                <h4>文件上传   <span slot="tip" class="el-upload__tip">（请将各项所需提供文件压缩成一份压缩包，每项至少上传一份，压缩包大小不得超过20M。）</span></h4>
+                
                 </el-row>
             <div class="thirdpage">
                 <el-row>
@@ -480,7 +481,6 @@
                         :on-success="afterupload"
                         :before-upload="beforeAvatarUpload">
                         <el-button size="mini" type="primary">点击上传</el-button>
-                        <div slot="tip" class="el-upload__tip">请将所需提供文件压缩，上传一份压缩包即可，文件大小为20M以内</div>
                         </el-upload>
                     </el-form-item>
                 </el-col>
@@ -497,8 +497,7 @@
                         :on-success="afterupload"
                         :before-upload="beforeAvatarUpload">
                         <el-button size="mini" type="primary">点击上传</el-button>
-                        <div slot="tip" style="color:red;font-size:12px;"> * 扫描件加盖公章</div>
-                        <div slot="tip" class="el-upload__tip">请将所需提供文件压缩，上传一份压缩包即可，文件大小为20M以内</div>
+                        <span slot="tip" style="color:red;font-size:12px;"> * 扫描件加盖公章</span>
                         </el-upload>
                     </el-form-item>
                 </el-col>
@@ -518,8 +517,8 @@
                         :on-success="afterupload"
                         :before-upload="beforeAvatarUpload">
                         <el-button size="mini" type="primary">点击上传</el-button>
-                        <div slot="tip" style="color:red;font-size:12px;"> * 扫描件加盖公章</div>
-                        <div slot="tip" class="el-upload__tip">请将所需提供文件压缩，上传一份压缩包即可，文件大小为20M以内</div>
+                        <span slot="tip" style="color:red;font-size:12px;"> * 扫描件加盖公章</span>
+                        <div slot="tip" class="el-upload__tip">此项压缩包中至少含有五份劳动合同</div>
                         </el-upload>
                     </el-form-item>
                 </el-col>
@@ -536,8 +535,7 @@
                         :on-success="afterupload"
                         :before-upload="beforeAvatarUpload">
                         <el-button size="mini" type="primary">点击上传</el-button>
-                        <div slot="tip" style="color:red;font-size:12px;"> * 银行水单或网银导出数据</div>
-                        <div slot="tip" class="el-upload__tip">请将所需提供文件压缩，上传一份压缩包即可，文件大小为20M以内</div>
+                        <span slot="tip" style="color:red;font-size:12px;"> * 银行水单或网银导出数据</span>
                         </el-upload>
                     </el-form-item>
                 </el-col>
@@ -557,7 +555,6 @@
                         :on-success="afterupload"
                         :before-upload="beforeAvatarUpload">
                         <el-button size="mini" type="primary">点击上传</el-button>
-                        <div slot="tip" class="el-upload__tip">请将所需提供文件压缩，上传一份压缩包即可，文件大小为20M以内</div>
                         </el-upload>
                     </el-form-item>
                 </el-col>
@@ -574,8 +571,7 @@
                         :on-success="afterupload"
                         :before-upload="beforeAvatarUpload">
                         <el-button size="mini" type="primary">点击上传</el-button>
-                        <div slot="tip" style="color:red;font-size:12px;"> * 原始邮件或对账单盖章</div>
-                        <div slot="tip" class="el-upload__tip">请将所需提供文件压缩，上传一份压缩包即可，文件大小为20M以内</div>
+                        <span slot="tip" style="color:red;font-size:12px;"> * 原始邮件或对账单盖章</span>
                         </el-upload>
                     </el-form-item>
                 </el-col>
@@ -655,15 +651,24 @@
                         {{form.generalTaxpayers}}
                     </el-form-item>
                 </el-col>
+                <el-col :span="12">
+                    <el-form-item label="法定代表人姓名：">
+                        {{form.legalName}}
+                    </el-form-item>
+                </el-col>
                 </el-row>
-
-
                 <el-row>
-                <el-table :data="this.form.lawlist" border>
-                <el-table-column property="legalName" label="法定代表人姓名" align="center"></el-table-column>
-                <el-table-column property="idCard" label="法定代表人身份证号码" align="center"></el-table-column>
-                <el-table-column property="phone" label="法定代表人联系电话" align="center"></el-table-column>
-                </el-table>
+                <el-col :span="12">
+                    <el-form-item label="法定代表人身份证号码：">
+                        {{form.idCard}}
+                    </el-form-item>
+                </el-col>
+
+                <el-col :span="12">
+                    <el-form-item label="法定代表人联系电话：">
+                        {{form.phone}}
+                    </el-form-item>
+                </el-col>
                 </el-row>
 
                 <el-row>
@@ -1295,8 +1300,10 @@ export default {
     margin-bottom: 12px;
 }
 .thirdpage .el-row{
-    // border-top: 1px solid rgba(197, 195, 195, 0.637);
-    padding: 10px;
+    border-bottom: 1px solid rgba(197, 195, 195, 0.637);
+
+    padding: 30px;
+    margin-bottom: 20px;
 }
 .thirdpage .el-row .el-col:nth-child(odd){
     border-right: 1px solid rgba(197, 195, 195, 0.637);
