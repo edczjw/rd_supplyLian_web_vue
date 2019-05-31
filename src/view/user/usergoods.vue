@@ -17,7 +17,7 @@
                     <!-- 点击某个客户姓名查看详情 -->
                     <template slot-scope="scope">
                         <el-button type="text" size="small"
-                        @click="gouserdetail(scope.row.processNo)">
+                        @click="gouserdetail(scope.row.processNo,scope.row.status)">
                         {{scope.row.operation}}</el-button>
                     </template>
                 </el-table-column>
@@ -58,8 +58,14 @@ export default {
     },
     methods: {
         //点击操作跳转
-        gouserdetail(processNo){
-            this.$router.push("/user/details/detail?processNo="+processNo)
+        gouserdetail(processNo,status){
+            this.$router.push({
+                path:"/user/details/detail",
+                query:{
+                    processNo:processNo,
+                    status:status
+                    }
+                })
         },
 
         getlist(){

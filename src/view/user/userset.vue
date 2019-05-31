@@ -84,95 +84,8 @@
 
                 </el-card>
             </el-tab-pane>
+           
             <el-tab-pane name="1">
-                <span slot="label"><i class="el-icon-goods">当期账单</i></span>
-                <div v-if="show">
-                <el-card class="box-card">
-                <el-row :gutter="24">
-                   <el-col :span="20"><div class="set-tit"><h3>还款概要</h3></div></el-col>
-                   <el-col :span="4"><div class="set-statues"><h3>待还款</h3></div></el-col>
-                </el-row>
-                <el-row :gutter="24">
-                <el-col :span="12">授信金额（元）：</el-col>
-                <el-col :span="12">授信期限（天）：</el-col>
-                </el-row>
-
-                <el-row :gutter="24">
-                <el-col :span="12">借款利率（%）：</el-col>
-                <el-col :span="12">借款服务费（%）：</el-col>
-                </el-row>
-
-                <el-row :gutter="24">
-                <el-col :span="12">应还款时间：</el-col>
-                <el-col :span="12">应还款总金额（元）：</el-col>
-                </el-row>
-
-                <el-row :gutter="24">
-                <el-col :span="12">应还款时间：</el-col>
-                <el-col :span="12">应还款总金额（元）：</el-col>
-                </el-row>
-
-                <el-row :gutter="24">
-                <el-col :span="12">已还本金（元）：</el-col>
-                <el-col :span="12">剩余本金（元）：</el-col>
-                </el-row>
-
-                <el-row :gutter="24">
-                <el-col :span="12">已还利息（元）：</el-col>
-                <el-col :span="12">剩余利息（元）：</el-col>
-                </el-row>
-
-                <el-row>
-                   <el-col><div class="set-tits"><h3>逾期概要</h3></div></el-col>
-                </el-row>
-                <el-row :gutter="24">
-                <el-col :span="12">总逾期天数：</el-col>
-                <el-col :span="12">累计罚息：</el-col>
-                </el-row>
-
-                <el-row>
-                    <el-col>
-                        <el-button style="width:100%;margin:30px 0;" type="danger" plain @click="reloan()">我要还款</el-button>
-                    </el-col>
-                </el-row>
-                </el-card>
-                </div>
-
-                <div v-if="!show">
-                    <el-card class="card-box">
-                        
-                    <el-row :gutter="24">
-                    <el-col :span="12">
-                        <div class="return">
-                        <el-breadcrumb separator-class="el-icon-arrow-right">
-                        <el-breadcrumb-item></el-breadcrumb-item>
-                        <el-breadcrumb-item>上传凭证</el-breadcrumb-item>
-                        </el-breadcrumb>
-                        </div>
-                    </el-col>
-                    </el-row>
-
-                        <el-upload
-                        class="upload-demo"
-                        ref="upload"
-                        accept="image/jpeg,image/gif,image/png,application/pdf"
-                        :limit="5"
-                        list-type="picture"
-                        action="https://jsonplaceholder.typicode.com/posts/"
-                        :on-preview="handlePreview"
-                        :on-remove="handleRemove"
-                        :before-upload="beforeAvatarUpload"
-                        :file-list="fileList"
-                        :auto-upload="false">
-                        <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-                        <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-                        <div slot="tip" class="el-upload__tip">只能上传jpg/png/pdf文件，文件大小5M以内，上传文件总数量限制1-5份，至少上传1份</div>
-                        </el-upload>
-                    </el-card>
-                </div>
-
-                </el-tab-pane>
-            <el-tab-pane name="2">
                 <span slot="label"><i class="el-icon-edit-outline">修改密码</i></span>
                 <el-card class="box-card">
                     <el-form ref="form" :model="this.form" status-icon :rules="rules" label-width="155px" class="demo-ruleForm">
@@ -248,8 +161,6 @@ export default {
 
             detail:"",//企业信息
             bankdetail:"",//银行卡信息
-
-            dangqidetail:"",//当期订单
 
             form:{
                 username:"",
@@ -381,10 +292,6 @@ export default {
                     }
                   );
             }
-        },
-
-        getdangqidetail(){
-
         },
 
         //切换tab
