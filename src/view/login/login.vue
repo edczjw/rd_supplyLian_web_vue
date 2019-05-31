@@ -215,39 +215,29 @@ export default {
                         var enterpriseNo = response.data.detail.enterpriseNo;
                         }
 
-                        // loading加载
-                        const loading = this.$loading({
-                            text: '请稍等...',
-                            spinner: 'el-icon-loading',
-                            background: 'rgba(238, 238, 238, 0.452)'
-                          });
-                          setTimeout(() => {
-                            loading.close();
-
-                            if(accountStatus == '2'){
-                              //已开户
-                              this.$router.push("/mshome");//跳转
-                            }else if(accountStatus == '0' || accountStatus == '1'  || accountStatus == '3' || accountStatus == '4' || accountStatus == '5' ){
-                              this.$router.push("/creatuser/creatus")
-                              this.$store.state.buttonshow=false;//隐藏开户提交按钮
-                            }
-                          }, 2000);
-
                         //登录成功
                         this.$message({
-                        message: '恭喜你'+response.data.msg,
-                        type: 'success'
-                      });
+                          message: '恭喜你'+response.data.msg,
+                          type: 'success'
+                        }); 
+
+                        if(accountStatus == '2'){
+                          //已开户
+                          this.$router.push("/mshome");//跳转
+                        }else if(accountStatus == '0' || accountStatus == '1' || accountStatus == '4' || accountStatus == '5' ){
+                          this.$router.push("/creatuser/creatus")
+                          this.$store.state.buttonshow=false;//隐藏开户提交按钮
+                        }else if(accountStatus == '3'){
+                          this.$router.push("/failcreatuser/failcreatus")
+                        }
+
+                        
 
 
                       //存储状态、用户名、企业编号
                       sessionStorage.setItem("accountStatus", accountStatus);
                       sessionStorage.setItem("username", username);
                       sessionStorage.setItem("enterpriseNo", enterpriseNo);
-
-                      //跳转主页
-                      
-                      
 
                       }else{
                         this.$message.error(response.data.msg);

@@ -108,7 +108,7 @@
                 </el-row>
 
                 <div class="kelist">
-                <el-button plain type="success" @click="addcontrol" size="mini">新增</el-button>
+                <el-button v-if="addshow1" plain type="success" @click="addcontrol" size="mini">新增</el-button>
                 <el-row>
                 <el-col :span="12">
                 <el-form-item 
@@ -142,14 +142,14 @@
                     :prop="'controlList.' + index + '.controlPhone'"
                     :rules="rules.phone">
                         <el-input v-model.trim="controlList.controlPhone" size="mini" clearable></el-input>
-                        <el-button v-if="deleteshow" plain type="danger" size="mini" @click.prevent="removecontrol(controlList)">删除</el-button>
+                        <el-button v-if="deleteshow1" plain type="danger" size="mini" @click.prevent="removecontrol(controlList)">删除</el-button>
                     </el-form-item>
                 </el-col>
                 </el-row>
                 </div>
 
                 <div class="kelist">
-                <el-button plain type="success" @click="addbussiness" size="mini">新增</el-button>
+                <el-button v-if="addshow2" plain type="success" @click="addbussiness" size="mini">新增</el-button>
                 <el-row>
                 <el-col :span="12">
                     <el-form-item 
@@ -179,7 +179,7 @@
                     :prop="'businessList.' + index + '.businessMail'"
                     :rules="rules.mail">
                         <el-input v-model.trim="businessList.businessMail" placeholder="请输入正确的邮箱" size="mini" clearable></el-input>
-                        <el-button v-if="deleteshow" plain type="danger" size="mini" @click.prevent="removebussiness(businessList)">删除</el-button>
+                        <el-button v-if="deleteshow2" plain type="danger" size="mini" @click.prevent="removebussiness(businessList)">删除</el-button>
                     </el-form-item>
                 </el-col>
                 </el-row>
@@ -187,7 +187,7 @@
 
 
                 <div class="kelist">
-                <el-button plain type="success" @click="addfinance" size="mini">新增</el-button>
+                <el-button v-if="addshow3" plain type="success" @click="addfinance" size="mini">新增</el-button>
                 <el-row>
                 <el-col :span="12">
                     <el-form-item 
@@ -220,7 +220,7 @@
                     :prop="'financeList.' + index + '.financeMail'"
                     :rules="rules.mail">
                         <el-input v-model.trim="financeList.financeMail" placeholder="请输入正确的邮箱" size="mini" clearable></el-input>
-                        <el-button v-if="deleteshow" plain type="danger" size="mini" @click.prevent="removefinance(financeList)">删除</el-button>
+                        <el-button v-if="deleteshow3" plain type="danger" size="mini" @click.prevent="removefinance(financeList)">删除</el-button>
                     </el-form-item>
                 </el-col>
                 </el-row>
@@ -246,7 +246,12 @@ export default {
           isFullscreen: false,
           rules,  
           statues:'',
-          deleteshow:false,
+          addshow1:true,
+          deleteshow1:false,
+          addshow2:true,
+          deleteshow2:false,
+          addshow3:true,
+          deleteshow3:false,
           form:{
                 username:"",                   //账号
                // 企业基本信息栏
@@ -330,9 +335,10 @@ export default {
                         response => {
                         if(response.data.code==0){
                              this.$alert(response.data.msg+'请返回登录界面等待工作人员联系告知您开户是否成功。', '开户结果', {
-                                confirmButtonText: '确定',
+                                confirmButtonText: '确定并重新进行登录',
                                 callback: action => {
-                                    
+                                //跳转到登录界面
+                                this.$router.push("/login")
                                 }
                                 });
                             
@@ -361,7 +367,8 @@ export default {
                 phone:"",               //联系电话
                 key: Date.now()
             });
-            this.deleteshow=true;
+            this.addshow1=false;
+            this.deleteshow1=true;
         },
 
         //删除控制人
@@ -370,6 +377,8 @@ export default {
             if (index !== -1) {
             this.form.controlList.splice(index, 1)
             }
+            this.deleteshow1=false;
+            this.addshow1=true;
         },
 
 
@@ -381,7 +390,8 @@ export default {
                 mail:"",                //联系邮箱
                 key: Date.now()
             });
-            this.deleteshow=true;
+            this.addshow2=false;
+            this.deleteshow2=true;
         },
 
         //删除业务人
@@ -390,6 +400,8 @@ export default {
             if (index !== -1) {
             this.form.businessList.splice(index, 1)
             }
+            this.deleteshow3=false;
+            this.addshow3=true;
         },
 
         // 新增财务人
@@ -400,7 +412,8 @@ export default {
                 mail:"",                //联系邮箱
                 key: Date.now()
             });
-            this.deleteshow=true;
+            this.addshow3=false;
+            this.deleteshow3=true;
         },
 
         //删除财务人
@@ -409,6 +422,8 @@ export default {
             if (index !== -1) {
             this.form.financeList.splice(index, 1)
             }
+            this.deleteshow3=false;
+            this.addshow3=true;
         },
 
          /**

@@ -29,6 +29,14 @@ export default new Router({
           auth: true
         }
       },{
+        // 创建账户
+          path: '/failcreatuser/failcreatus',
+          name: '创建账户',
+          component: require('../view/createuser/failcreatuser.vue').default,
+          meta: {
+            auth: true
+          }
+        },{
       // 主页
       path: '/home',
       name: '空白主页',

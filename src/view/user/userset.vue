@@ -7,8 +7,8 @@
         </el-row>
         </div>
 
-        <el-tabs tab-position="left" type="border-card" @tab-click="handleClick">
-            <el-tab-pane>
+        <el-tabs tab-position="left" type="border-card" @tab-click="handleClick" v-model="activeName">
+            <el-tab-pane name="0">
                 <span slot="label"><i class="el-icon-tickets">账户信息</i></span>
 
                 <el-card class="box-card">
@@ -16,78 +16,76 @@
                    <el-col><div class="set-tit"><h3>企业基本信息栏</h3></div></el-col>
                 </el-row>
                 <el-row :gutter="24">
-                <el-col :span="12">企业名称：</el-col>
-                <el-col :span="12">统一社会征信号码或营业执照号码：</el-col>
+                <el-col :span="12"><span>企业名称：</span>{{this.detail.enterpriseName}}</el-col>
+                <el-col :span="12"><span>统一社会征信号码或营业执照号码：</span>{{this.detail.socialCode}}</el-col>
                 </el-row>
 
                 <el-row :gutter="24">
-                <el-col :span="12">注册地址：</el-col>
-                <el-col :span="12">实际经营地址：</el-col>
+                <el-col :span="12"><span>注册地址：</span>{{this.detail.registeredAddress}}</el-col>
+                <el-col :span="12"><span>实际经营地址：</span>{{this.detail.businessAddress}}</el-col>
                 </el-row>
 
                 <el-row :gutter="24">
-                <el-col :span="12">注册资本：</el-col>
-                <el-col :span="12">实缴资本：</el-col>
+                <el-col :span="12"><span>注册资本（万元）：</span>{{this.detail.registeredCapital}}</el-col>
+                <el-col :span="12"><span>实缴资本（万元）：</span>{{this.detail.paidCapital}}</el-col>
                 </el-row>
 
                 <el-row :gutter="24">
-                <el-col :span="12">成立起止日：</el-col>
-                <el-col :span="12">是否为一般纳税人：</el-col>
+                <el-col :span="12"><span>成立开始日：</span>{{this.detail.startingDate}}</el-col>
+                <el-col :span="12"><span>有效截止日：</span>{{this.detail.endingDate}}</el-col>
                 </el-row>
 
                 <el-row :gutter="24">
-                <el-col :span="12">法定代表人姓名：</el-col>
-                <el-col :span="12">法定代表人身份证号码：</el-col>
+                <el-col :span="12"><span>是否为一般纳税人：</span>{{this.detail.generalTaxpayers}}</el-col>
+                <el-col :span="12"><span>法定代表人姓名：</span>{{this.detail.legalName}}</el-col>
                 </el-row>
 
                 <el-row :gutter="24">
-                <el-col :span="12">法定代表人联系电话：</el-col>
-                <el-col :span="12">实际控制人姓名：</el-col>
+                <el-col :span="12"><span>法定代表人身份证号码：</span>{{this.detail.legalIdCard}}</el-col>
+                <el-col :span="12"><span>法定代表人联系电话：</span>{{this.detail.legalPhone}}</el-col>
                 </el-row>
 
-                <el-row :gutter="24">
-                <el-col :span="12">实际控制人身份证号码：</el-col>
-                <el-col :span="12">实际控制人联系电话：</el-col>
+                 <el-row>
+                <el-table :data="this.detail.controlList" border>
+                <el-table-column property="controlName" label="实际控制人姓名" align="center"></el-table-column>
+                <el-table-column property="controlIdCard" label="实际控制人身份证号码" align="center"></el-table-column>
+                <el-table-column property="controlPhone" label="实际控制人联系电话" align="center"></el-table-column>
+                </el-table>
                 </el-row>
 
-                <el-row :gutter="24">
-                <el-col :span="12">业务对接人姓名：</el-col>
-                <el-col :span="12">业务对接人联系电话：</el-col>
+                <el-row>
+                <el-table :data="this.detail.businessList" border>
+                <el-table-column property="businessName" label="业务对接人姓名" align="center"></el-table-column>
+                <el-table-column property="businessPhone" label="业务对接人联系电话" align="center"></el-table-column>
+                <el-table-column property="businessMail" label="业务对接人联系邮箱" align="center"></el-table-column>
+                </el-table>
                 </el-row>
 
-                <el-row :gutter="24">
-                <el-col :span="12">业务对接人联系邮箱：</el-col>
-                <el-col :span="12">财务对接人姓名：</el-col>
-                </el-row>
-
-                <el-row :gutter="24">
-                <el-col :span="12">财务对接人联系电话：</el-col>
-                <el-col :span="12">财务对接人联系邮箱：</el-col>
-                </el-row>
-
-                <el-row :gutter="24">
-                <el-col :span="12">注册地址：</el-col>
-                <el-col :span="12">实际经营地址：</el-col>
+                <el-row>
+                <el-table :data="this.detail.financeList" border >
+                <el-table-column property="financeName" label="财务对接人姓名" align="center"></el-table-column>
+                <el-table-column property="financePhone" label="财务对接人联系电话" align="center"></el-table-column>
+                <el-table-column property="financeMail" label="财务对接人联系邮箱" align="center"></el-table-column>
+                </el-table>
                 </el-row>
 
                 <el-row>
                    <el-col><div class="set-tits"><h3>银行卡信息</h3></div></el-col>
                 </el-row>
                 <el-row :gutter="24">
-                <el-col :span="12">银行卡卡号：</el-col>
-                <el-col :span="12">银行名称：</el-col>
+                <el-col :span="12"><span>银行卡卡号：</span>{{this.detail.enterpriseName}}</el-col>
+                <el-col :span="12"><span>银行名称：</span>{{this.detail.enterpriseName}}</el-col>
                 </el-row>
 
                 <el-row :gutter="24">
-                <el-col :span="12">账户户名：</el-col>
-                <el-col :span="12">银行支行名称：</el-col>
+                <el-col :span="12"><span>账户户名：</span>{{this.detail.enterpriseName}}</el-col>
+                <el-col :span="12"><span>银行支行名称：</span>{{this.detail.enterpriseName}}</el-col>
                 </el-row>
 
                 </el-card>
             </el-tab-pane>
-            <el-tab-pane>
+            <el-tab-pane name="1">
                 <span slot="label"><i class="el-icon-goods">当期账单</i></span>
-
                 <div v-if="show">
                 <el-card class="box-card">
                 <el-row :gutter="24">
@@ -174,44 +172,44 @@
                 </div>
 
                 </el-tab-pane>
-            <el-tab-pane>
+            <el-tab-pane name="2">
                 <span slot="label"><i class="el-icon-edit-outline">修改密码</i></span>
                 <el-card class="box-card">
-                    <el-form label-width="150px">
+                    <el-form ref="form" :model="this.form" status-icon :rules="rules" label-width="155px" class="demo-ruleForm">
                         <el-row>
                         <el-col :span="24">
-                            <el-form-item label="账号：">
-                                <el-input></el-input>
+                            <el-form-item label="账号：" prop="username" :rules="rules.username">
+                                <el-input placeholder="请输入手机号" v-model.trim="form.username"></el-input>
                             </el-form-item>
                         </el-col>
                         </el-row>
 
                         <el-row>
                         <el-col :span="24">
-                            <el-form-item label="输入旧密码：">
-                                <el-input></el-input>
+                            <el-form-item label="输入旧密码：" prop="oldPassword" :rules="rules.password">
+                                <el-input placeholder="请输入旧密码" v-model.trim="form.oldPassword"></el-input>
                             </el-form-item>
                         </el-col>
                         </el-row>
 
                         <el-row>
                         <el-col :span="24">
-                            <el-form-item label="输入新密码：">
-                                <el-input></el-input>
+                            <el-form-item label="输入新密码：" prop="newPassword"  :rules="rules.newPassword">
+                                <el-input placeholder="请输入新密码" v-model.trim="form.newPassword"></el-input>
                             </el-form-item>
                         </el-col>
                         </el-row>
 
                         <el-row>
                         <el-col :span="24">
-                            <el-form-item label="再次输入新密码：">
-                                <el-input></el-input>
+                            <el-form-item label="再次输入新密码："  prop="renewPassword" :rules="rules.renewPassword">
+                                <el-input placeholder="请再次输入新密码" v-model.trim="form.renewPassword"></el-input>
                             </el-form-item>
                         </el-col>
                         </el-row>
 
                         <el-form-item>
-                            <el-button type="primary" plain >确认修改</el-button>
+                            <el-button type="primary" plain @click="submit('form')">确认修改</el-button>
                         </el-form-item>
                     </el-form>
 
@@ -223,16 +221,137 @@
     </div>
 </template>
 <script>
+
+import rules from '../../untils/rules'
 export default {
     data(){
+        // 确认密码校验
+        var validatePass1 = (rule, value, callback) => {
+            if (value != this.form.newPassword) {
+            callback(new Error('与新密码不一致!'));
+            } else {
+            callback();
+            }
+        };
+        // 确认密码校验
+        var validatePass2 = (rule, value, callback) => {
+            if (value == this.form.oldPassword) {
+            callback(new Error('新密码和旧密码不能相同!'));
+            } else {
+            callback();
+            }
+        };
         return{
+            activeName: '0',//标签
             show:true,
-            fileList: []
+            fileList: [],
+
+            detail:"",//所有信息
+
+            form:{
+                username:"",
+                oldPassword:"",
+                newPassword:"",
+                renewPassword:"",
+            },
+
+            //输入框验证
+          rules: {
+              username: [
+                { required: true, message: '账号不能为空。', trigger: 'blur'},
+                { max: 11, message: '长度 11 个字符。', trigger: 'blur' },
+                { pattern: /^1[34578]\d{9}$/, message: '请输入正确的手机号码。', trigger: 'blur'},
+              ],
+              password:[
+                { required: true, message: '旧密码不能为空。', trigger: 'blur' },
+                // { min: 8, max: 16, message: '长度在 8 到 16 个字符', trigger: 'blur' }
+              ],
+              newPassword: [
+                  { required: true, message: '不能为空。', trigger: 'blur' },
+                  { validator: validatePass2, trigger: 'blur' }
+                ],
+              renewPassword:[
+                  { required: true, message: '不能为空。', trigger: 'blur' },
+                  { validator: validatePass1, trigger: 'blur' }
+              ]
+          }
         }
     },
+    mounted() {
+        this.getMessage();//获取企业信息
+    },
     methods:{
+        submit(formName){
+            this.$refs[formName].validate((valid) => {
+            if (valid) {
+                    this.$axios({
+                    method: 'post',
+                    url: this.$store.state.domain +"/biz/user/editPassword",
+                    data: this.form,
+                  })
+                  .then(
+                    response => {
+                      if(response.data.code==0){
+                        
+                        this.$alert(response.data.msg, '修改结果', {
+                                confirmButtonText: '确定并重新进行登录',
+                                callback: action => {
+                                //跳转到登录界面
+                                this.$router.push("/login")
+                            }
+                            });
+                      }else{
+                        this.$message.error(response.data.msg);
+                      }
+                    },
+                    response => {
+                      console.log(response);
+                    }
+                  );
+                
+                } else {
+                console.log('error submit!!');
+                return false;
+            }
+            });
+
+        },
+
+        //获取企业信息
+        getMessage(){
+            //获取企业编号
+            var enterpriseNo = sessionStorage.getItem("enterpriseNo");
+
+            //判断是否在第一页
+            if(this.activeName==0){
+                this.$axios({
+                    method: 'post',
+                    url: this.$store.state.domain +"/biz/user/getBasicInfo",
+                    data: {
+                            enterpriseNo: enterpriseNo
+                    }
+                  })
+                  .then(
+                    response => {
+                      if(response.data.code==0){
+                        
+                          this.detail = response.data.detail;
+
+                      }else{
+                        this.$message.error(response.data.msg);
+                      }
+                    },
+                    response => {
+                      console.log(response);
+                    }
+                  );
+            }
+        },
+
+
         //切换tab
         handleClick(){
+            //默认显示当期账单
             this.show=true;
         },
 
@@ -303,7 +422,15 @@ export default {
 .box-card .el-row{
     margin:20px 0;
     font-size: 14px;
+    padding: 15px 40px;
+    font-family: '苹方'
+    
 }
+
+.box-card .el-row span{
+        color:rgb(238, 154, 29);
+    }
+
 .set-tit{
     border-bottom: 1px solid rgba(201, 197, 197, 0.377);
     padding: 10px 0;

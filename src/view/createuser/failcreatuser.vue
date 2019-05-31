@@ -1,0 +1,463 @@
+<template>
+<div>
+<div class="topBanner">
+    <div class="side-tit">
+      <p class='left'><span>民盛小贷</span> 创建账户
+      </p>
+    </div>
+    <p class='right' @click="goBack" title="安全退出">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-shouye"></use>
+      </svg>返回登录</p>
+      <p class='right' title="用户名">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-character"></use>
+      </svg>{{username}}</p>
+    <p class='right' @click="screenfull" title="全屏显示">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-quanping4"></use>
+      </svg></p>
+    <p class='right' title="联系客服">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-atm"></use>
+      </svg>112</p>
+  </div>
+ <div class="creat-wapper">
+     <div class="container">
+         <div class="creat-title">创建账户</div>
+         <div class="creat-form">
+             <div class="form-title">企业基本信息栏</div>
+             <el-form ref="detail" :model="this.detail" label-width="260px" status-icon>
+                <el-row>
+                <el-col :span="12">
+                <el-form-item label="企业名称：" prop="enterpriseName"  :rules="rules.kong">
+                    <span v-if="willShow" >{{this.detail.enterpriseName}}</span>
+                    <el-input v-else v-model="detail.enterpriseName" placeholder="填写企业全称"></el-input>
+                </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="统一社会征信号码或营业执照号码：" prop="socialCode" :rules="rules.kong">
+                        <span v-if="willShow" >{{this.detail.socialCode}}</span>
+                        <el-input v-else v-model="detail.socialCode" ></el-input>
+                    </el-form-item>
+                </el-col>
+                </el-row>
+
+                <el-row>
+                <el-col :span="12">
+                    <el-form-item label="注册地址：" prop="registeredAddress" :rules="rules.kong">
+                        <span v-if="willShow" >{{this.detail.registeredAddress}}</span>
+                        <el-input v-else v-model="detail.registeredAddress" ></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="实际经营地址：" prop="businessAddress" :rules="rules.kong">
+                        <span v-if="willShow" >{{this.detail.businessAddress}}</span>
+                        <el-input v-else v-model="detail.businessAddress" ></el-input>
+                    </el-form-item>
+                </el-col>
+                </el-row>
+
+                <el-row>
+                <el-col :span="12">
+                    <el-form-item label="注册资本：" prop="registeredCapital" :rules="rules.number">
+                        <span v-if="willShow" >{{this.detail.registeredCapital}}</span>
+                        <el-input v-else v-model="detail.registeredCapital" placeholder="填写数字值"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="实缴资本：" prop="paidCapital" :rules="rules.number">
+                        <span v-if="willShow" >{{this.detail.paidCapital}}</span>
+                        <el-input v-else v-model="detail.paidCapital" placeholder="填写数字值"></el-input>
+                    </el-form-item>
+                </el-col>
+                </el-row>
+
+                <el-row>
+                <el-col :span="12">
+                    <el-form-item label="成立开始日期：" prop="startingDate" :rules="rules.kong">
+                        <span v-if="willShow" >{{this.detail.startingDate}}</span>
+                        <el-input v-else v-model="detail.startingDate" placeholder="yyyy-mm-dd"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="成立有效截止日期：" prop="endingDate" :rules="rules.kong">
+                        <span v-if="willShow" >{{this.detail.endingDate}}</span>
+                        <el-input v-else v-model="detail.endingDate" placeholder="yyyy-mm-dd" ></el-input>
+                    </el-form-item>
+                </el-col>
+                </el-row>
+
+                <el-row>
+                <el-col :span="12">
+                    <el-form-item label="是否为一般纳税人：" prop="generalTaxpayers" :rules="rules.kong">
+                        <span v-if="willShow" >{{this.detail.generalTaxpayers}}</span>
+                        <div v-else>
+                        <el-radio v-model="detail.generalTaxpayers" label="1">是</el-radio>
+                        <el-radio v-model="detail.generalTaxpayers" label="2">否</el-radio>
+                        </div>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="法定代表人姓名：" prop="legalName" :rules="rules.kong">
+                        <span v-if="willShow" >{{this.detail.legalName}}</span>
+                        <el-input v-else v-model="detail.legalName" ></el-input>
+                    </el-form-item>
+                </el-col>
+                </el-row>
+
+                <el-row>
+                <el-col :span="12">
+                    <el-form-item label="法定代表人身份证号码：" prop="legalIdCard" :rules="rules.checkid">
+                        <span v-if="willShow" >{{this.detail.legalIdCard}}</span>
+                        <el-input v-else v-model="detail.legalIdCard" ></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="法定代表人联系电话：" prop="legalPhone" :rules="rules.phone">
+                        <span v-if="willShow" >{{this.detail.legalPhone}}</span>
+                        <el-input v-else v-model="detail.legalPhone" ></el-input>
+                    </el-form-item>
+                </el-col>
+                </el-row>
+
+                <el-row>
+                <el-table :data="this.detail.controlList" border>
+                <el-table-column property="controlName" label="实际控制人姓名" align="center">
+                    <template slot-scope="scope">
+                    <span v-if="willShow">{{scope.row.controlName}}</span>
+                    <el-input v-else size="small" v-model="scope.row.controlName" placeholder="请输入内容"></el-input> 
+                </template>
+                </el-table-column>
+                <el-table-column property="controlIdCard" label="实际控制人身份证号码" align="center">
+                    <template slot-scope="scope">
+                    <span v-if="willShow">{{scope.row.controlIdCard}}</span>
+                    <el-input v-else size="small" v-model="scope.row.controlIdCard" placeholder="请输入内容"></el-input> 
+                </template>
+                </el-table-column>
+                <el-table-column property="controlPhone" label="实际控制人联系电话" align="center">
+                    <template slot-scope="scope">
+                    <span v-if="willShow">{{scope.row.controlPhone}}</span>
+                    <el-input v-else size="small" v-model="scope.row.controlPhone" placeholder="请输入内容" ></el-input> 
+                </template>
+                </el-table-column>
+                </el-table>
+                </el-row>
+
+                <el-row>
+                <el-table :data="this.detail.businessList" border>
+                <el-table-column property="businessName" label="业务对接人姓名" align="center">
+                    <template slot-scope="scope">
+                    <span v-if="willShow">{{scope.row.businessName}}</span>
+                    <el-input v-else size="small" v-model="scope.row.businessName" placeholder="请输入内容" ></el-input> 
+                </template>
+                </el-table-column>
+                <el-table-column property="businessPhone" label="业务对接人联系电话" align="center">
+                    <template slot-scope="scope">
+                    <span v-if="willShow">{{scope.row.businessPhone}}</span>
+                    <el-input v-else size="small" v-model="scope.row.businessPhone" placeholder="请输入内容" ></el-input> 
+                </template>
+                </el-table-column>
+                <el-table-column property="businessMail" label="业务对接人联系邮箱" align="center">
+                    <template slot-scope="scope">
+                    <span v-if="willShow">{{scope.row.businessMail}}</span>
+                    <el-input v-else size="small" v-model="scope.row.businessMail" placeholder="请输入内容" ></el-input> 
+                </template>
+                </el-table-column>
+                </el-table>
+                </el-row>
+
+                <el-row>
+                <el-table :data="this.detail.financeList" border >
+                <el-table-column property="financeName" label="财务对接人姓名" align="center">
+                    <template slot-scope="scope">
+                    <span v-if="willShow">{{scope.row.financeName}}</span>
+                    <el-input v-else size="small" v-model="scope.row.financeName" placeholder="请输入内容" ></el-input> 
+                </template>
+                </el-table-column>
+                <el-table-column property="financePhone" label="财务对接人联系电话" align="center">
+                    <template slot-scope="scope">
+                    <span v-if="willShow">{{scope.row.financePhone}}</span>
+                    <el-input v-else size="small" v-model="scope.row.financePhone" placeholder="请输入内容" ></el-input> 
+                </template>
+                </el-table-column>
+                <el-table-column property="financeMail" label="财务对接人联系邮箱" align="center">
+                    <template slot-scope="scope">
+                    <span v-if="willShow">{{scope.row.financeMail}}</span>
+                    <el-input v-else size="small" v-model="scope.row.financeMail" placeholder="请输入内容" ></el-input> 
+                </template>
+                </el-table-column>
+                </el-table>
+                </el-row>
+             </el-form>
+         </div>
+            <div class="creat-button" v-if="this.$store.state.buttonshow">
+            <el-button plain type="success" @click="fn()">修改</el-button>
+            <el-button plain type="success" @click="save()">保存</el-button>
+            <el-button type="primary" plain @click="submit('detail')">提交</el-button>
+            </div>
+     </div>
+ </div>
+</div>
+</template>
+<script>
+
+import screenfull from 'screenfull'
+import rules from '../../untils/rules'
+export default {
+  data(){
+      return{
+          
+          detail:{
+                   
+          },//所有信息
+
+          willShow:true,//展示和输入切换
+          username:'admin',
+          isFullscreen: false,
+          rules,  
+          statues:'',
+          addshow1:true,
+          deleteshow1:false,
+          addshow2:true,
+          deleteshow2:false,
+          addshow3:true,
+          deleteshow3:false,
+    }
+  },
+  mounted() {
+      this.getMessage();//获取企业信息
+      this.getName();
+       window.onresize = () => {
+            // 全屏下监控是否按键了ESC
+            if (!this.checkFull()) {
+              // 全屏下按键esc后要执行的动作
+              this.isFullscreen = false
+            }
+          }
+       },
+  methods: {
+      //获取企业信息
+        getMessage(){
+            //获取企业编号
+            var enterpriseNo = sessionStorage.getItem("enterpriseNo");
+
+                this.$axios({
+                    method: 'post',
+                    url: this.$store.state.domain +"/biz/user/getBasicInfo",
+                    data: {
+                            enterpriseNo: enterpriseNo
+                    }
+                  })
+                  .then(
+                    response => {
+                      if(response.data.code==0){
+                        
+                          this.detail = response.data.detail;
+
+                      }else{
+                        this.$message.error(response.data.msg);
+                      }
+                    },
+                    response => {
+                      console.log(response);
+                    }
+                  );
+        },
+
+        //修改
+        fn(){
+            this.willShow=false;
+        },
+        //保存
+        save(){
+            this.willShow=true;
+        },
+
+      //提交
+      submit(formName){
+          this.$refs[formName].validate((valid) => {
+          if (valid) {
+          this.detail.username = sessionStorage.getItem("username");
+
+            this.$axios({
+                        method: 'post',
+                        url: this.$store.state.domain +"/biz/user/openAccount",
+                        data: this.detail,
+                    })
+                    .then(
+                        response => {
+                        if(response.data.code==0){
+                             this.$alert(response.data.msg+'请返回登录界面等待工作人员联系告知您开户是否成功。', '开户结果', {
+                                confirmButtonText: '确定并重新进行登录',
+                                callback: action => {
+                                //跳转到登录界面
+                                this.$router.push("/login")
+                                }
+                                });
+                        }else{
+                            this.$message.error(response.data.msg);
+                        }
+                        },
+                        response => {
+                        console.log(response);
+                        }
+                     )
+                  }else {
+              console.log('error submit!!');
+              return false;
+            }
+          
+        })
+      },
+
+         /**
+     * 全屏事件
+     */
+    screenfull() {
+      if (!screenfull.enabled) {
+        this.$message({
+          message: 'Your browser does not work',
+          type: 'warning'
+        })
+        return false
+      }
+      screenfull.toggle()
+      this.isFullscreen = true
+    },
+    /**
+     * 是否全屏并按键ESC键的方法
+     */
+    checkFull() {
+      var isFull = document.fullscreenEnabled || window.fullScreen || document.webkitIsFullScreen || document.msFullscreenEnabled
+      // to fix : false || undefined == undefined
+      if (isFull === undefined) {
+          isFull = false
+      }
+      return isFull
+    },
+
+    getName(){
+        this.username = sessionStorage.getItem("username");
+    },
+    //退出登陆
+    goBack() {
+      var _this = this;
+      this.$confirm('确认退出吗?', '提示', {
+        //type: 'warning'
+      }).then(() => {
+        // sessionStorage.removeItem('user');
+        sessionStorage.setItem("name", 'str');//本地存储用户名
+        this.$router.push('/login');
+      }).catch(() => {
+
+      });
+      // this.$router.push("/login");
+    },
+  }
+};
+</script>
+
+<style scoped>
+.creat-wapper{
+    margin: 0 210px;
+    padding: 20px;
+    height: 100%;
+}
+.creat-wapper .container{
+    height: 100%;
+    padding: 50px 0;
+    border-left: 1px solid rgb(214, 212, 212);
+    border-right: 1px solid rgb(214, 212, 212);
+}
+.container .creat-title{
+    margin: 0 auto;
+    font-size: 28px;
+    width: 120px;
+    text-align: center;
+    line-height: 40px;
+}
+.creat-form{
+    margin-top: 10px;
+    padding: 50px;
+}
+.form-title{
+    padding-left: 50px;
+    margin-bottom: 18px;
+}
+.creat-button{
+    text-align: center;
+}
+.topBanner {
+  line-height: 50px;
+
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 99;
+
+  width: 100%;
+  height: 50px;
+  background: #72d0eb;
+  border-bottom: 1px solid #a0d9ea;
+}
+
+.topBanner p {
+  padding-left: 20px;
+}
+
+.left {
+  font-family: '黑体';
+  font-size: 21px;
+  color: #f3faef;
+  float: left;
+  font-weight: bolder;
+}
+.left span{
+     font-size: 28px;
+     color: #b86e0e;
+     opacity: 1;
+     padding-right: 10px;
+     border-right: 2px solid rgba(175, 105, 105, 0.63);
+ }
+.left .icon-tip{
+  width: 40px;
+  height: 40px;
+}
+
+.right {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 12px;
+
+  float: right;
+
+  margin-right: 5px;
+
+  cursor: pointer;
+
+  color: rgb(89, 90, 94);
+}
+
+.right:hover {
+  color: #eee;
+}
+
+svg {
+  width: 30px;
+  height: 30px;
+  padding: 3px 8px;
+  color: #fff;
+}
+
+svg:hover {
+  color: #eee;
+}
+
+.el-row{
+    margin:20px 0;
+    font-size: 14px;
+    padding: 15px 20px;
+    font-family: '苹方'
+    
+}
+</style>
