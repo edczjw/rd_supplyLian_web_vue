@@ -102,6 +102,10 @@ export default {
   mounted() {
   },
   methods: {
+      godetail(){
+
+      },
+
     // 我要还款
     reloan(){
         this.show=!this.show;

@@ -31,7 +31,7 @@ export default new Router({
       },{
         // 创建账户
           path: '/failcreatuser/failcreatus',
-          name: '创建账户',
+          name: '创建账户失败',
           component: require('../view/createuser/failcreatuser.vue').default,
           meta: {
             auth: true

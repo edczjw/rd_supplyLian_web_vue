@@ -73,13 +73,13 @@
                    <el-col><div class="set-tits"><h3>银行卡信息</h3></div></el-col>
                 </el-row>
                 <el-row :gutter="24">
-                <el-col :span="12"><span>银行卡卡号：</span>{{this.detail.enterpriseName}}</el-col>
-                <el-col :span="12"><span>银行名称：</span>{{this.detail.enterpriseName}}</el-col>
+                <el-col :span="12"><span>银行卡卡号：</span>{{this.bankdetail.cardNo}}</el-col>
+                <el-col :span="12"><span>银行名称：</span>{{this.bankdetail.bankName}}</el-col>
                 </el-row>
 
                 <el-row :gutter="24">
-                <el-col :span="12"><span>账户户名：</span>{{this.detail.enterpriseName}}</el-col>
-                <el-col :span="12"><span>银行支行名称：</span>{{this.detail.enterpriseName}}</el-col>
+                <el-col :span="12"><span>账户户名：</span>{{this.bankdetail.accountName}}</el-col>
+                <el-col :span="12"><span>银行支行名称：</span>{{this.bankdetail.bankBranchName}}</el-col>
                 </el-row>
 
                 </el-card>
@@ -246,7 +246,10 @@ export default {
             show:true,
             fileList: [],
 
-            detail:"",//所有信息
+            detail:"",//企业信息
+            bankdetail:"",//银行卡信息
+
+            dangqidetail:"",//当期订单
 
             form:{
                 username:"",
@@ -279,6 +282,7 @@ export default {
     },
     mounted() {
         this.getMessage();//获取企业信息
+        this.getbankMessage();//获取银行卡信息
     },
     methods:{
         submit(formName){
@@ -335,7 +339,7 @@ export default {
                     response => {
                       if(response.data.code==0){
                         
-                          this.detail = response.data.detail;
+                          this.detail = response.data.detail
 
                       }else{
                         this.$message.error(response.data.msg);
@@ -348,11 +352,47 @@ export default {
             }
         },
 
+        //获取银行卡信息
+        getbankMessage(){
+            //获取企业编号
+            var enterpriseNo = sessionStorage.getItem("enterpriseNo");
+
+            //判断是否在第一页
+            if(this.activeName==0){
+                this.$axios({
+                    method: 'post',
+                    url: this.$store.state.domain +"/biz/accountSetting/accountInfo",
+                    data: {
+                            enterpriseNo: enterpriseNo
+                    }
+                  })
+                  .then(
+                    response => {
+                      if(response.data.code==0){
+                        
+                          this.bankdetail = response.data.detail.result
+
+                      }else{
+                        this.$message.error(response.data.msg);
+                      }
+                    },
+                    response => {
+                      console.log(response);
+                    }
+                  );
+            }
+        },
+
+        getdangqidetail(){
+
+        },
 
         //切换tab
         handleClick(){
             //默认显示当期账单
             this.show=true;
+            this.getMessage()
+            this.getbankMessage()
         },
 
         // 我要还款
