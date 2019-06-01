@@ -376,9 +376,10 @@ export default {
             var index = this.form.controlList.indexOf(item)
             if (index !== -1) {
             this.form.controlList.splice(index, 1)
-            }
+            
             this.deleteshow1=false;
             this.addshow1=true;
+            }
         },
 
 
@@ -399,9 +400,10 @@ export default {
             var index = this.form.businessList.indexOf(item)
             if (index !== -1) {
             this.form.businessList.splice(index, 1)
-            }
+            
             this.deleteshow3=false;
             this.addshow3=true;
+            }
         },
 
         // 新增财务人
@@ -421,9 +423,10 @@ export default {
             var index = this.form.financeList.indexOf(item)
             if (index !== -1) {
             this.form.financeList.splice(index, 1)
-            }
+            
             this.deleteshow3=false;
             this.addshow3=true;
+            }
         },
 
          /**

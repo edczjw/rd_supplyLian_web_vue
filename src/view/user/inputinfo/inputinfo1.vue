@@ -71,7 +71,7 @@
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="成立有效截止日期：" prop="endingDate" :rules="rules.kong">
-                        <el-input v-model.trim="form.endingDate" placeholder="yyyy-mm-dd" size="mini" clearable></el-input>
+                        <el-input v-model.trim="form.endingDate" placeholder="yyyy-mm-dd或者长期" size="mini" clearable></el-input>
                     </el-form-item>
                 </el-col>
                 </el-row>
@@ -85,49 +85,30 @@
                 </el-col>
                 </el-row>
 
-                <div class="kelist">
-                <el-button plain type="success" @click="addlaw" size="mini">新增</el-button>
                 <el-row>
                 <el-col :span="12">
-                    <el-form-item 
-                    v-for="(lawlist, index) in form.lawlist"
-                    :label="'法定代表人姓名'+(index+1)+'：'" 
-                    :key="lawlist.key"
-                    :prop="'lawlist.' + index + '.legalName'"
-                    :rules="rules.kong">
-                        <el-input v-model.trim="lawlist.legalName"  size="mini" clearable></el-input>
+                    <el-form-item label="法定代表人姓名" prop="legalName" :rules="rules.kong">
+                        <el-input v-model.trim="form.legalName" placeholder="yyyy-mm-dd" size="mini" clearable></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item 
-                    v-for="(lawlist, index) in form.lawlist"
-                    :label="'法定代表人身份证号码'+(index+1)+'：'" 
-                    :key="lawlist.key"
-                    :prop="'lawlist.' + index + '.idCard'"
-                    :rules="rules.checkid">
-                        <el-input v-model.trim="lawlist.idCard"  size="mini" clearable></el-input>
+                    <el-form-item label="法定代表人身份证号码" prop="legalIdCard" :rules="rules.checkid">
+                        <el-input v-model.trim="form.legalIdCard"  size="mini" clearable></el-input>
                     </el-form-item>
                 </el-col>
                 </el-row>
 
                 <el-row>
                 <el-col :span="12">
-                    <el-form-item 
-                    v-for="(lawlist, index) in form.lawlist"
-                    :label="'法定代表人联系电话'+(index+1)+'：'" 
-                    :key="lawlist.key"
-                    :prop="'lawlist.' + index + '.phone'"
-                    :rules="rules.phone">
-                        <el-input v-model.trim="lawlist.phone" placeholder="请输入正确的电话号码"  size="mini" clearable></el-input>
-                        <el-button v-if="deleteshow" plain type="danger" size="mini" @click.prevent="removelaw(lawlist)">删除</el-button>
-                    </el-form-item>
+                    <el-form-item label="法定代表人联系电话" prop="legalPhone" :rules="rules.phone">
+                        <el-input v-model.trim="form.legalPhone" placeholder="请输入正确的电话号码"  size="mini" clearable></el-input>
+                        </el-form-item>
                 </el-col>
                 </el-row>
-                </div>
 
 
                 <div class="kelist">
-                <el-button plain type="success" @click="addcontrol" size="mini">新增</el-button>
+                <el-button  v-if="addshow1" plain type="success" @click="addcontrol" size="mini">新增</el-button>
                 <el-row>
                 <el-col :span="12">
                 <el-form-item 
@@ -161,14 +142,14 @@
                     :prop="'controlList.' + index + '.phone'"
                     :rules="rules.phone">
                         <el-input v-model.trim="controlList.phone" size="mini" clearable></el-input>
-                        <el-button v-if="deleteshow" plain type="danger" size="mini" @click.prevent="removecontrol(controlList)">删除</el-button>
+                        <el-button v-if="deleteshow1" plain type="danger" size="mini" @click.prevent="removecontrol(controlList)">删除</el-button>
                     </el-form-item>
                 </el-col>
                 </el-row>
                 </div>
 
                 <div class="kelist">
-                <el-button plain type="success" @click="addbussiness" size="mini">新增</el-button>
+                <el-button v-if="addshow2" plain type="success" @click="addbussiness" size="mini">新增</el-button>
                 <el-row>
                 <el-col :span="12">
                     <el-form-item 
@@ -198,7 +179,7 @@
                     :prop="'businessList.' + index + '.mail'"
                     :rules="rules.mail">
                         <el-input v-model.trim="businessList.mail" placeholder="请输入正确的邮箱" size="mini" clearable></el-input>
-                        <el-button v-if="deleteshow" plain type="danger" size="mini" @click.prevent="removebussiness(businessList)">删除</el-button>
+                        <el-button v-if="deleteshow2" plain type="danger" size="mini" @click.prevent="removebussiness(businessList)">删除</el-button>
                     </el-form-item>
                 </el-col>
                 </el-row>
@@ -206,7 +187,7 @@
 
 
                 <div class="kelist">
-                <el-button plain type="success" @click="addfinance" size="mini">新增</el-button>
+                <el-button v-if="addshow3" plain type="success" @click="addfinance" size="mini">新增</el-button>
                 <el-row>
                 <el-col :span="12">
                     <el-form-item 
@@ -239,7 +220,7 @@
                     :prop="'financeList.' + index + '.mail'"
                     :rules="rules.mail">
                         <el-input v-model.trim="financeList.mail" placeholder="请输入正确的邮箱" size="mini" clearable></el-input>
-                        <el-button v-if="deleteshow" plain type="danger" size="mini" @click.prevent="removefinance(financeList)">删除</el-button>
+                        <el-button v-if="deleteshow3" plain type="danger" size="mini" @click.prevent="removefinance(financeList)">删除</el-button>
                     </el-form-item>
                 </el-col>
                 </el-row>
@@ -941,7 +922,7 @@
             <!-- 按钮 -->
             <div class="in-button">
                 <el-button type="primary" style="margin-top: 12px;" @click="last">上一步</el-button>
-                <el-button type="primary" style="margin-top: 12px;" @click="next">提交</el-button>
+                <el-button type="primary" style="margin-top: 12px;" @click="submit('form')">提交</el-button>
                 </div>
             </div>
             
@@ -966,8 +947,16 @@ export default {
             danbaoinput:false,//担保输入框是否禁用
             deleteshow:false,
 
+            addshow1:true,
+            deleteshow1:false,
+            addshow2:true,
+            deleteshow2:false,
+            addshow3:true,
+            deleteshow3:false,
+
             //表单
             form:{
+                enterpriseNo:"",            //企业编号
                 // 企业基本信息栏
                 enterpriseName:"",              //企业名称
                 socialCode:"",              //统一社会征信号码或营业执照号码
@@ -978,13 +967,9 @@ export default {
                 startingDate:"",              //成立开始日
                 endingDate:"",                  //成立有效截止日期
                 generalTaxpayers:"1",                //是否为一般纳税人
-
-                //法人list
-                lawlist:[{             
-                    legalName:"",               //法定代表人姓名
-                    idCard:"",              //身份证号码
-                    phone:"",               //联系电话
-                }],
+                legalName:"",               //法定代表人姓名
+                legalIdCard:"",              //身份证号码
+                legalPhone:"",               //联系电话
                 
                 //控制人list
                 controlList:[{
@@ -1049,6 +1034,49 @@ export default {
     components:{
     },
     methods: {
+    //提交
+      submit(formName){
+          this.$refs[formName].validate((valid) => {
+          if (valid) {
+                this.form.enterpriseNo = sessionStorage.getItem("enterpriseNo");
+
+                this.$axios({
+                            method: 'post',
+                            url: this.$store.state.domain +"/biz/order/apply",
+                            data: this.form,
+                        })
+                        .then(
+                            response => {
+                            if(response.data.code==0){
+                                this.$alert('借款信息提交成功，工作人员将会尽快联系告知您借款是否成功，请耐心等待。', '借款结果', {
+                                    confirmButtonText: '确定',
+                                    callback: action => {
+
+                                    }
+                                    });
+                                
+                        }else{
+                            this.$message.error(response.data.msg);
+                        }
+                        },
+                        response => {
+                        console.log(response);
+                        }
+                     )
+
+              }else {
+              this.$alert('请重新检查您的输入信息是否正确。', '提醒', {
+                confirmButtonText: '确定',
+                showClose:false,
+                callback: action => {
+                }
+                });
+              return false;
+            }
+          
+        })
+      },
+
         //点击单选担保
         danbaochange(val){
             if(val=='2'){
@@ -1058,27 +1086,6 @@ export default {
             }
         },
 
-        //新增法定代表人
-        addlaw(){
-            this.form.lawlist.push({
-                legalName:"",               //法定代表人姓名
-                idCard:"",              //身份证号码
-                phone:"",               //联系电话
-                key: Date.now()
-            });
-            this.deleteshow=true;
-        },
-
-        //删除法定人
-        removelaw(item){
-            //角标值
-            var index = this.form.lawlist.indexOf(item)
-            if (index !== -1) {
-            this.form.lawlist.splice(index, 1)
-            }
-        },
-
-
         //新增控制人
         addcontrol(){
             this.form.controlList.push({
@@ -1087,7 +1094,8 @@ export default {
                 phone:"",               //联系电话
                 key: Date.now()
             });
-            this.deleteshow=true;
+            this.addshow1=false;
+            this.deleteshow1=true;
         },
 
         //删除控制人
@@ -1095,6 +1103,9 @@ export default {
             var index = this.form.controlList.indexOf(item)
             if (index !== -1) {
             this.form.controlList.splice(index, 1)
+            
+            this.deleteshow1=false;
+            this.addshow1=true;
             }
         },
 
@@ -1107,7 +1118,8 @@ export default {
                 mail:"",                //联系邮箱
                 key: Date.now()
             });
-            this.deleteshow=true;
+            this.addshow2=false;
+            this.deleteshow2=true;
         },
 
         //删除业务人
@@ -1115,6 +1127,9 @@ export default {
             var index = this.form.businessList.indexOf(item)
             if (index !== -1) {
             this.form.businessList.splice(index, 1)
+            
+            this.deleteshow3=false;
+            this.addshow3=true;
             }
         },
 
@@ -1126,7 +1141,8 @@ export default {
                 mail:"",                //联系邮箱
                 key: Date.now()
             });
-            this.deleteshow=true;
+            this.addshow3=false;
+            this.deleteshow3=true;
         },
 
         //删除财务人
@@ -1134,10 +1150,15 @@ export default {
             var index = this.form.financeList.indexOf(item)
             if (index !== -1) {
             this.form.financeList.splice(index, 1)
+            
+            this.deleteshow3=false;
+            this.addshow3=true;
             }
         },
 
         next(formName) {
+            this.$refs[formName].validate((valid) => {
+          if (valid) {
                 if (this.active++ > 3) 
                 this.active = 0;
 
@@ -1184,6 +1205,12 @@ export default {
                     this.fourshow=false;
                     this.active = 0;
                 }
+                }else {
+              console.log('error submit!!');
+              return false;
+            }
+          
+        })
       },
 
       //上一步

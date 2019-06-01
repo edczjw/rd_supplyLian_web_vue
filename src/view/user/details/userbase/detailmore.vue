@@ -42,7 +42,7 @@
                 <el-col :span="12">剩余罚息：{{detail.surplusPenalty}}</el-col>
                 </el-row>
 
-                <el-row>
+                <el-row v-if="buttonshow">
                     <el-col>
                         <el-button style="width:100%;margin:30px 0;" type="danger" plain @click="reloan()">我要还款</el-button>
                     </el-col>
@@ -63,37 +63,73 @@
                         </div>
                     </el-col>
                     </el-row>
-
                         <el-upload
                         class="upload-demo"
-                        ref="upload"
+                        drag
                         accept="image/jpeg,image/gif,image/png,application/pdf"
                         :limit="5"
-                        list-type="picture"
+                        :http-request="Upload"
+                        :file-list='fileList'
                         action=""
-                        :file-list="fileList"
-                        :auto-upload="false">
-                        <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-                        <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-                        <div slot="tip" class="el-upload__tip">只能上传jpg/png/pdf文件，文件大小5M以内，上传文件总数量限制1-5份，至少上传1份</div>
+                        multiple>
+                        <i class="el-icon-upload"></i>
+                        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                        <div class="el-upload__tip" slot="tip">只能上传jpg/png/pdf文件，文件大小5M以内，上传文件总数量限制1-5份，至少上传1份</div>
                         </el-upload>
-
-                        <el-upload :http-request="Upload" :multiple="true" 
-                        :show-file-list="false" action="">
+                        <!-- <el-upload :http-request="Upload" :multiple="true" 
+                        :show-file-list="true" action="">
                         <el-button size="small" type="primary">点击上传</el-button>
-                        </el-upload>
+                        </el-upload> -->
                     </el-card>
+
+                    <!-- 列表 -->
+        <div class="file-list">
+          <!-- 预览 -->
+            <section v-for="(file, index) of files" class="file-item draggable-item" 
+            :key="file.name">
+                <img :src="file.src" alt="" ondragstart="return false;">
+                <span class="file-remove" @click="remove(index)">+</span>
+            </section>
+
+            <!-- 添加 -->
+            <section v-if="status == 'ready'" class="file-item">
+                <div @click="add" class="add"></div>
+            </section>
+        </div>
+
+        <section v-if="files.length != 0" class="upload-func">
+          <!-- 进度条 -->
+            <div class="progress-bar">
+                <section v-if="uploading" :width="(percent * 100) + '%'">
+                    {{(percent * 100) + '%'}}</section>
+            </div>
+            <!-- 按钮 -->
+            <div class="operation-box">
+                <button v-if="status == 'ready'" @click="submit">上传</button>
+                <button v-if="status == 'finished'" @click="finished">完成</button>
+            </div>
+        </section>
+        <!-- 格式框 -->
+        <input type="file" @change="fileChanged" ref="file" 
+        multiple="multiple" accept="image/jpg,image/jpeg,image/png,image/bmp">
+    </div>
                 </div>
 
   </div>
 </template>
-<script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-4.3.0.min.js"></script>
 
 <script>
-import { client } from '../../../../untils/alioss'
+import OSS from 'ali-oss';
 export default {
   data() {
     return {
+        buttonshow:true,
+        status: 'ready',
+        // 图片容器
+        files: [],
+        uploading: false,
+        percent: 0,
+
         show:true,
         statues:"",//订单状态
         detail:"",
@@ -107,77 +143,204 @@ export default {
       this.godetail();//获取信息
   },
   methods: {
-      Upload(file) {
-      var fileName = 'banner' + file.file.uid 
-        //定义唯一的文件名，打印出来的uid其实就是时间戳
-            client().put(fileName, file.file).then(
-        result => {
-        // 大功搞成  
-            //下面是如果对返回结果再进行处理，根据项目需要，下面是我们自己项目所用的，仅供参考
-                this.fileList[0] =
-                    { 
-                    'name': result.name, 
-                    'url': result.url 
-                    }
-                uploadBannerPic(this.fileList).then(res => { 
-                    //根据需要可能项目还需对自己的数据库进行保存
-                })
-        })
-        },
+      //完成
+    finished() {
+        this.files = []
+        this.status = 'ready'
+    },
 
-      //上传服务器
-      submitUpload(){
-          
-        //  这里是OSS
-        const OSS = require('ali-oss')
-            var that=this
-            var bucket;//OSS文件名称
-            var extranet;
-            var SecretId;
-            var SecretKey;
+//删除
+    remove(index) {
+        this.files.splice(index, 1)
+    },
+
+//辨别是否同一个文件
+    fileChanged() {
+        const list = this.$refs.file.files
+        for (let i = 0; i < list.length; i++) {
+            if (!this.isContain(list[i])) {
+                const item = {
+                    name: list[i].name,
+                    size: list[i].size,
+                    file: list[i]
+                }
+                this.html5Reader(list[i], item)
+                this.files.push(item)
+            }
+        }
+        this.$refs.file.value = ''
+    },
+    //查询列表是否包含同一个名字的文件
+    isContain(file) {
+      return this.files.find((item) => item.name === file.name && item.size === file.size)
+    },
+    // 将图片文件转成BASE64格式
+    html5Reader(file, item){
+        const reader = new FileReader()
+        reader.onload = (e) => {
+            this.$set(item, 'src', e.target.result)
+        }
+        reader.readAsDataURL(file)
+    },
+      // 添加图片
+    add() {
+        this.$refs.file.click()
+    },
+    // 上传图片
+    submit() {
+        console.log(this.files)
+        var that=this
+        var bucket;//OSS文件名称
+        // var Region;//OSS区域
+        var SecretId;
+        var SecretKey;
 
         this.$axios({
-                    method: 'post',
-                    url: this.$store.state.domain +"/biz/getAliyunOss"
-                })
-                .then(
-                    response => {
-                        bucket = response.data.bucket;
-                        extranet = response.data.extranet;
-                        SecretId = response.data.secretId;
-                        SecretKey = response.data.secretKey;
+            method: 'post',
+            url: this.$store.state.domain +"/biz/getAliyunOss"
+            })
+        .then((response) => {
+          if (response.data.code == 0) {
+            bucket = response.data.bucket;
+            // Region = response.data.detail.region;
+            SecretId = response.data.secretId;
+            SecretKey = response.data.secretKey;
 
-                        const client = new OSS.Wrapper({
-                            region: 'oss-cn-shenzhen',  
-                            accessKeyId: SecretId,
-                            accessKeySecret: SecretKey,
-                            bucket: bucket
+          //  这里是OSS
+            const client = new OSS.Wrapper({
+                region: 'oss-cn-shenzhen',  
+                accessKeyId: SecretId,
+                accessKeySecret: SecretKey,
+                bucket: bucket
+            });
+            //循环图片列表
+            const fNum = this.files;
+            for(var i=0;i<fNum.length;i++){
+                var f=fNum[i].file
+                console.log(f)
+                const Name=f.name
+                console.log(Name)
+                //后缀名
+                const suffix = Name.substr(Name.indexOf("."));
+                //时间戳
+                const obj=this.timestamp();
+                const storeAs = 'msbuc/'+obj+suffix  //  路径+时间戳+后缀名
+                console.log(storeAs)
+                client.multipartUpload(storeAs, f).then(function (result){
+
+                    console.log(result.res.requestUrls)
+                    console.log('成功')
+                    that.status="finished";
+                    that.percent=1;
+                }).catch(function (err) {
+                    console.log(err);
+                });
+              }
+          }
+      })
+    },
+    
+      Upload(file) {
+            var bucket;//OSS文件名称
+            // var Region;//OSS区域
+            var SecretId;
+            var SecretKey;
+        this.$axios({
+            method: 'post',
+            url: this.$store.state.domain +"/biz/getAliyunOss"
+            })
+            .then(
+                response => {
+                    console.log('获取阿里云配置成功')
+                    SecretKey = response.data.secretKey;
+                    SecretId = response.data.secretId;
+                    bucket = response.data.bucket;
+                    
+                    //后端提供数据
+                    const client = new OSS({
+                        region: 'oss-cn-shenzhen',
+                        accessKeyId: SecretId,
+                        accessKeySecret: SecretKey,
+                        bucket: bucket
+                    })
+                    console.log('配置client成功')
+                    var fileName = 'banner' + file.file.name 
+
+                    //后缀名
+                    const suffix = fileName.substr(fileName.indexOf("."));
+                    //时间戳
+                    const obj=this.timestamp();
+                    const storeAs = 'mssaas/'+obj+suffix  //  路径+时间戳+后缀名
+                    console.log(client)
+
+                    console.log(file)
+
+                    //上传
+                    client.put(storeAs,file.file).then(function (result){
+                        console.log('成功')
+                                // console.log(result);
+                                // console.log(result.url);
+                            }).catch(function (err) {
+                                console.log('上传文件异常：'+err);
                         });
-                        alert(bucket+":"+SecretId+":"+SecretKey)
+                        //失败  
+                    },
+                    //打印
+                    response => {
+                    console.log(response);
+                    }
+            )
+    },
+     
+      //上传服务器
+      submitUpload(file){
+          console.log(file)
+        var bucket;//OSS文件名称
+            // var Region;//OSS区域
+            var SecretId;
+            var SecretKey;
+        this.$axios({
+            method: 'post',
+            url: this.$store.state.domain +"/biz/getAliyunOss"
+            })
+            .then(
+                response => {
+                    console.log('获取阿里云配置成功')
+                    SecretKey = response.data.secretKey;
+                    SecretId = response.data.secretId;
+                    bucket = response.data.bucket;
+                    
+                    //后端提供数据
+                    const client = new OSS({
+                        region: 'oss-cn-shenzhen',
+                        accessKeyId: SecretKey,
+                        accessKeySecret: SecretId,
+                        bucket: bucket
+                    })
+                    console.log('配置client成功')
+                    var fileName = 'banner' + file.file.name 
 
-                        //循环图片列表
-                        const fNum = this.fileList;
-                        for(var i=0;i<fNum.length;i++){
-                            var f=fNum[i].file
-                            console.log(f)
-                            const Name=f.name
-                            console.log(Name)
-                            //后缀名
-                            const suffix = Name.substr(Name.indexOf("."));
-                            //时间戳
-                            const obj=this.timestamp();
-                            const storeAs = 'msbuc/'+obj+suffix  //  路径+时间戳+后缀名
-                            console.log(storeAs)
+                    //后缀名
+                    const suffix = fileName.substr(fileName.indexOf("."));
+                    //时间戳
+                    const obj=this.timestamp();
+                    const storeAs = 'msbuc/'+obj+suffix  //  路径+时间戳+后缀名
+                    console.log(client)
 
-                            client.multipartUpload(storeAs, f).then(function (result){
-                                console.log(result.res.requestUrls)
-                                that.status="finished";
-                                that.percent=1;
+                    //上传
+                    client.put(storeAs, file).then(function (result){
+                                console.log(result);
+                                console.log(result.url);
                             }).catch(function (err) {
                                 console.log(err);
-                            });
-                        }
-        })
+                        });
+                        //失败  
+                    },
+                    //打印
+                    response => {
+                    console.log(response);
+                    }
+            )
       },
 
       //  时间戳
@@ -191,14 +354,17 @@ export default {
           const s = time.getSeconds();  
           return ""+y+this.Add0(m)+this.Add0(d)+this.Add0(h)+this.Add0(mm)+this.Add0(s);  
       },
-
       Add0:function(m){  
           return m<10?'0'+m : m;  
       } ,
 
-
       godetail(){
           this.statues = this.$route.query.status
+          if(this.statues == '已结清' || this.statues == '审核中' || this.statues == '待放款'){
+              this.buttonshow=false;//隐藏还款按钮
+          }else if(this.statues == '待还款' || this.statues == '已逾期'){
+              this.buttonshow=true;//显示还款按钮
+          }
           this.$axios({
                         method: 'post',
                         url: this.$store.state.domain +"/biz/orderInfo",
