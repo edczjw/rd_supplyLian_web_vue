@@ -147,7 +147,7 @@ p {
      color: #b86e0e;
      opacity: 1;
      padding-right: 10px;
-     border-right: 2px solid rgba(175, 105, 105, 0.63);
+     border-right: 1px solid rgba(230, 228, 228, 0.952);
  }
 .left .icon-tip{
   width: 40px;
@@ -155,16 +155,15 @@ p {
 }
 
 .right {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: '黑体';
   font-size: 12px;
 
   float: right;
 
-  margin-right: 5px;
+  margin-right: 6px;
 
   cursor: pointer;
 
-  color: rgb(182, 21, 231);
 }
 
 .right:hover {
@@ -172,10 +171,10 @@ p {
 }
 
 svg {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   padding: 3px 8px;
-  color: #fff;
+  color: rgb(80, 78, 78);
 }
 
 svg:hover {

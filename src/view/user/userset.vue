@@ -3,7 +3,7 @@
          <div class="heading-top">
         <el-row>
         <el-col :span="20">账号设置</el-col>
-        <el-col :span="4">客服电话：110</el-col>
+        <el-col :span="4"><i class="el-icon-phone-outline"></i>客服电话：110</el-col>
         </el-row>
         </div>
 
@@ -13,7 +13,7 @@
 
                 <el-card class="box-card">
                 <el-row>
-                   <el-col><div class="set-tit"><h3>企业基本信息栏</h3></div></el-col>
+                   <el-col><div class="set-tit"><h3><i class="el-icon-view"></i>企业基本信息栏</h3></div></el-col>
                 </el-row>
                 <el-row :gutter="24">
                 <el-col :span="12"><span>企业名称：</span>{{this.detail.enterpriseName}}</el-col>
@@ -70,7 +70,7 @@
                 </el-row>
 
                 <el-row>
-                   <el-col><div class="set-tits"><h3>银行卡信息</h3></div></el-col>
+                   <el-col><div class="set-tits"><h3><i class="el-icon-message"></i>银行卡信息</h3></div></el-col>
                 </el-row>
                 <el-row :gutter="24">
                 <el-col :span="12"><span>银行卡卡号：</span>{{this.bankdetail.cardNo}}</el-col>
@@ -121,9 +121,11 @@
                         </el-col>
                         </el-row>
 
-                        <el-form-item>
+                        <el-row style="text-align:center">
+                        <el-col :span="24">
                             <el-button type="primary" plain @click="submit('form')">确认修改</el-button>
-                        </el-form-item>
+                        </el-col>
+                        </el-row>
                     </el-form>
 
                     

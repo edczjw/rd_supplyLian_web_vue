@@ -10,28 +10,32 @@
                 <el-tab-pane label="全部产品" name="first">
                     <el-collapse v-model="activeName" accordion @change="handleChange">
                     <el-collapse-item title="产品一" name="1">
-                        <div class="loan-need"><h3>申请所需材料:</h3><br>
+                        <div class="loan-need"><h3><i class="el-icon-edit-outline"></i>申请所需材料:</h3><br>
                                 请提前准备好复印件：<br>
-                                1. 企业统一社会信用代码证副本；<br>
-                                2. 公司章程；<br>
-                                3. 法定代表人、实际控制人、股东的身份证；<br>
-                                4. 近期(不少于3个月)经营结算账户的流水；<br>
-                                5. 银行要求的其他资料。</div>
-                        <el-button size="mini" type="success" plain @click="appliy()">申请</el-button>
+                                <i class="el-icon-check"></i>1. 企业统一社会信用代码证副本；<br>
+                                <i class="el-icon-check"></i>2. 公司章程；<br>
+                                <i class="el-icon-check"></i>3. 法定代表人、实际控制人、股东的身份证；<br>
+                                <i class="el-icon-check"></i>4. 近期(不少于3个月)经营结算账户的流水；<br>
+                                <i class="el-icon-check"></i>5. 银行要求的其他资料。</div>
+                        <el-row class="row">
+                        <el-button type="success" plain @click="appliy()">申请</el-button>
+                        </el-row>
                     </el-collapse-item>
                     <el-collapse-item title="产品二" name="2">
-                        <div class="loan-need"><h3>申请所需材料:</h3><br>
+                        <div class="loan-need"><h3><i class="el-icon-edit-outline"></i>申请所需材料:</h3><br>
                                 请提前准备好复印件：<br>
-                                1. 企业统一社会信用代码证副本；<br>
-                                2. 公司章程；<br>
-                                3. 法定代表人、实际控制人、股东的身份证；<br>
-                                4. 近期(不少于3个月)经营结算账户的流水；<br>
-                                5. 银行要求的其他资料。</div>
+                                <i class="el-icon-check"></i>1. 企业统一社会信用代码证副本；<br>
+                                <i class="el-icon-check"></i>2. 公司章程；<br>
+                                <i class="el-icon-check"></i>3. 法定代表人、实际控制人、股东的身份证；<br>
+                                <i class="el-icon-check"></i>4. 近期(不少于3个月)经营结算账户的流水；<br>
+                                <i class="el-icon-check"></i>5. 银行要求的其他资料。</div>
+                        <el-row class="row">
                         <el-button type="success" plain @click="appliy()">申请</el-button>
+                        </el-row>
                     </el-collapse-item>
                     </el-collapse>
                 </el-tab-pane>
-                <el-tab-pane label="更多产品" name="second">更多产品</el-tab-pane>
+                <el-tab-pane label="更多产品" name="second">敬请期待</el-tab-pane>
             </el-tabs>
         </el-card>
 
@@ -43,7 +47,7 @@ export default {
         return{
             activeName2:'first',
             activeName:'',
-            producet:'m001',//产品
+            productCd:'M001',//产品
         }
     },
     components:{
@@ -51,24 +55,19 @@ export default {
     methods: {
         handleChange(val){
             if(val=='1'){
-                this.producet='m001'
+                this.productCd='M006'
             }else if(val=='2'){
-                this.producet='m002'
+                this.productCd='M006'
             }else{
-                this.producet='m001'
+                this.productCd='M006'
             }
         },
         appliy(){
-            var pro=this.producet;
-            sessionStorage.setItem("proId", pro);//本地存储所选产品
+            var pro=this.productCd;
+            sessionStorage.setItem("productCd", pro);//本地存储所选产品
 
             //判断产品跳转信息录入页面
-            if(this.producet=='m001'){
                 this.$router.push('/user/inputinfo/inputinfo1');
-            }
-            else{
-                this.$router.push('/login');
-            }
         }
     }
     
@@ -82,11 +81,16 @@ export default {
     border-top: 3px solid rgba(15, 182, 160, 0.849);
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
+    
 }
+.row{
+        text-align: center;
+    }
 .loan-need{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: '宋体';
+    font-size: 16px;
     color: rgb(71, 70, 70);
-    padding: 30px 0;
+    padding: 20px 15px;
     margin-bottom: 10px;
 }
 </style>

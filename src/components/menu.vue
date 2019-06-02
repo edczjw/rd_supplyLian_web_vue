@@ -14,13 +14,13 @@
             </router-link>
             <router-link to="/user/userloan" >
                 <el-menu-item index="2">
-                    <i class="el-icon-menu"></i>
+                    <i class="el-icon-star-off"></i>
                     <span slot="title">我要借款</span>
                 </el-menu-item>
             </router-link>
             <router-link to="/user/userset" >
                 <el-menu-item index="3">
-                    <i class="el-icon-menu"></i>
+                    <i class="el-icon-setting"></i>
                     <span slot="title">账号设置</span>
                 </el-menu-item>
             </router-link>

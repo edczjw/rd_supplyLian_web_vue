@@ -71,6 +71,7 @@
                         :http-request="Upload"
                         :file-list='fileList'
                         :before-upload="beforeAvatarUpload"
+                        :on-change="handleChange"
                         action=""
                         list-type="picture"
                         multiple>
@@ -95,12 +96,17 @@ export default {
         statues:"",//订单状态
         detail:"",
         fileList:[],//文件容器
+        auditingImage:"",//存储文件url
     };
   },
   mounted() {
       this.godetail();//获取信息
   },
   methods: {
+      //对文件列表进行控制
+      handleChange(file, fileList) {
+        this.fileList = fileList.slice(-1);
+      },
        // 图片上传前验证:限制用户上传的图片格式和大小
       beforeAvatarUpload (file) {
         const isimg = file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'application/pdf';
@@ -122,6 +128,7 @@ export default {
             let _self = this;
             var bucket;//OSS文件名称
             var region;
+            var extranet;
             var accessKeyId;
             var accessKeySecret;
         this.$axios({
@@ -134,43 +141,77 @@ export default {
                     //后端提供数据
                     const client = new OSS({
                         region: 'oss-cn-shenzhen',// 服务器集群地区
+                        extranet: response.data.extranet,
                         accessKeyId:response.data.secretId, // OSS帐号
                         accessKeySecret:response.data.secretKey, // OSS 密码
                         bucket:response.data.bucket // 阿里云上存储的 Bucket
                         })
-                    console.log('配置client成功')
+                    console.log('配置client成功！')
                     console.log(client)
 
                     // 存储路径，并且给图片改成唯一名字
-                    var fileName = 'banner' + file.file.name 
+                    var fileName = file.file.name 
 
                     //后缀名
                     const suffix = fileName.substr(fileName.indexOf("."));
+
                     //时间戳
                     const obj=this.timestamp();
-                    const storeAs = 'mssaas/'+obj+suffix 
+
+                    //时间戳
+                    const obj2=this.timestamp1();
+
+                    //获取企业编号
+                    const enterpriseNo = sessionStorage.getItem("enterpriseNo");
+
+                    const storeAs = 'prod/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/repaymentvoucher/'+obj2+'-'
+                    +fileName
 
                     //上传
                     client.put(storeAs,file.file).then(res => {
-                            console.log('成功')
-
+                        if(res.url!=null || res.url!=""){
+                            
+                            console.log('服务器返回的文件url：')
                             //返回服务器文件url
                             console.log(res.url)
+                            
+                            this.$notify({
+                            title: '上传结果',
+                            type: 'success',
+                            offset: 100,
+                            dangerouslyUseHTMLString: true,
+                            message: '<strong>'+file.file.name+'文件上传成功！</strong>',
+                            position: 'bottom-left'
+                            });
+                            console.log(file.file.name+'文件上传成功！')
+                        }
 
-                            //保存在本地页面
-                            // _self.detail.auditingImage.push(res.url);
-                            // console.log(_self.detail.auditingImage);
+                            //保存
+                            _self.auditingImage = res.url;
 
-                            // //把上传图片的url发给后台做记录
-                            // _self.$http.post(_self.$store.state.domain + "/msweb/auditing?processNo=" 
-                            //     + _self.process_no + "&url=" + res.url).then((response) => {
-                            //     _self.getdetail();
-                            //      console.log("success");
-                            //     }, (response) => {
-                            //       console.log(response);
-                            //     });
+                            //把上传图片的url发给后台做记录
+                            _self.$axios({
+                                    method: 'post',
+                                    url: _self.$store.state.domain +"/biz/saveVoucher",
+                                    data:{
+                                        processNo:_self.$route.query.processNo,
+                                        imagesUrl:_self.auditingImage
+                                    }
+                                    })
+                                    .then(
+                                        response => {
+                                                if(response.data.code==0){
+                                                    console.log(response.data.msg);
+                                                    console.log(response.data.detail.result);
+                                                }else{
+                                                    console.log(response.data.msg);
+                                                }
+                                            }, response => {
+                                                console.log(response);
+                                            });
 
                             }).catch(err => {
+                                this.$message.error('上传文件异常');
                                 console.log('上传文件异常：');
                                 console.log(err)
                         });
@@ -193,9 +234,24 @@ timestamp(){
     const h = time.getHours();  
     const mm = time.getMinutes();  
     const s = time.getSeconds();  
-    return ""+y+this.Add0(m)+this.Add0(d)+this.Add0(h)+this.Add0(mm)+this.Add0(s);  
+    return ""+y+'-'+this.Add0(m)+'-'+this.Add0(d);  
 },
 Add0:function(m){  
+    return m<10?'0'+m : m;  
+} ,
+
+//  时间戳1
+timestamp1(){  
+    const time = new Date();  
+    const y = time.getFullYear();  
+    const m = time.getMonth()+1;  
+    const d = time.getDate();  
+    const h = time.getHours();  
+    const mm = time.getMinutes();  
+    const s = time.getSeconds();  
+    return ""+y+'-'+this.Add1(m)+'-'+this.Add1(d)+'_'+this.Add1(h)+this.Add1(mm)+this.Add1(s);  
+},
+Add1:function(m){  
     return m<10?'0'+m : m;  
 } ,
 
