@@ -160,6 +160,14 @@ export default {
   methods: {
     //注册
     regist(formName){
+      if(this.registform.agreementStatus == false){
+        this.$alert('确认是否勾选了查看协议！', '提醒', {
+                    confirmButtonText: '确定',
+                    callback: action => {
+                    
+                    }
+                    });
+      }
        this.$refs[formName].validate((valid) => {
           if (valid) {
             this.$axios({
@@ -221,14 +229,21 @@ export default {
                           type: 'success'
                         }); 
 
-                        if(accountStatus == '2'){
+                        if(accountStatus == 2){
                           //已开户
                           this.$router.push("/mshome");//跳转
-                        }else if(accountStatus == '0' || accountStatus == '1' || accountStatus == '4' || accountStatus == '5' ){
+                          console.log(accountStatus+'跳转到主页')
+                        }else if(accountStatus == 0){
                           this.$router.push("/creatuser/creatus")
+                          console.log(accountStatus+'创建账户')
+                          this.$store.state.buttonshow=true;//隐藏开户提交按钮
+                        }else if(accountStatus == 1 || accountStatus == 4 || accountStatus == 5 ){
+                          this.$router.push("/creatuser/creatus")
+                          console.log(accountStatus+'创建账户')
                           this.$store.state.buttonshow=false;//隐藏开户提交按钮
-                        }else if(accountStatus == '3'){
+                        }else if(accountStatus == 3){
                           this.$router.push("/failcreatuser/failcreatus")
+                          console.log(accountStatus+'创建账户失败')
                         }
 
                         

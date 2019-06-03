@@ -306,19 +306,33 @@ export default {
           this.statues = sessionStorage.getItem("accountStatus");
           if(this.statues==1){
               this.statues='开户中'
+              this.$alert(this.statues+',请等待工作人员联系您。', '当前开户状态', {
+                confirmButtonText: '确定并返回登录窗口',
+                showClose:false,
+                callback: action => {
+                    this.$router.push("/login")
+                }
+                });
           }else if(this.statues==3){
               this.statues='开户失败'
+              this.$alert(this.statues+',请等待工作人员联系您。', '当前开户状态', {
+                confirmButtonText: '确定并返回登录窗口',
+                showClose:false,
+                callback: action => {
+                    this.$router.push("/login")
+                }
+                });
           }else if(this.statues==4){
               this.statues='账户失效'
+              this.$alert(this.statues+',请等待工作人员联系您。', '当前开户状态', {
+                confirmButtonText: '确定并返回登录窗口',
+                showClose:false,
+                callback: action => {
+                    this.$router.push("/login")
+                }
+                });
           }
-          console.log(this.statues)
-          this.$alert(this.statues+',请等待工作人员联系您。', '当前开户状态', {
-          confirmButtonText: '确定并返回登录窗口',
-          showClose:false,
-          callback: action => {
-            this.$router.push("/login")
-          }
-        });
+          
       },
       //提交
       submit(formName){
@@ -401,8 +415,8 @@ export default {
             if (index !== -1) {
             this.form.businessList.splice(index, 1)
             
-            this.deleteshow3=false;
-            this.addshow3=true;
+            this.deleteshow2=false;
+            this.addshow2=true;
             }
         },
 
