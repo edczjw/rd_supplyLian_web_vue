@@ -311,7 +311,7 @@
                     <el-form-item label="对外担保情况：" prop="externalGuarantees" :rules="rules.kong">
                         <el-radio-group v-model.trim="form.externalGuarantees" @change="danbaochange">
                         <el-radio label="1">是</el-radio>
-                        <el-radio label="2">否</el-radio>
+                        <el-radio label="0">否</el-radio>
                         </el-radio-group>
                     </el-form-item>
                 </el-col>
@@ -404,13 +404,13 @@
 
                 <el-row>
                 <el-col :span="12">
-                    <el-form-item label="本次申请借款总额（元）：" prop="applyLimit" :rules="rules.number">
-                        <el-input v-model.trim="form.applyLimit" placeholder="填写数字值" size="mini" clearable></el-input>
+                    <el-form-item label="本次申请借款总额（元）：" prop="totalApplication" :rules="rules.number">
+                        <el-input v-model.trim="form.totalApplication" placeholder="填写数字值" size="mini" clearable></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="本次申请借款最长期限：" prop="applyTerm" :rules="rules.number">
-                        <el-input v-model.trim="form.applyTerm" placeholder="填写数字值" size="mini" clearable></el-input>
+                    <el-form-item label="本次申请借款最长期限：" prop="applicationDeadline" :rules="rules.number">
+                        <el-input v-model.trim="form.applicationDeadline" placeholder="填写数字值" size="mini" clearable></el-input>
                     </el-form-item>
                 </el-col>
                 </el-row>
@@ -786,7 +786,7 @@
                 </el-col>
                 </el-row>
 
-                <span v-if="form.externalGuarantees == '0'">
+                <span v-if="form.externalGuarantees == '1'">
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="对外担保情况：">
@@ -820,8 +820,19 @@
                 
                 </span>
                 <!-- 判断是否显示 -->
-                <span v-if="form.generalTaxpayers == '1'">
-                
+                <span v-if="form.externalGuarantees == '0'">
+                <el-row>
+                    <el-col :span="12">
+                        <el-form-item label="对外担保情况：">
+                            <span v-if="form.externalGuarantees == '0'">
+                            否
+                            </span>
+                            <span v-if="form.externalGuarantees == '1'">
+                            是
+                            </span>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
                 </span>
 
                 </div>
@@ -886,12 +897,12 @@
                 <el-row>
                 <el-col :span="12">
                     <el-form-item label="本次申请借款总额（元）：">
-                        {{form.applyLimit}}
+                        {{form.totalApplication}}
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="本次申请借款最长期限：">
-                        {{form.applyTerm}}
+                        {{form.applicationDeadline}}
                     </el-form-item>
                 </el-col>
                 </el-row>
@@ -1080,8 +1091,8 @@ export default {
                 capEmployeeSalary:"",               //单个员工薪资上限
                 paymentList:"",             //本次融资对应的发薪名单、金额
                 receivables:"",             //应收款对账凭证
-                applyLimit:"",                //本次申请借款总额
-                applyTerm:"",             //本次申请借款最长期限
+                totalApplication:"",                //本次申请借款总额
+                applicationDeadline:"",             //本次申请借款最长期限
                 repaymentAccount:"",                //本次借款指定回款及还款账户
                 pledgedReceivables:"",              //本次借款质押的应收款金额
                 borrowingGuarantee:"",              //本次借款担保方式
@@ -1116,7 +1127,7 @@ export default {
                                     this.$alert('恭喜您！'+response.data.detail.result, '借款信息提交结果', {
                                         confirmButtonText: '确定',
                                         callback: action => {
-
+                                            this.active = 0;
                                         }
                                         });
                                     console.log(response.data.detail.result);
@@ -1652,7 +1663,7 @@ Add1:function(m){
 
         //点击单选担保
         danbaochange(val){
-            if(val=='2'){
+            if(val=='0'){
                 this.danbaoinput=true;
             }else{
                 this.danbaoinput=false;
