@@ -1970,6 +1970,7 @@ Add1:function(m){
 }
 .thirdpage .el-row .el-col:nth-child(odd){
     border-right: 1px solid rgba(197, 195, 195, 0.637);
+    padding-right: 40px;
 }
 .kelist{
     margin-top: 30px;
