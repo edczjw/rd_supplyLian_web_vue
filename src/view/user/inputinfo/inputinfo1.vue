@@ -1124,7 +1124,7 @@ export default {
                     .then(
                         response => {
                                 if(response.data.code==0){
-                                    this.$alert('恭喜您！'+response.data.detail.result, '借款信息提交结果', {
+                                    this.$alert('恭喜您！申请借款信息提交成功！', '借款信息提交结果', {
                                         confirmButtonText: '确定',
                                         callback: action => {
                                             this.active = 0;
