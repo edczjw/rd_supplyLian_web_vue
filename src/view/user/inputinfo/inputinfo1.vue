@@ -23,7 +23,6 @@
                 <h4>企业基本信息栏</h4>
                 </el-row>
                 
-                <div>
                 <el-row>
                 <el-col :span="12">
                     <el-form-item label="企业名称：" prop="enterpriseName" >
@@ -137,15 +136,11 @@
             </el-table>
           </el-row>
 
-                </div>
-                </div>
-
-                <!-- 银行卡信息 -->
+        <!-- 银行卡信息 -->
                 <el-row>
                 <h4>银行卡信息</h4>
                 </el-row>
 
-                <div>
                 <el-row>
                 <el-col :span="12">
                     <el-form-item label="银行卡卡号：" prop="cardNo" :rules="rules.kong">
@@ -171,15 +166,12 @@
                     </el-form-item>
                 </el-col>
                 </el-row>
-                </div>
 
                 <!-- 企业财务信息栏 -->
-                <div>
                 <el-row>
                 <h4>企业财务信息栏</h4>
                 </el-row>
 
-                <div>
                 <el-row>
                 <el-col :span="12">
                     <el-form-item label="近三年经营收入金额（元）：" prop="threeYearIncome" :rules="rules.number">
@@ -248,15 +240,12 @@
                 </el-col>
                 </el-row>
                 
-                </div>
-                </div>
             <!-- 按钮 -->
             <div class="in-button">
             <el-button type="primary" style="margin-top: 12px;" @click="next()">下一步</el-button>
             </div>
-            </el-form>
-
-            <el-form ref="form" :model="form" label-width="255px" status-icon>
+            </div>
+            
             <!-- 第二页 -->
             <div v-if="secondshow">
                 <el-row>
@@ -354,9 +343,7 @@
                 <el-button type="primary" style="margin-top: 12px;" @click="last">上一步</el-button>
                 <el-button type="primary" style="margin-top: 12px;" @click="next()">下一步</el-button></div>
             </div>
-            </el-form>
 
-            <el-form ref="form" :model="form" label-width="255px" status-icon>
             <!-- 第三页 -->
             <div v-if="thirdshow" >  
                 <el-row>
@@ -1150,7 +1137,7 @@ export default {
                     //获取企业编号
                     const enterpriseNo = sessionStorage.getItem("enterpriseNo");
 
-                    const storeAs = 'prod/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
+                    const storeAs = 'test/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
                     +fileName
 
                     //上传
@@ -1175,7 +1162,7 @@ export default {
                         }
 
                             }).catch(err => {
-                                this.$message.error('上传文件异常');
+                                this.$message.error('上传文件异常:'+err);
                                 console.log('上传文件异常：');
                                 console.log(err)
                         });
@@ -1230,7 +1217,7 @@ export default {
                     //获取企业编号
                     const enterpriseNo = sessionStorage.getItem("enterpriseNo");
 
-                    const storeAs = 'prod/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
+                    const storeAs = 'test/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
                     +fileName
 
                     //上传
@@ -1256,7 +1243,7 @@ export default {
                         }
 
                             }).catch(err => {
-                                this.$message.error('上传文件异常');
+                                this.$message.error('上传文件异常:'+err);
                                 console.log('上传文件异常：');
                                 console.log(err)
                         });
@@ -1311,7 +1298,7 @@ export default {
                     //获取企业编号
                     const enterpriseNo = sessionStorage.getItem("enterpriseNo");
 
-                    const storeAs = 'prod/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
+                    const storeAs = 'test/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
                     +fileName
 
                     //上传
@@ -1336,7 +1323,7 @@ export default {
                         }
 
                             }).catch(err => {
-                                this.$message.error('上传文件异常');
+                                this.$message.error('上传文件异常:'+err);
                                 console.log('上传文件异常：');
                                 console.log(err)
                         });
@@ -1391,7 +1378,7 @@ export default {
                     //获取企业编号
                     const enterpriseNo = sessionStorage.getItem("enterpriseNo");
 
-                    const storeAs = 'prod/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
+                    const storeAs = 'test/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
                     +fileName
 
                     //上传
@@ -1416,7 +1403,7 @@ export default {
                         }
 
                             }).catch(err => {
-                                this.$message.error('上传文件异常');
+                                this.$message.error('上传文件异常:'+err);
                                 console.log('上传文件异常：');
                                 console.log(err)
                         });
@@ -1471,7 +1458,7 @@ export default {
                     //获取企业编号
                     const enterpriseNo = sessionStorage.getItem("enterpriseNo");
 
-                    const storeAs = 'prod/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
+                    const storeAs = 'test/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
                     +fileName
 
                     //上传
@@ -1495,7 +1482,7 @@ export default {
                         }
 
                             }).catch(err => {
-                                this.$message.error('上传文件异常');
+                                this.$message.error('上传文件异常:'+err);
                                 console.log('上传文件异常：');
                                 console.log(err)
                         });
@@ -1550,7 +1537,7 @@ export default {
                     //获取企业编号
                     const enterpriseNo = sessionStorage.getItem("enterpriseNo");
 
-                    const storeAs = 'prod/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
+                    const storeAs = 'test/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
                     +fileName
 
                     //上传
@@ -1575,7 +1562,7 @@ export default {
                         }
 
                             }).catch(err => {
-                                this.$message.error('上传文件异常');
+                                this.$message.error('上传文件异常:'+err);
                                 console.log('上传文件异常：');
                                 console.log(err)
                         });
