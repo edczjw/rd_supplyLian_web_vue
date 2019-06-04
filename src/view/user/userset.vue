@@ -92,7 +92,7 @@
                         <el-row>
                         <el-col :span="24">
                             <el-form-item label="账号：" prop="username" :rules="rules.username">
-                                <el-input placeholder="请输入手机号" v-model.trim="form.username"></el-input>
+                                {{form.username}}
                             </el-form-item>
                         </el-col>
                         </el-row>
@@ -194,10 +194,19 @@ export default {
         }
     },
     mounted() {
+        this.getname();
         this.getMessage();//获取企业信息
         this.getbankMessage();//获取银行卡信息
     },
     methods:{
+        getname(){
+            
+            if(this.activeName==1){
+            this.form.username = sessionStorage.getItem("username");
+            }else{
+                this.form.username = sessionStorage.getItem("username");
+            }
+        },
         submit(formName){
             this.$refs[formName].validate((valid) => {
             if (valid) {
@@ -302,6 +311,7 @@ export default {
             this.show=true;
             this.getMessage()
             this.getbankMessage()
+            this.getname();
         },
 
         // 我要还款

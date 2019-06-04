@@ -49,7 +49,7 @@ export default {
         return{
             activeName2:'first',
             activeName:'',
-            productCd:'M001',//产品
+            productCd:'10001',//产品
         }
     },
     components:{
@@ -57,11 +57,11 @@ export default {
     methods: {
         handleChange(val){
             if(val=='1'){
-                this.productCd='M006'
+                this.productCd='10001'
             }else if(val=='2'){
-                this.productCd='M006'
+                this.productCd='10001'
             }else{
-                this.productCd='M006'
+                this.productCd='10001'
             }
         },
         appliy(){

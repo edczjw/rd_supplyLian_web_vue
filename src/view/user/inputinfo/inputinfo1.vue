@@ -26,26 +26,26 @@
                 <div>
                 <el-row>
                 <el-col :span="12">
-                    <el-form-item label="企业名称：" prop="enterpriseName"  :rules="rules.kong">
-                        <el-input v-model.trim="form.enterpriseName" size="mini" clearable placeholder="填写企业全称"></el-input>
+                    <el-form-item label="企业名称：" prop="enterpriseName" >
+                        {{form.enterpriseName}}
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="统一社会征信号码或营业执照号码：" prop="socialCode" :rules="rules.kong">
-                        <el-input v-model.trim="form.socialCode" size="mini" clearable></el-input>
+                    <el-form-item label="统一社会征信号码或营业执照号码：" prop="socialCode">
+                        {{form.socialCode}}
                     </el-form-item>
                 </el-col>
                 </el-row>
 
                 <el-row>
                 <el-col :span="12">
-                    <el-form-item label="注册地址：" prop="registeredAddress" :rules="rules.kong">
-                        <el-input v-model.trim="form.registeredAddress" size="mini" clearable></el-input>
+                    <el-form-item label="注册地址：" prop="registeredAddress">
+                        {{form.registeredAddress}}
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="实际经营地址：" prop="businessAddress" :rules="rules.kong">
-                        <el-input v-model.trim="form.businessAddress" size="mini" clearable></el-input>
+                    <el-form-item label="实际经营地址：" prop="businessAddress">
+                        {{form.businessAddress}}
                     </el-form-item>
                 </el-col>
                 </el-row>
@@ -53,12 +53,12 @@
                 <el-row>
                 <el-col :span="12">
                     <el-form-item label="注册资本（元）：" prop="registeredCapital" :rules="rules.number">
-                        <el-input v-model.trim="form.registeredCapital" placeholder="填写数字值" size="mini" clearable></el-input>
+                        {{form.registeredCapital}}
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="实缴资本（元）：" prop="paidCapital" :rules="rules.number">
-                        <el-input v-model.trim="form.paidCapital" placeholder="填写数字值" size="mini" clearable></el-input>
+                        {{form.paidCapital}}
                     </el-form-item>
                 </el-col>
                 </el-row>
@@ -66,12 +66,12 @@
                 <el-row>
                 <el-col :span="12">
                     <el-form-item label="成立开始日期：" prop="startingDate" :rules="rules.kong">
-                        <el-input v-model.trim="form.startingDate" placeholder="yyyy-mm-dd" size="mini" clearable></el-input>
+                        {{form.startingDate}}
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="成立有效截止日期：" prop="endingDate" :rules="rules.kong">
-                        <el-input v-model.trim="form.endingDate" placeholder="yyyy-mm-dd或者长期" size="mini" clearable></el-input>
+                        {{form.endingDate}}
                     </el-form-item>
                 </el-col>
                 </el-row>
@@ -79,151 +79,64 @@
                 <el-row>
                 <el-col :span="12">
                     <el-form-item label="是否为一般纳税人：" prop="generalTaxpayers" :rules="rules.kong">
-                        <el-radio v-model.trim="form.generalTaxpayers" label="1">是</el-radio>
-                        <el-radio v-model.trim="form.generalTaxpayers" label="2">否</el-radio>
+                        {{form.generalTaxpayers}}
                     </el-form-item>
                 </el-col>
-                </el-row>
-
-                <el-row>
                 <el-col :span="12">
                     <el-form-item label="法定代表人姓名" prop="legalName" :rules="rules.kong">
-                        <el-input v-model.trim="form.legalName" size="mini" clearable></el-input>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item label="法定代表人身份证号码" prop="legalIdCard" :rules="rules.checkid">
-                        <el-input v-model.trim="form.legalIdCard"  size="mini" clearable></el-input>
+                        {{form.legalName}}
                     </el-form-item>
                 </el-col>
                 </el-row>
 
                 <el-row>
                 <el-col :span="12">
+                    <el-form-item label="法定代表人身份证号码" prop="legalIdCard" :rules="rules.checkid">
+                        {{form.legalIdCard}}
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
                     <el-form-item label="法定代表人联系电话" prop="legalPhone" :rules="rules.phone">
-                        <el-input v-model.trim="form.legalPhone" placeholder="请输入正确的电话号码"  size="mini" clearable></el-input>
+                        {{form.legalPhone}}
                         </el-form-item>
                 </el-col>
                 </el-row>
 
 
-                <div class="kelist">
-                <el-button  v-if="addshow1" plain type="success" @click="addcontrol" size="mini">新增</el-button>
-                <el-row>
-                <el-col :span="12">
-                <el-form-item 
-                    v-for="(controlList, index) in form.controlList"
-                    :label="'实际控制人姓名'+(index+1)+'：'" 
-                    :key="controlList.key"
-                    :prop="'controlList.' + index + '.controlName'"
-                    :rules="rules.kong">
-                    <el-input v-model.trim="controlList.controlName"  size="mini" clearable></el-input>
-                </el-form-item>
-                </el-col>
+               <el-row>
+            <el-table
+              :data="this.form.controlList"
+              size="mini"
+              border
+              style="color:blue; font-size:8px"
+            >
+              <el-table-column prop="controlName" label="实际控制人姓名" align="center"></el-table-column>
+              <el-table-column prop="controlIdCard" label="实际控制人身份证号码" align="center"></el-table-column>
+              <el-table-column prop="controlPhone" label="实际控制人联系电话" align="center"></el-table-column>
+            </el-table>
+               </el-row>
 
-                <el-col :span="12">
-                    <el-form-item 
-                    v-for="(controlList, index) in form.controlList"
-                    :label="'实际控制人身份证号码'+(index+1)+'：'" 
-                    :key="controlList.key"
-                    :prop="'controlList.' + index + '.idCard'"
-                    :rules="rules.checkid">
-                        <el-input v-model.trim="controlList.idCard"  size="mini" clearable></el-input>
-                    </el-form-item>
-                </el-col>
-                </el-row>
+          <el-row>
+            <el-table
+              :data="this.form.businessList"
+              size="mini"
+              border
+              style="color:blue; font-size:8px"
+            >
+              <el-table-column prop="businessName" label="业务对接人姓名" align="center"></el-table-column>
+              <el-table-column prop="businessPhone" label="业务对接人联系电话" align="center"></el-table-column>
+              <el-table-column prop="businessMail" label="业务对接人联系邮箱" align="center"></el-table-column>
+            </el-table>
+          </el-row>
 
-                <el-row>
-                <el-col :span="12">
-                    <el-form-item 
-                    v-for="(controlList, index) in form.controlList"
-                    :label="'实际控制人联系电话'+(index+1)+'：'" 
-                    :key="controlList.key"
-                    :prop="'controlList.' + index + '.phone'"
-                    :rules="rules.phone">
-                        <el-input v-model.trim="controlList.phone" size="mini" clearable></el-input>
-                        <el-button v-if="deleteshow1" plain type="danger" size="mini" @click.prevent="removecontrol(controlList)">删除</el-button>
-                    </el-form-item>
-                </el-col>
-                </el-row>
-                </div>
+          <el-row>
+            <el-table :data="this.form.financeList" size="mini" border>
+              <el-table-column prop="financeName" label="财务对接人姓名" align="center"></el-table-column>
+              <el-table-column prop="financePhone" label="财务对接人联系电话" align="center"></el-table-column>
+              <el-table-column prop="financeMail" label="财务对接人联系邮箱" align="center"></el-table-column>
+            </el-table>
+          </el-row>
 
-                <div class="kelist">
-                <el-button v-if="addshow2" plain type="success" @click="addbussiness" size="mini">新增</el-button>
-                <el-row>
-                <el-col :span="12">
-                    <el-form-item 
-                    v-for="(businessList, index) in form.businessList"
-                    :label="'业务对接人姓名'+(index+1)+'：'" 
-                    :key="businessList.key"
-                    :prop="'businessList.' + index + '.businessName'"
-                    :rules="rules.kong">
-                        <el-input v-model.trim="businessList.businessName"  size="mini" clearable></el-input>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item 
-                    v-for="(businessList, index) in form.businessList"
-                    :label="'业务对接人联系电话'+(index+1)+'：'" 
-                    :key="businessList.key"
-                    :prop="'businessList.' + index + '.phone'"
-                    :rules="rules.phone">
-                        <el-input v-model.trim="businessList.phone" placeholder="请输入正确的电话号码" size="mini" clearable></el-input>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item 
-                    v-for="(businessList, index) in form.businessList"
-                    :label="'业务对接人联系邮箱'+(index+1)+'：'" 
-                    :key="businessList.key"
-                    :prop="'businessList.' + index + '.mail'"
-                    :rules="rules.mail">
-                        <el-input v-model.trim="businessList.mail" placeholder="请输入正确的邮箱" size="mini" clearable></el-input>
-                        <el-button v-if="deleteshow2" plain type="danger" size="mini" @click.prevent="removebussiness(businessList)">删除</el-button>
-                    </el-form-item>
-                </el-col>
-                </el-row>
-                </div>
-
-
-                <div class="kelist">
-                <el-button v-if="addshow3" plain type="success" @click="addfinance" size="mini">新增</el-button>
-                <el-row>
-                <el-col :span="12">
-                    <el-form-item 
-                    v-for="(financeList, index) in form.financeList"
-                    :label="'财务对接人姓名'+(index+1)+'：'" 
-                    :key="financeList.key"
-                    :prop="'financeList.' + index + '.financeName'"
-                    :rules="rules.kong">
-                        <el-input v-model.trim="financeList.financeName" size="mini" clearable></el-input>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item 
-                    v-for="(financeList, index) in form.financeList"
-                    :label="'财务对接人联系电话'+(index+1)+'：'" 
-                    :key="financeList.key"
-                    :prop="'financeList.' + index + '.phone'"
-                    :rules="rules.phone">
-                        <el-input v-model.trim="financeList.phone"  placeholder="请输入正确的电话号码" size="mini" clearable></el-input>
-                    </el-form-item>
-                </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
-                    <el-form-item
-                    v-for="(financeList, index) in form.financeList"
-                    :label="'财务对接人联系邮箱'+(index+1)+'：'" 
-                    :key="financeList.key"
-                    :prop="'financeList.' + index + '.mail'"
-                    :rules="rules.mail">
-                        <el-input v-model.trim="financeList.mail" placeholder="请输入正确的邮箱" size="mini" clearable></el-input>
-                        <el-button v-if="deleteshow3" plain type="danger" size="mini" @click.prevent="removefinance(financeList)">删除</el-button>
-                    </el-form-item>
-                </el-col>
-                </el-row>
                 </div>
                 </div>
 
@@ -334,12 +247,12 @@
                     </el-form-item>
                 </el-col>
                 </el-row>
-                </div>
-                </div>
                 
+                </div>
+                </div>
             <!-- 按钮 -->
             <div class="in-button">
-            <el-button type="primary" style="margin-top: 12px;" @click="next()">下一步</el-button></div>
+            <el-button type="primary" style="margin-top: 12px;" @click="next()">下一步</el-button>
             </div>
             </el-form>
 
@@ -1062,6 +975,8 @@ export default {
                     mail:"",                //联系邮箱
                 }],             
                 
+
+
                 cardNo:"",              //银行卡卡号
                 bankName:"",                //银行名称
                 accountName:"",             //账户户名
@@ -1106,7 +1021,50 @@ export default {
     },
     components:{
     },
+    mounted() {
+        this.getdetail()
+    },
     methods: {
+        getdetail(){
+            this.form.enterpriseNo = sessionStorage.getItem("enterpriseNo");
+            //把上传图片的url发给后台做记录
+            this.$axios({
+                    method: 'post',
+                    url: this.$store.state.domain +"/biz/user/getBasicInfo",
+                    data:this.form
+                    })
+                    .then(
+                        response => {
+                                if(response.data.code==0){
+                                    this.form.enterpriseName = response.data.detail.enterpriseName
+                                    this.form.socialCode = response.data.detail.socialCode
+                                    this.form.registeredAddress = response.data.detail.registeredAddress
+                                    this.form.businessAddress = response.data.detail.businessAddress
+                                    this.form.registeredCapital = response.data.detail.registeredCapital
+                                    this.form.paidCapital = response.data.detail.paidCapital
+                                    this.form.startingDate = response.data.detail.startingDate
+                                    this.form.endingDate = response.data.detail.endingDate
+                                    this.form.generalTaxpayers = response.data.detail.generalTaxpayers
+                                    this.form.legalName = response.data.detail.legalName
+                                    this.form.legalPhone = response.data.detail.legalPhone
+                                    this.form.legalIdCard = response.data.detail.legalIdCard
+                                    this.form.controlList = response.data.detail.controlList
+                                    this.form.businessList = response.data.detail.businessList
+                                    this.form.financeList = response.data.detail.financeList
+                                    console.log(this.form)
+                                }else{
+                                     this.$alert(response.data.msg, '提示', {
+                                        confirmButtonText: '确定',
+                                        callback: action => {
+                                            
+                                        }
+                                        });
+                                    console.log(response.data.msg);
+                                }
+                            }, response => {
+                                console.log(response);
+                            });
+        },
     //提交
     submit(formName){
     this.$refs[formName].validate((valid) => {
