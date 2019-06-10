@@ -102,12 +102,12 @@
                 </el-row>
 
 
+            <div class="thirdpage">
                <el-row>
             <el-table
               :data="this.form.controlList"
               size="mini"
               border
-              style="color:blue; font-size:8px"
             >
               <el-table-column prop="controlName" label="实际控制人姓名" align="center"></el-table-column>
               <el-table-column prop="controlIdCard" label="实际控制人身份证号码" align="center"></el-table-column>
@@ -120,7 +120,6 @@
               :data="this.form.businessList"
               size="mini"
               border
-              style="color:blue; font-size:8px"
             >
               <el-table-column prop="businessName" label="业务对接人姓名" align="center"></el-table-column>
               <el-table-column prop="businessPhone" label="业务对接人联系电话" align="center"></el-table-column>
@@ -135,6 +134,7 @@
               <el-table-column prop="financeMail" label="财务对接人联系邮箱" align="center"></el-table-column>
             </el-table>
           </el-row>
+            </div>
 
         <!-- 银行卡信息 -->
                 <el-row>
@@ -306,12 +306,12 @@
 
                 <el-row>
                 <el-col :span="12">
-                    <el-form-item label="本次申请借款总额（元）：" prop="totalApplication" :rules="rules.number">
+                    <el-form-item label="本次申请借款总额（元）：" prop="totalApplication" :rules="rules.range">
                         <el-input v-model.trim="form.totalApplication" placeholder="填写数字值" size="mini" clearable></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="本次申请借款最长期限：" prop="applicationDeadline" :rules="rules.number">
+                    <el-form-item label="本次申请借款最长期限：" prop="applicationDeadline" :rules="rules.day">
                         <el-input v-model.trim="form.applicationDeadline" placeholder="填写数字值" size="mini" clearable></el-input>
                     </el-form-item>
                 </el-col>
@@ -555,12 +555,7 @@
                 <el-row>
                 <el-col :span="12">
                     <el-form-item label="是否为一般纳税人：">
-                        <span v-if="form.generalTaxpayers == '0'">
-                        否
-                        </span>
-                        <span v-if="form.generalTaxpayers == '1'">
-                        是
-                        </span>
+                        {{form.generalTaxpayers}}
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
@@ -586,24 +581,24 @@
                 <el-row>
                 <el-table :data="this.form.controlList" border>
                 <el-table-column property="controlName" label="实际控制人姓名" align="center"></el-table-column>
-                <el-table-column property="idCard" label="实际控制人身份证号码" align="center"></el-table-column>
-                <el-table-column property="phone" label="实际控制人联系电话" align="center"></el-table-column>
+              <el-table-column prop="controlIdCard" label="实际控制人身份证号码" align="center"></el-table-column>
+              <el-table-column prop="controlPhone" label="实际控制人联系电话" align="center"></el-table-column>
                 </el-table>
                 </el-row>
 
                 <el-row>
                 <el-table :data="this.form.businessList" border>
                 <el-table-column property="businessName" label="业务对接人姓名" align="center"></el-table-column>
-                <el-table-column property="phone" label="业务对接人联系电话" align="center"></el-table-column>
-                <el-table-column property="mail" label="业务对接人联系邮箱" align="center"></el-table-column>
+              <el-table-column prop="businessPhone" label="业务对接人联系电话" align="center"></el-table-column>
+              <el-table-column prop="businessMail" label="业务对接人联系邮箱" align="center"></el-table-column>
                 </el-table>
                 </el-row>
 
                 <el-row>
                 <el-table :data="this.form.financeList" border >
                 <el-table-column property="financeName" label="财务对接人姓名" align="center"></el-table-column>
-                <el-table-column property="phone" label="财务对接人联系电话" align="center"></el-table-column>
-                <el-table-column property="mail" label="财务对接人联系邮箱" align="center"></el-table-column>
+              <el-table-column prop="financePhone" label="财务对接人联系电话" align="center"></el-table-column>
+              <el-table-column prop="financeMail" label="财务对接人联系邮箱" align="center"></el-table-column>
                 </el-table>
                 </el-row>
                 </div>
@@ -690,7 +685,7 @@
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="对外担保情况：">
-                            <span v-if="form.externalGuarantees == '0'">
+                            <span v-if="form.externalGuarantees == '否'">
                             否
                             </span>
                             <span v-if="form.externalGuarantees == '1'">
@@ -1060,6 +1055,11 @@ export default {
             this.form.enterpriseNo = sessionStorage.getItem("enterpriseNo");
             this.form.productCd = sessionStorage.getItem("productCd");
             this.form.userName = sessionStorage.getItem("username");
+            if(this.form.generalTaxpayers == '是'){
+                this.form.generalTaxpayers = '1'
+            }else{
+                this.form.generalTaxpayers = '0'
+            }
             //把上传图片的url发给后台做记录
             _self.$axios({
                     method: 'post',
@@ -1123,6 +1123,7 @@ export default {
 
                     // 存储路径，并且给图片改成唯一名字
                     var fileName = file.file.name 
+                    
                     this.cooperativeClients = fileName
 
                     //后缀名
@@ -1140,13 +1141,13 @@ export default {
                     const storeAs = 'test/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
                     +fileName
 
+                    this.form.cooperativeClients = 'http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs
+
                     //上传
                     client.put(storeAs,file.file).then(res => {
                         if(res.url!=null || res.url!=""){
                             
                             // console.log('服务器返回的文件url：')
-
-                            this.form.cooperativeClients = res.url
 
                             //返回服务器文件url
                             // console.log(res.url)
@@ -1220,13 +1221,13 @@ export default {
                     const storeAs = 'test/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
                     +fileName
 
+                    this.form.manpowerServiceContract = 'http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs
+
                     //上传
                     client.put(storeAs,file.file).then(res => {
                         if(res.url!=null || res.url!=""){
                             
                             // console.log('服务器返回的文件url：')
-
-                            this.form.manpowerServiceContract = res.url
 
                             //返回服务器文件url
                             // console.log(res.url)
@@ -1301,13 +1302,14 @@ export default {
                     const storeAs = 'test/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
                     +fileName
 
+                    this.form.laborContract = 'http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs
+
                     //上传
                     client.put(storeAs,file.file).then(res => {
                         if(res.url!=null || res.url!=""){
                             
                             // console.log('服务器返回的文件url：')
 
-                            this.form.laborContract = res.url
 
                             //返回服务器文件url
                             // console.log(res.url)
@@ -1381,13 +1383,14 @@ export default {
                     const storeAs = 'test/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
                     +fileName
 
+                    this.form.returnRecords = 'http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs
+
                     //上传
                     client.put(storeAs,file.file).then(res => {
                         if(res.url!=null || res.url!=""){
                             
                             // console.log('服务器返回的文件url：')
 
-                            this.form.returnRecords = res.url
 
                             //返回服务器文件url
                             // console.log(res.url)
@@ -1461,13 +1464,14 @@ export default {
                     const storeAs = 'test/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
                     +fileName
 
+                    this.form.paymentList = 'http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs
+
                     //上传
                     client.put(storeAs,file.file).then(res => {
                         if(res.url!=null || res.url!=""){
                             
                             // console.log('服务器返回的文件url：')
 
-                            this.form.paymentList = res.url
                             //返回服务器文件url
                             // console.log(res.url)
                             
@@ -1540,13 +1544,13 @@ export default {
                     const storeAs = 'test/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
                     +fileName
 
+                    this.form.receivables = 'http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs
+
                     //上传
                     client.put(storeAs,file.file).then(res => {
                         if(res.url!=null || res.url!=""){
                             
                             // console.log('服务器返回的文件url：')
-
-                            this.form.receivables = res.url
 
                             //返回服务器文件url
                             // console.log(res.url)
@@ -1918,6 +1922,8 @@ Add1:function(m){
     text-align: center;
     margin-bottom: 12px;
 }
+
+
 .thirdpage .el-row{
     border-bottom: 1px solid rgba(197, 195, 195, 0.637);
 

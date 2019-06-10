@@ -17,10 +17,10 @@
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-quanping4"></use>
       </svg></p>
-    <p class='right' title="联系客服">
+    <p class='right' title="联系客服：020-86534547">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-atm"></use>
-      </svg>112</p>
+      </svg></p>
   </div>
  <div class="creat-wapper">
      <div class="container">
@@ -29,88 +29,90 @@
              <div class="form-title">企业基本信息栏</div>
              <el-form ref="form" :model="form" label-width="240px" status-icon>
                 <el-row>
-                <el-col :span="24">
+                <el-col :span="8">
                 <el-form-item label="企业名称" prop="enterpriseName"  :rules="rules.kong">
-                    <el-input v-model="form.enterpriseName" placeholder="填写企业全称"></el-input>
+                    <el-input size="mini" v-model="form.enterpriseName" placeholder="填写企业全称"></el-input>
                 </el-form-item>
                 </el-col>
-                <el-col :span="24">
-                    <el-form-item label="统一社会征信号码或营业执照号码" prop="socialCode" :rules="rules.kong">
-                        <el-input v-model="form.socialCode" ></el-input>
-                    </el-form-item>
-                </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="24">
+                <el-col :span="8">
                     <el-form-item label="注册地址" prop="registeredAddress" :rules="rules.kong">
-                        <el-input v-model="form.registeredAddress" ></el-input>
+                        <el-input size="mini" v-model="form.registeredAddress" ></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col :span="24">
+                <el-col :span="8">
                     <el-form-item label="实际经营地址" prop="businessAddress" :rules="rules.kong">
-                        <el-input v-model="form.businessAddress" ></el-input>
+                        <el-input size="mini" v-model="form.businessAddress" ></el-input>
                     </el-form-item>
                 </el-col>
+                
                 </el-row>
 
                 <el-row>
-                <el-col :span="24">
-                    <el-form-item label="注册资本" prop="registeredCapital" :rules="rules.number">
-                        <el-input v-model="form.registeredCapital" placeholder="填写数字值"></el-input>
+                <el-col :span="8">
+                    <el-form-item label="注册资本(元)" prop="registeredCapital" :rules="rules.number">
+                        <el-input size="mini" v-model="form.registeredCapital" placeholder="填写数字值"></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col :span="24">
-                    <el-form-item label="实缴资本" prop="paidCapital" :rules="rules.number">
-                        <el-input v-model="form.paidCapital" placeholder="填写数字值"></el-input>
+                <el-col :span="8">
+                    <el-form-item label="实缴资本(元)" prop="paidCapital" :rules="rules.number">
+                        <el-input size="mini" v-model="form.paidCapital" placeholder="填写数字值"></el-input>
                     </el-form-item>
                 </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="24">
+                <el-col :span="8">
                     <el-form-item label="成立开始日期" prop="startingDate" :rules="rules.kong">
-                        <el-input v-model="form.startingDate" placeholder="yyyy-mm-dd"></el-input>
+                        <el-input size="mini" v-model="form.startingDate" placeholder="yyyy-mm-dd"></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col :span="24">
-                    <el-form-item label="成立有效截止日期" prop="endingDate" :rules="rules.kong">
-                        <el-input v-model="form.endingDate" placeholder="yyyy-mm-dd" ></el-input>
-                    </el-form-item>
-                </el-col>
+                
                 </el-row>
 
                 <el-row>
-                <el-col :span="24">
+                <el-col :span="8">
+                    <el-form-item label="成立有效截止日期" prop="endingDate" :rules="rules.kong">
+                        <el-input size="mini" v-model="form.endingDate" placeholder="yyyy-mm-dd" ></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="8">
                     <el-form-item label="是否为一般纳税人" prop="generalTaxpayers" :rules="rules.kong">
                         <el-radio v-model="form.generalTaxpayers" label="1">是</el-radio>
                         <el-radio v-model="form.generalTaxpayers" label="2">否</el-radio>
                     </el-form-item>
                 </el-col>
-                <el-col :span="24">
+                <el-col :span="8">
                     <el-form-item label="法定代表人姓名" prop="legalName" :rules="rules.kong">
-                        <el-input v-model="form.legalName" ></el-input>
+                        <el-input size="mini" v-model="form.legalName" ></el-input>
                     </el-form-item>
                 </el-col>
+                
                 </el-row>
 
                 <el-row>
-                <el-col :span="24">
+                <el-col :span="8">
                     <el-form-item label="法定代表人身份证号码" prop="legalIdCard" :rules="rules.checkid">
-                        <el-input v-model="form.legalIdCard" ></el-input>
+                        <el-input size="mini" v-model="form.legalIdCard" ></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col :span="24">
+                <el-col :span="8">
                     <el-form-item label="法定代表人联系电话" prop="legalPhone" :rules="rules.phone">
-                        <el-input v-model="form.legalPhone" ></el-input>
+                        <el-input size="mini" v-model="form.legalPhone" ></el-input>
+                    </el-form-item>
+                </el-col>
+                </el-row>
+                
+                
+                <el-row>
+                <el-col :span="24">
+                    <el-form-item label="统一社会征信号码或营业执照号码" prop="socialCode" :rules="rules.kong">
+                        <el-input size="mini" v-model="form.socialCode" ></el-input>
                     </el-form-item>
                 </el-col>
                 </el-row>
 
                 <div class="kelist">
-                <el-button v-if="addshow1" plain type="success" @click="addcontrol" size="mini">新增</el-button>
+                    <span></span>
+                <el-button v-if="addshow1"  type="success" @click="addcontrol" size="mini">新增实际控制人</el-button>
                 <el-row>
-                <el-col :span="12">
+                <el-col :span="8">
                 <el-form-item 
                     v-for="(controlList, index) in form.controlList"
                     :label="'实际控制人姓名'+(index+1)+'：'" 
@@ -121,7 +123,7 @@
                 </el-form-item>
                 </el-col>
 
-                <el-col :span="12">
+                <el-col :span="8">
                     <el-form-item 
                     v-for="(controlList, index) in form.controlList"
                     :label="'实际控制人身份证号码'+(index+1)+'：'" 
@@ -131,10 +133,7 @@
                         <el-input v-model.trim="controlList.controlIdCard"  size="mini" clearable></el-input>
                     </el-form-item>
                 </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
+                <el-col :span="8">
                     <el-form-item 
                     v-for="(controlList, index) in form.controlList"
                     :label="'实际控制人联系电话'+(index+1)+'：'" 
@@ -142,16 +141,17 @@
                     :prop="'controlList.' + index + '.controlPhone'"
                     :rules="rules.phone">
                         <el-input v-model.trim="controlList.controlPhone" size="mini" clearable></el-input>
-                        <el-button v-if="deleteshow1" plain type="danger" size="mini" @click.prevent="removecontrol(controlList)">删除</el-button>
+                        <el-button v-if="deleteshow1"  type="danger" size="mini" @click.prevent="removecontrol(controlList)">删除当前</el-button>
                     </el-form-item>
                 </el-col>
                 </el-row>
                 </div>
 
                 <div class="kelist">
-                <el-button v-if="addshow2" plain type="success" @click="addbussiness" size="mini">新增</el-button>
+                    <span></span>
+                <el-button v-if="addshow2"  type="success" @click="addbussiness" size="mini">新增业务对接人</el-button>
                 <el-row>
-                <el-col :span="12">
+                <el-col :span="8">
                     <el-form-item 
                     v-for="(businessList, index) in form.businessList"
                     :label="'业务对接人姓名'+(index+1)+'：'" 
@@ -161,7 +161,7 @@
                         <el-input v-model.trim="businessList.businessName"  size="mini" clearable></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="8">
                     <el-form-item 
                     v-for="(businessList, index) in form.businessList"
                     :label="'业务对接人联系电话'+(index+1)+'：'" 
@@ -171,7 +171,7 @@
                         <el-input v-model.trim="businessList.businessPhone" placeholder="请输入正确的电话号码" size="mini" clearable></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="8">
                     <el-form-item 
                     v-for="(businessList, index) in form.businessList"
                     :label="'业务对接人联系邮箱'+(index+1)+'：'" 
@@ -179,7 +179,7 @@
                     :prop="'businessList.' + index + '.businessMail'"
                     :rules="rules.mail">
                         <el-input v-model.trim="businessList.businessMail" placeholder="请输入正确的邮箱" size="mini" clearable></el-input>
-                        <el-button v-if="deleteshow2" plain type="danger" size="mini" @click.prevent="removebussiness(businessList)">删除</el-button>
+                        <el-button v-if="deleteshow2"  type="danger" size="mini" @click.prevent="removebussiness(businessList)">删除当前</el-button>
                     </el-form-item>
                 </el-col>
                 </el-row>
@@ -187,9 +187,10 @@
 
 
                 <div class="kelist">
-                <el-button v-if="addshow3" plain type="success" @click="addfinance" size="mini">新增</el-button>
+                    <span></span>
+                <el-button v-if="addshow3"  type="success" @click="addfinance" size="mini">新增财务对接人</el-button>
                 <el-row>
-                <el-col :span="12">
+                <el-col :span="8">
                     <el-form-item 
                     v-for="(financeList, index) in form.financeList"
                     :label="'财务对接人姓名'+(index+1)+'：'" 
@@ -199,7 +200,7 @@
                         <el-input v-model.trim="financeList.financeName" size="mini" clearable></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="8">
                     <el-form-item 
                     v-for="(financeList, index) in form.financeList"
                     :label="'财务对接人联系电话'+(index+1)+'：'" 
@@ -209,10 +210,7 @@
                         <el-input v-model.trim="financeList.financePhone"  placeholder="请输入正确的电话号码" size="mini" clearable></el-input>
                     </el-form-item>
                 </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
+                <el-col :span="8">
                     <el-form-item
                     v-for="(financeList, index) in form.financeList"
                     :label="'财务对接人联系邮箱'+(index+1)+'：'" 
@@ -220,16 +218,17 @@
                     :prop="'financeList.' + index + '.financeMail'"
                     :rules="rules.mail">
                         <el-input v-model.trim="financeList.financeMail" placeholder="请输入正确的邮箱" size="mini" clearable></el-input>
-                        <el-button v-if="deleteshow3" plain type="danger" size="mini" @click.prevent="removefinance(financeList)">删除</el-button>
+                        <el-button v-if="deleteshow3"  type="danger" size="mini" @click.prevent="removefinance(financeList)">删除当前</el-button>
                     </el-form-item>
                 </el-col>
                 </el-row>
                 </div>
+
              </el-form>
          </div>
 
         <div class="creat-button" v-if="this.$store.state.buttonshow">
-         <el-button type="primary" plain @click="submit('form')">提交</el-button>
+         <el-button type="primary"  @click="submit('form')">提交</el-button>
          </div>
      </div>
  </div>
@@ -492,15 +491,12 @@ export default {
 
 <style scoped>
 .creat-wapper{
-    margin: 0 210px;
     padding: 20px;
     height: 100%;
 }
 .creat-wapper .container{
     height: 100%;
     padding: 50px 0;
-    border-left: 1px solid rgb(214, 212, 212);
-    border-right: 1px solid rgb(214, 212, 212);
 }
 .container .creat-title{
     margin: 0 auto;
@@ -513,9 +509,17 @@ export default {
     margin-top: 10px;
     padding: 50px;
 }
-.form-title{
-    padding-left: 50px;
+.el-input{
+    width: 210px;
+}
+.form-title{    
     margin-bottom: 18px;
+    border-radius: 8px;
+    text-align: center;
+    width: 150px;
+    line-height: 40px;
+    font-weight: bolder;
+    border: 2px solid rgb(219, 133, 133);
 }
 .creat-button{
     text-align: center;
@@ -558,16 +562,16 @@ export default {
 }
 
 .right {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: 12px;
+  font-family: '宋体';
+  font-size: xx-small;
 
   float: right;
 
   margin-right: 5px;
-
+  line-height: 50px;
   cursor: pointer;
 
-  color: rgb(89, 90, 94);
+  color: #eee;
 }
 
 .right:hover {
@@ -575,13 +579,29 @@ export default {
 }
 
 svg {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   padding: 3px 8px;
   color: #fff;
 }
 
 svg:hover {
   color: #eee;
+}
+.kelist{
+    position: relative;
+    margin-top: 20px;
+    border-top: 1px dotted rgb(216, 215, 215);
+    padding: 30px 20px;
+}
+.kelist span{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    border-width:30px 30px 0;
+    border-style:solid;
+    border-color: rgb(92, 162, 202) transparent transparent;/*灰 透明 透明 */
+    width: 30px;
+    height: 30px;
 }
 </style>

@@ -58,7 +58,31 @@ var mobile = (rule, value, callback) => {
     }
   }
 
+  // 范围
+  export function checkrange(rule, value, callback) {
+    if (value<10000) {
+      return callback(new Error('不得小于10000！'))
+    } else if (value>10000000) {
+      return callback(new Error('不得大于10000000！'))
+    } else {
+      callback()
+    }
+  }
+
+  // 范围
+  export function checkday(rule, value, callback) {
+    if (value<7) {
+      return callback(new Error('不得小于7天！'))
+    } else if (value>180) {
+      return callback(new Error('不得大于180天！'))
+    } else {
+      callback()
+    }
+  }
+
   export default {
+    day:[{required: true, validator: checkday, trigger: 'blur' }],
+    range:[{required: true, validator: checkrange, trigger: 'blur' }],
     enterpriseName:[{ required: true, message: '此处不能为空，没有则填无。', trigger: 'blur'}],
     kong: [{ required: true, message: '此处不能为空，没有则填无。', trigger: 'blur'}],
     number: [

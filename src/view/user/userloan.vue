@@ -12,12 +12,12 @@
                     <el-collapse-item title="人力薪资贷" name="1">
                         <div class="loan-need"><h3><i class="el-icon-edit-outline"></i>申请所需材料:</h3><br>
                                 请提前准备以下材料：<br>
-                                <i class="el-icon-check"></i>前十大合作客户名单及年交易额（整理成.zip压缩包）；<br>
-                                <i class="el-icon-check"></i>人力服务合同（扫描件加盖公章，整理成.zip压缩包）；<br>
-                                <i class="el-icon-check"></i>5份以上劳动合同（扫描件加盖公章，整理成.zip压缩包）；<br>
-                                <i class="el-icon-check"></i>近一年的核心企业回款记录（银行水单或网银导出数据，整理成.zip压缩包）；<br>
-                                <i class="el-icon-check"></i>本次融资对应的发薪名单、金额（整理成.zip压缩包）；</br>
-                                <i class="el-icon-check"></i>应收款对账凭证（原始邮件或对账单盖章，整理成.zip压缩包）。</div>
+                                <i class="el-icon-check"></i>  前十大合作客户名单及年交易额（整理成.zip压缩包）；<br>
+                                <i class="el-icon-check"></i>  人力服务合同（扫描件加盖公章，整理成.zip压缩包）；<br>
+                                <i class="el-icon-check"></i>  5份以上劳动合同（扫描件加盖公章，整理成.zip压缩包）；<br>
+                                <i class="el-icon-check"></i>  近一年的核心企业回款记录（银行水单或网银导出数据，整理成.zip压缩包）；<br>
+                                <i class="el-icon-check"></i>  本次融资对应的发薪名单、金额（整理成.zip压缩包）；</br>
+                                <i class="el-icon-check"></i>  应收款对账凭证（原始邮件或对账单盖章，整理成.zip压缩包）。</div>
                         <el-row class="row">
                         <el-button type="success" plain @click="appliy()">申请</el-button>
                         </el-row>
