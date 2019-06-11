@@ -29,11 +29,12 @@ import screenfull from 'screenfull'
 export default {
   data(){
       return{
-      userName:'admin',
+      userName:'',
       isFullscreen: false
     }
   },
   mounted() {
+    this.tologin();//判断是否登陆
     this.getName();
       window.onresize = () => {
             // 全屏下监控是否按键了ESC
@@ -44,6 +45,12 @@ export default {
           }
        },
   methods: {
+    tologin(){
+      if(this.userName==''){
+        this.$message.error('请进行登录!')
+        this.$router.push("/login")
+      }
+    },
     //获取用户名，vue 本地存储数据 sessionStorage
     getName() {
       let userName = sessionStorage.getItem("username");

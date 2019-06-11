@@ -109,7 +109,7 @@
                 </el-row>
 
                 <div class="kelist">
-                    <span></span>
+                    <span class="kespan"></span>
                 <el-button v-if="addshow1"  type="success" @click="addcontrol" size="mini">新增实际控制人</el-button>
                 <el-row>
                 <el-col :span="8">
@@ -148,7 +148,7 @@
                 </div>
 
                 <div class="kelist">
-                    <span></span>
+                    <span class="kespan"></span>
                 <el-button v-if="addshow2"  type="success" @click="addbussiness" size="mini">新增业务对接人</el-button>
                 <el-row>
                 <el-col :span="8">
@@ -187,7 +187,7 @@
 
 
                 <div class="kelist">
-                    <span></span>
+                    <span class="kespan"></span>
                 <el-button v-if="addshow3"  type="success" @click="addfinance" size="mini">新增财务对接人</el-button>
                 <el-row>
                 <el-col :span="8">
@@ -241,7 +241,7 @@ import rules from '../../untils/rules'
 export default {
   data(){
       return{
-          username:'admin',
+          username:'',
           isFullscreen: false,
           rules,  
           statues:'',
@@ -290,6 +290,7 @@ export default {
     }
   },
   mounted() {
+      this.tologin()
       this.getstatues();//获取开户状态
       this.getName();
        window.onresize = () => {
@@ -301,6 +302,12 @@ export default {
           }
        },
   methods: {
+      tologin(){
+      if(this.userName==''){
+        this.$message.error('请进行登录!')
+        this.$router.push("/login")
+      }
+    },
       getstatues(){
           this.statues = sessionStorage.getItem("accountStatus");
           if(this.statues==1){
@@ -588,7 +595,7 @@ svg {
 svg:hover {
   color: #eee;
 }
-.kelist{
+.kelist .kespan{
     position: relative;
     margin-top: 20px;
     border-top: 1px dotted rgb(216, 215, 215);

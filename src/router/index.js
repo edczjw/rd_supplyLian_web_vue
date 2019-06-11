@@ -26,7 +26,7 @@ export default new Router({
         name: '创建账户',
         component: require('../view/createuser/creatuser.vue').default,
         meta: {
-          auth: true
+          requirerequireAuth: true
         }
       },{
         // 创建账户
@@ -34,7 +34,7 @@ export default new Router({
           name: '创建账户失败',
           component: require('../view/createuser/failcreatuser.vue').default,
           meta: {
-            auth: true
+            requireAuth: true
           }
         },{
       // 主页
@@ -42,7 +42,7 @@ export default new Router({
       name: '空白主页',
       component: require('../view/index/index.vue').default,
       meta: {
-        auth: true
+        requireAuth: true
       },
       // 含有文件夹的文件children
       children:[{
@@ -51,7 +51,7 @@ export default new Router({
           name: '主页',
           component: require('../view/index/home.vue').default,
           meta: {
-            auth: true
+            requireAuth: true
           }
         },{
           // 我的订单
@@ -59,7 +59,7 @@ export default new Router({
             name: '我的订单',
             component: require('../view/user/usergoods.vue').default,
             meta: {
-              auth: true
+              requireAuth: true
             }
           },{
             // 我要借款
@@ -67,7 +67,7 @@ export default new Router({
               name: '我要借款',
               component: require('../view/user/userloan.vue').default,
               meta: {
-                auth: true
+                requireAuth: true
               }
             },{
               // 账户设置
@@ -75,7 +75,7 @@ export default new Router({
                 name: '账户设置',
                 component: require('../view/user/userset.vue').default,
                 meta: {
-                  auth: true
+                  requireAuth: true
                 }
               },{
                 // 录入企业信息
@@ -83,7 +83,7 @@ export default new Router({
                   name: '信息录入',
                   component: require('../view/user/inputinfo/inputinfo1.vue').default,
                   meta: {
-                    auth: true
+                    requireAuth: true
                   }
                 },{
                   // detail
@@ -91,7 +91,7 @@ export default new Router({
                     name: '信息',
                     component: require('../view/user/details/detail.vue').default,
                     meta: {
-                      auth: true
+                      requireAuth: true
                     }
                   },{
                   // 订单信息
@@ -99,7 +99,7 @@ export default new Router({
                     name: '订单信息',
                     component: require('../view/user/details/userbase/detailmore.vue').default,
                     meta: {
-                      auth: true
+                      requireAuth: true
                     }
                   },{
                     // 基本信息
@@ -107,7 +107,7 @@ export default new Router({
                       name: '基本信息',
                       component: require('../view/user/details/userbase/userbase.vue').default,
                       meta: {
-                        auth: true
+                        requireAuth: true
                       }
                     }],
     },

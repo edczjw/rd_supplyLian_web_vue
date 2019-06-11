@@ -10,7 +10,7 @@
                 <el-tab-pane label="小贷产品" name="first">
                     <el-collapse v-model="activeName" accordion @change="handleChange">
                     <el-collapse-item title="人力薪资贷" name="1">
-                        <div class="loan-need"><h3><i class="el-icon-edit-outline"></i>申请所需材料:</h3><br>
+                        <div class="loan-need"><h3><i class="el-icon-edit-outline"></i>  申请所需材料:</h3><br>
                                 请提前准备以下材料：<br>
                                 <i class="el-icon-check"></i>  前十大合作客户名单及年交易额（整理成.zip压缩包）；<br>
                                 <i class="el-icon-check"></i>  人力服务合同（扫描件加盖公章，整理成.zip压缩包）；<br>
