@@ -34,11 +34,18 @@ export default {
   },
   mounted() {
     this.getName();
+    this.tologin();//判断是否登陆
     //登陆成功提示
     // this.openCenter();
     window.addEventListener('scroll', this.returntop, true);  // 监听（绑定）滚轮滚动事件
   },
   methods: {
+    tologin(){
+      if(this.userName==''){
+        this.$message.error('请进行登录!')
+        this.$router.push("/login")
+      }
+    },
      //返回顶部
     returntop(){
     //返回顶部

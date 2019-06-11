@@ -13,6 +13,9 @@ import axios from 'axios'
 //引入vuex
 import store from './store'
 
+//兼容ie
+import 'babel-polyfill'
+
 import 'element-ui/lib/theme-chalk/index.css'
 Vue.config.productionTip = false
 Vue.use(ElementUI)

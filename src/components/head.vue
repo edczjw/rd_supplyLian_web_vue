@@ -34,8 +34,8 @@ export default {
     }
   },
   mounted() {
-    this.tologin();//判断是否登陆
     this.getName();
+    this.tologin();//判断是否登陆
       window.onresize = () => {
             // 全屏下监控是否按键了ESC
             if (!this.checkFull()) {

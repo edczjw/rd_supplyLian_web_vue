@@ -317,11 +317,14 @@ export default {
       submit(formName){
           this.$refs[formName].validate((valid) => {
           if (valid) {
-          this.detail.username = sessionStorage.getItem("username");
+            
+            //获取企业编号
+          this.detail.enterpriseNo = sessionStorage.getItem("enterpriseNo");
+          this.detail.lstUpdUser = sessionStorage.getItem("username");
 
             this.$axios({
                         method: 'post',
-                        url: this.$store.state.domain +"/biz/user/openAccount",
+                        url: this.$store.state.domain +"/biz/user/editBasicInfo",
                         data: this.detail,
                     })
                     .then(
