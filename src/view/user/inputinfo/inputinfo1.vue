@@ -78,7 +78,8 @@
                 <el-row>
                 <el-col :span="12">
                     <el-form-item label="是否为一般纳税人：" prop="generalTaxpayers" :rules="rules.kong">
-                        {{form.generalTaxpayers}}
+                        <span v-if="form.generalTaxpayers=='1'">是</span>
+                        <span v-if="form.generalTaxpayers=='0'">否</span>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
@@ -555,7 +556,8 @@
                 <el-row>
                 <el-col :span="12">
                     <el-form-item label="是否为一般纳税人：">
-                        {{form.generalTaxpayers}}
+                        <span v-if="form.generalTaxpayers=='1'">是</span>
+                        <span v-if="form.generalTaxpayers=='0'">否</span>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">

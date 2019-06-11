@@ -312,7 +312,7 @@ export default {
           this.statues = sessionStorage.getItem("accountStatus");
           if(this.statues==1){
               this.statues='开户中'
-              this.$alert(this.statues+',请等待工作人员联系您。', '当前开户状态', {
+              this.$alert('尊敬的客户，目前您的开户状态处在：'+this.statues+',请等待工作人员联系您，谢谢!', '当前开户状态', {
                 confirmButtonText: '确定并返回登录窗口',
                 showClose:false,
                 callback: action => {
@@ -321,7 +321,7 @@ export default {
                 });
           }else if(this.statues==3){
               this.statues='开户失败'
-              this.$alert(this.statues+',请等待工作人员联系您。', '当前开户状态', {
+              this.$alert('尊敬的客户，很遗憾：'+this.statues+',请等待工作人员联系您，谢谢!', '当前开户状态', {
                 confirmButtonText: '确定并返回登录窗口',
                 showClose:false,
                 callback: action => {
@@ -330,7 +330,7 @@ export default {
                 });
           }else if(this.statues==4){
               this.statues='账户失效'
-              this.$alert(this.statues+',请等待工作人员联系您。', '当前开户状态', {
+              this.$alert('尊敬的客户，您的开户状态为：'+this.statues+',请等待工作人员联系您，谢谢!', '当前开户状态', {
                 confirmButtonText: '确定并返回登录窗口',
                 showClose:false,
                 callback: action => {
@@ -354,7 +354,7 @@ export default {
                     .then(
                         response => {
                         if(response.data.code==0){
-                             this.$alert(response.data.msg+'请返回登录界面等待工作人员联系告知您开户是否成功。', '开户结果', {
+                             this.$alert('恭喜您！'+response.data.msg+'！请返回登录界面等待，工作人员将会联系告知您开户是否成功，谢谢！。', '开户结果', {
                                 confirmButtonText: '确定并重新进行登录',
                                 callback: action => {
                                 //跳转到登录界面
