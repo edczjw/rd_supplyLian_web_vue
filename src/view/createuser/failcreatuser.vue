@@ -90,8 +90,8 @@
                           <span v-if="detail.generalTaxpayers=='否'">否</span>
                           </span>
                         <div v-else>
-                        <el-radio size="mini" border v-model="detail.generalTaxpayers" label="1">是</el-radio>
-                        <el-radio size="mini" border v-model="detail.generalTaxpayers" label="0">否</el-radio>
+                        <el-radio size="mini" border v-model="detail.generalTaxpayers" >是</el-radio>
+                        <el-radio size="mini" border v-model="detail.generalTaxpayers" >否</el-radio>
                         </div>
                     </el-form-item>
                 </el-col>
@@ -321,6 +321,11 @@ export default {
             //获取企业编号
           this.detail.enterpriseNo = sessionStorage.getItem("enterpriseNo");
           this.detail.lstUpdUser = sessionStorage.getItem("username");
+          if(this.detail.generalTaxpayers == '是'){
+            this.detail.generalTaxpayers = '1'
+          }else{
+            this.detail.generalTaxpayers = '0'
+          }
 
             this.$axios({
                         method: 'post',

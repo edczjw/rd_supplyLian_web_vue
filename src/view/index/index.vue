@@ -29,7 +29,7 @@ import $ from 'jquery'
 export default {
   data() {
     return {
-      userName: "",
+      userName: ""
     };
   },
   mounted() {

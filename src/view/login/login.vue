@@ -130,7 +130,7 @@ export default {
               username: "",  //账号
               password: "",  //密码
               realpassword:"",  //确认密码
-              agreementStatus:false,//是否勾选注册协议
+              agreementStatus:false//是否勾选注册协议
           },
 
           //输入框验证

@@ -947,7 +947,7 @@ export default {
                 businessList:[{
                     businessName:"",                //业务对接人姓名
                     phone:"",               //联系电话
-                    mail:"",                //联系邮箱
+                    mail:"",               //联系邮箱
                 }],                
                               
                 //财务对接人list
@@ -995,7 +995,7 @@ export default {
                 borrowingGuarantee:"",              //本次借款担保方式
                 warrantorName:"",                   //担保人
                 amountGuaranteed:"",                //担保金额
-                warrantyPeriod:"",                  //担保期限
+                warrantyPeriod:""                //担保期限
 
             },
 
