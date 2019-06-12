@@ -3,46 +3,46 @@
          <div class="heading-top">
         <el-row>
         <el-col :span="20">账号设置</el-col>
-        <el-col :span="4"><i class="el-icon-phone-outline"></i>客服电话：110</el-col>
+        <!-- <el-col :span="4"><i class="el-icon-phone-outline"></i>  客服电话：110</el-col> -->
         </el-row>
         </div>
 
         <el-tabs tab-position="left" type="border-card" @tab-click="handleClick" v-model="activeName">
             <el-tab-pane name="0">
-                <span slot="label"><i class="el-icon-tickets">账户信息</i></span>
+                <span slot="label"><i class="el-icon-tickets">  账户信息</i></span>
 
                 <el-card class="box-card">
                 <el-row>
-                   <el-col><div class="set-tit"><h3><i class="el-icon-view"></i>企业基本信息栏</h3></div></el-col>
+                   <el-col><div class="set-tit"><h3><i class="el-icon-view"></i>  企业基本信息栏</h3></div></el-col>
                 </el-row>
                 <el-row :gutter="24">
-                <el-col :span="12"><span>企业名称：</span>{{this.detail.enterpriseName}}</el-col>
-                <el-col :span="12"><span>统一社会征信号码或营业执照号码：</span>{{this.detail.socialCode}}</el-col>
+                <el-col :span="8"><span>企业名称：</span>{{this.detail.enterpriseName}}</el-col>
+                <el-col :span="8"><span>是否为一般纳税人：</span>{{this.detail.generalTaxpayers}}</el-col>
+                <el-col :span="8"><span>实际经营地址：</span>{{this.detail.businessAddress}}</el-col>
                 </el-row>
 
+                <el-row :gutter="24">
+                <el-col :span="8"><span>注册资本（万元）：</span>{{this.detail.registeredCapital}}</el-col>
+                <el-col :span="8"><span>实缴资本（万元）：</span>{{this.detail.paidCapital}}</el-col>
+                <el-col :span="8"><span>成立开始日：</span>{{this.detail.startingDate}}</el-col>
+                </el-row>
+
+                <el-row :gutter="24">
+                <el-col :span="8"><span>有效截止日：</span>{{this.detail.endingDate}}</el-col>
+                <el-col :span="8"><span>法定代表人姓名：</span>{{this.detail.legalName}}</el-col>
+                <el-col :span="8"><span>法定代表人联系电话：</span>{{this.detail.legalPhone}}</el-col>
+                </el-row>
+
+                <el-row :gutter="24">
+                <el-col :span="8"><span>法定代表人身份证号码：</span>{{this.detail.legalIdCard}}</el-col>
+                </el-row>
+                
                 <el-row :gutter="24">
                 <el-col :span="12"><span>注册地址：</span>{{this.detail.registeredAddress}}</el-col>
-                <el-col :span="12"><span>实际经营地址：</span>{{this.detail.businessAddress}}</el-col>
                 </el-row>
 
                 <el-row :gutter="24">
-                <el-col :span="12"><span>注册资本（万元）：</span>{{this.detail.registeredCapital}}</el-col>
-                <el-col :span="12"><span>实缴资本（万元）：</span>{{this.detail.paidCapital}}</el-col>
-                </el-row>
-
-                <el-row :gutter="24">
-                <el-col :span="12"><span>成立开始日：</span>{{this.detail.startingDate}}</el-col>
-                <el-col :span="12"><span>有效截止日：</span>{{this.detail.endingDate}}</el-col>
-                </el-row>
-
-                <el-row :gutter="24">
-                <el-col :span="12"><span>是否为一般纳税人：</span>{{this.detail.generalTaxpayers}}</el-col>
-                <el-col :span="12"><span>法定代表人姓名：</span>{{this.detail.legalName}}</el-col>
-                </el-row>
-
-                <el-row :gutter="24">
-                <el-col :span="12"><span>法定代表人身份证号码：</span>{{this.detail.legalIdCard}}</el-col>
-                <el-col :span="12"><span>法定代表人联系电话：</span>{{this.detail.legalPhone}}</el-col>
+                <el-col :span="12"><span>统一社会征信号码或营业执照号码：</span>{{this.detail.socialCode}}</el-col>
                 </el-row>
 
                  <el-row>
@@ -70,28 +70,28 @@
                 </el-row>
 
                 <el-row>
-                   <el-col><div class="set-tits"><h3><i class="el-icon-message"></i>银行卡信息</h3></div></el-col>
+                   <el-col><div class="set-tits"><h3><i class="el-icon-message"></i>  银行卡信息</h3></div></el-col>
                 </el-row>
                 <el-row :gutter="24">
-                <el-col :span="12"><span>银行卡卡号：</span>{{this.bankdetail.cardNo}}</el-col>
-                <el-col :span="12"><span>银行名称：</span>{{this.bankdetail.bankName}}</el-col>
+                <el-col :span="8"><span>银行名称：</span>{{this.bankdetail.bankName}}</el-col>
+                <el-col :span="8"><span>账户户名：</span>{{this.bankdetail.accountName}}</el-col>
+                <el-col :span="8"><span>银行支行名称：</span>{{this.bankdetail.bankBranchName}}</el-col>
                 </el-row>
 
                 <el-row :gutter="24">
-                <el-col :span="12"><span>账户户名：</span>{{this.bankdetail.accountName}}</el-col>
-                <el-col :span="12"><span>银行支行名称：</span>{{this.bankdetail.bankBranchName}}</el-col>
+                <el-col :span="24"><span>银行卡卡号：</span>{{this.bankdetail.cardNo}}</el-col>
                 </el-row>
 
                 </el-card>
             </el-tab-pane>
            
             <el-tab-pane name="1">
-                <span slot="label"><i class="el-icon-edit-outline">修改密码</i></span>
+                <span slot="label"><i class="el-icon-edit-outline">  修改密码</i></span>
                 <el-card class="box-card">
                     <el-form ref="form" :model="this.form" status-icon :rules="rules" label-width="155px" class="demo-ruleForm">
                         <el-row>
                         <el-col :span="24">
-                            <el-form-item label="账号：" prop="username" :rules="rules.username">
+                            <el-form-item label="登录账号：" prop="username" :rules="rules.username">
                                 {{form.username}}
                             </el-form-item>
                         </el-col>
@@ -100,7 +100,7 @@
                         <el-row>
                         <el-col :span="24">
                             <el-form-item label="输入旧密码：" prop="oldPassword" :rules="rules.password">
-                                <el-input placeholder="请输入旧密码" v-model.trim="form.oldPassword"></el-input>
+                                <el-input size="mini" placeholder="请输入旧密码" v-model.trim="form.oldPassword"></el-input>
                             </el-form-item>
                         </el-col>
                         </el-row>
@@ -108,7 +108,7 @@
                         <el-row>
                         <el-col :span="24">
                             <el-form-item label="输入新密码：" prop="newPassword"  :rules="rules.newPassword">
-                                <el-input placeholder="请输入新密码" v-model.trim="form.newPassword"></el-input>
+                                <el-input size="mini" placeholder="请输入新密码" v-model.trim="form.newPassword"></el-input>
                             </el-form-item>
                         </el-col>
                         </el-row>
@@ -116,14 +116,14 @@
                         <el-row>
                         <el-col :span="24">
                             <el-form-item label="再次输入新密码："  prop="renewPassword" :rules="rules.renewPassword">
-                                <el-input placeholder="请再次输入新密码" v-model.trim="form.renewPassword"></el-input>
+                                <el-input size="mini" placeholder="请再次输入新密码" v-model.trim="form.renewPassword"></el-input>
                             </el-form-item>
                         </el-col>
                         </el-row>
 
                         <el-row style="text-align:center">
                         <el-col :span="24">
-                            <el-button type="primary" plain @click="submit('form')">确认修改</el-button>
+                            <el-button type="primary" @click="submit('form')">确认修改</el-button>
                         </el-col>
                         </el-row>
                     </el-form>
@@ -366,7 +366,7 @@ export default {
     width:100%;
     height: 0;
     position: relative;
-    padding-bottom: 80%;
+    padding-bottom: 70%;
 }
 .el-tabs{
     border-top: 1px solid rgba(15, 182, 160, 0.849);
@@ -379,15 +379,15 @@ export default {
     font-weight: bolder;
     }
 .box-card .el-row{
-    margin:20px 0;
+    margin:10px 0;
     font-size: 14px;
-    padding: 15px 40px;
+    padding: 10px 120px;
     font-family: '苹方'
     
 }
 
 .box-card .el-row span{
-        color:rgb(238, 154, 29);
+        color:rgb(94, 92, 90);
     }
 
 .set-tit{

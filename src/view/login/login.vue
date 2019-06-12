@@ -2,10 +2,10 @@
   <div class="wrapper ">
     <div class="contain">
     <div class="text-left">
-        <h1 class="animated zoomIn">民盛小贷供应链</h1>
-            <h2 class="animated zoomIn">金融服务平台</h2>
+        <h1 class="animated zoomIn">捷易融供应链</h1>
+            <h2 class="animated zoomIn">金融服务系统</h2>
             <span class="ti animated zoomIn"></span>
-        <span class="animated zoomIn">Minsheng Credit Supply ChainFinancial Service Platform</span>
+        <span class="animated zoomIn">JieYiRong Credit Supply Chain <br> Financial Service Platform</span>
     </div>
 
     <div class="inner-right">
@@ -35,12 +35,12 @@
                 </el-form-item>
               </div>
               <div class="button-content">
-                <el-button type="primary" plain size="medium" @click="login('loginform')" >登录</el-button>
+                <el-button type="primary" size="medium" @click="login('loginform')" >登录</el-button>
               </div>
             </el-form>
 
             <div class="button-content">
-              <el-button type="warning" plain @click="toregist()" >未有账号？立即注册</el-button>
+              <el-button type="warning" @click="toregist()" >未有账号？立即注册</el-button>
             </div>
 
             
@@ -92,11 +92,11 @@
               </div>
 
               <div class="button-content">
-                <el-button type="primary" plain size="medium"  @click="regist('registform')" >注册</el-button>
+                <el-button type="primary" size="medium"  @click="regist('registform')" >注册</el-button>
               </div>
 
               <div class="button-content">
-                <el-button type="primary"  plain size="medium"  @click="tologin()" >已有账号？立即登录</el-button>
+                <el-button type="primary"  size="medium"  @click="tologin()" >已有账号？立即登录</el-button>
               </div>
             </el-form>
         </div>
@@ -331,7 +331,7 @@ export default {
     display: block;
     margin: 0 auto;
     height: 2px;
-    width: 230px;
+    width: 270px;
     margin-top: 30px;
     margin-bottom: 20px;
     background-color: rgba(38, 80, 128, 0.767);
@@ -349,6 +349,7 @@ export default {
     margin-top:5%;
     margin-left: 10%;
     width: 70%;
+    border-radius: 12px; 
     text-align: center;
     padding: 50px 40px;
     background-color: #fff;
@@ -363,6 +364,7 @@ export default {
     margin-top:5%;
     margin-left: 10%;
     width: 85%;
+    border-radius: 12px; 
     text-align: center;
     padding: 30px 40px;
     background-color: #fff;
@@ -394,7 +396,7 @@ margin-top: 15px;
 position: relative;
 margin-top: 20px;
     button {
-        width: 50%;
+        width: 52%;
     }
 }
 </style>

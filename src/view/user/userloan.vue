@@ -10,7 +10,7 @@
                 <el-tab-pane label="小贷产品" name="first">
                     <el-collapse v-model="activeName" accordion @change="handleChange">
                     <el-collapse-item title="人力薪资贷" name="1">
-                        <div class="loan-need"><h3><i class="el-icon-edit-outline"></i>  申请所需材料:</h3><br>
+                        <div class="loan-need"><h4><i class="el-icon-edit-outline"></i>  申请所需材料:</h4><br>
                                 请提前准备以下材料：<br>
                                 <i class="el-icon-check"></i>  前十大合作客户名单及年交易额（整理成.zip压缩包）；<br>
                                 <i class="el-icon-check"></i>  人力服务合同（扫描件加盖公章，整理成.zip压缩包）；<br>
@@ -19,7 +19,7 @@
                                 <i class="el-icon-check"></i>  本次融资对应的发薪名单、金额（整理成.zip压缩包）；</br>
                                 <i class="el-icon-check"></i>  应收款对账凭证（原始邮件或对账单盖章，整理成.zip压缩包）。</div>
                         <el-row class="row">
-                        <el-button type="success" plain @click="appliy()">申请</el-button>
+                        <el-button type="success" @click="appliy()">申请</el-button>
                         </el-row>
                     </el-collapse-item>
                     <!-- <el-collapse-item title="产品二" name="2">
@@ -89,10 +89,10 @@ export default {
         text-align: center;
     }
 .loan-need{
-    font-family: '宋体';
-    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
     color: rgb(71, 70, 70);
-    padding: 20px 15px;
-    margin-bottom: 10px;
+    padding: 20px 125px;
+    margin-bottom: 20px;
 }
 </style>

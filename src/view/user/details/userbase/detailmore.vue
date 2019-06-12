@@ -12,7 +12,7 @@
                 </el-row>
 
                 <el-row :gutter="24">
-                <el-col :span="12">借款利率（%）：{{detail.creditRate}}</el-col>
+                <el-col :span="12">借款日利率（%）：{{detail.creditRate*100}}</el-col>
                 <el-col :span="12">借款服务费率（%）：{{detail.creditFeeRate}}</el-col>
                 </el-row>
 

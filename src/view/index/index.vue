@@ -41,8 +41,9 @@ export default {
   },
   methods: {
     tologin(){
-      if(this.userName==''){
+      if(this.userName=='' || this.userName==null){
         this.$message.error('请进行登录!')
+        console.log(this.userName)
         this.$router.push("/login")
       }
     },

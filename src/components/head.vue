@@ -1,7 +1,7 @@
 <template>
   <div class="topBanner">
     <div class="side-tit">
-      <p class='left'><span>民盛小贷</span> 供应链金融服务平台
+      <p class='left'><span>民盛小贷</span> 捷易融供应链金融服务系统
       </p>
     </div>
     <p class='right' @click="goBack" title="安全退出">
@@ -10,15 +10,15 @@
       </svg></p>
     <p class='right' title="用户名">
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-character"></use>
+        <use xlink:href="#icon-atm"></use>
       </svg>{{this.userName}}</p>
     <p class='right' @click="screenfull" title="全屏显示">
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-quanping4"></use>
+        <use xlink:href="#icon-quanping6"></use>
       </svg></p>
     <p class='right' @click="tabcontrol" title="折叠菜单栏">
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-cebianlanshousuo"></use>
+        <use xlink:href="#icon-zhankai1"></use>
       </svg></p>
     
   </div>
@@ -46,7 +46,8 @@ export default {
        },
   methods: {
     tologin(){
-      if(this.userName==''){
+      if(this.userName=='' || this.userName==null){
+        console.log(this.userName)
         this.$message.error('请进行登录!')
         this.$router.push("/login")
       }
@@ -134,8 +135,8 @@ export default {
 
   width: 100%;
   height: 50px;
-  background: #72d0eb;
-  border-bottom: 1px solid #a0d9ea;
+  background: #6abbd1;
+  border-bottom: 1px solid #92c5d4;
 }
 
 p {
@@ -151,7 +152,7 @@ p {
 }
 .left span{
      font-size: 28px;
-     color: #b86e0e;
+     color: #f1b35c;
      opacity: 1;
      padding-right: 10px;
      border-right: 1px solid rgba(230, 228, 228, 0.952);
@@ -162,7 +163,7 @@ p {
 }
 
 .right {
-  font-family: '黑体';
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 12px;
 
   float: right;

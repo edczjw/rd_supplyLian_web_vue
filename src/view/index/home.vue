@@ -15,15 +15,19 @@
                 小
                 贷
                 </h2>
-            <h3 class="animated zoomIn">供
+            <h3 class="animated zoomIn">
+                捷
+                易
+                融
+                供
                 应
                 链
                 金
                 融
                 服
                 务
-                平
-                台
+                系
+                统
                 </h3>
         </div>
     </div>
