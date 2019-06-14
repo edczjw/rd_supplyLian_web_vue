@@ -249,7 +249,7 @@
 
                 <el-row>
                 <el-col :span="12">
-                    <el-form-item label="付款主体名称：" prop="paymentSubject" :rules="rules.kong">
+                    <el-form-item label="应收账款主体（债务人）：" prop="paymentSubject" :rules="rules.kong">
                         <el-input v-model.trim="form.paymentSubject" size="mini" clearable></el-input>
                     </el-form-item>
                 </el-col>
@@ -267,7 +267,7 @@
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="付款账期：" prop="paymentPeriod" :rules="rules.number">
+                    <el-form-item label="付款账期（天）：" prop="paymentPeriod" :rules="rules.number">
                         <el-input v-model.trim="form.paymentPeriod" placeholder="填写数字值" size="mini" clearable></el-input>
                     </el-form-item>
                 </el-col>
