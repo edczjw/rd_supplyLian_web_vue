@@ -6,39 +6,39 @@
         </el-row>
         </div>
         <el-card class="box-card">
-           <el-tabs v-model="activeName2" type="border-card">
-                <el-tab-pane label="小贷产品" name="first">
-                    <el-collapse v-model="activeName" accordion @change="handleChange">
-                    <el-collapse-item title="人力薪资贷" name="1">
-                        <div class="loan-need"><h4><i class="el-icon-edit-outline"></i>  申请所需材料:</h4><br>
-                                请提前准备以下材料：<br>
-                                <i class="el-icon-check"></i>  前十大合作客户名单及年交易额（整理成.zip压缩包）；<br>
-                                <i class="el-icon-check"></i>  人力服务合同（扫描件加盖公章，整理成.zip压缩包）；<br>
-                                <i class="el-icon-check"></i>  5份以上劳动合同（扫描件加盖公章，整理成.zip压缩包）；<br>
-                                <i class="el-icon-check"></i>  近一年的核心企业回款记录（银行水单或网银导出数据，整理成.zip压缩包）；<br>
-                                <i class="el-icon-check"></i>  本次融资对应的发薪名单、金额（整理成.zip压缩包）；</br>
-                                <i class="el-icon-check"></i>  应收款对账凭证（原始邮件或对账单盖章，整理成.zip压缩包）。</div>
-                        <el-row class="row">
-                        <el-button type="success" @click="appliy()">申请</el-button>
-                        </el-row>
-                    </el-collapse-item>
-                    <!-- <el-collapse-item title="产品二" name="2">
-                        <div class="loan-need"><h3><i class="el-icon-edit-outline"></i>申请所需材料:</h3><br>
-                                 请提前准备以下材料：<br>
-                                <i class="el-icon-check"></i>前十大合作客户名单及年交易额（整理成.zip压缩包）；<br>
-                                <i class="el-icon-check"></i>人力服务合同（扫描件加盖公章，整理成.zip压缩包）；<br>
-                                <i class="el-icon-check"></i>5份以上劳动合同（扫描件加盖公章，整理成.zip压缩包）；<br>
-                                <i class="el-icon-check"></i>近一年的核心企业回款记录（银行水单或网银导出数据，整理成.zip压缩包）；<br>
-                                <i class="el-icon-check"></i>本次融资对应的发薪名单、金额（整理成.zip压缩包）；</br>
-                                <i class="el-icon-check"></i>应收款对账凭证（原始邮件或对账单盖章，整理成.zip压缩包）。</div>
-                        <el-row class="row">
-                        <el-button type="success" plain @click="appliy()">申请</el-button>
-                        </el-row>
-                    </el-collapse-item> -->
-                    </el-collapse>
-                </el-tab-pane>
-                <el-tab-pane label="更多产品" name="second">敬请期待</el-tab-pane>
-            </el-tabs>
+
+            <ul class="pro-ul">
+                <li class="animated zoomIn">
+                    <div class="inner-box">
+                    <div><img src="../../assets/pro1.png" alt=""></div>
+                    <div class="pro-tit">人力薪资贷</div>
+                    </div>
+
+                    <div class="desc-inner">
+                        <div>需提前准备材料：</div><br>
+                        <div><i class="el-icon-check"></i>  前十大合作客户名单及年交易额；</div><br>
+                        <div><i class="el-icon-check"></i>  人力服务合同；</div><br>
+                        <div><i class="el-icon-check"></i>  5份以上劳动合同；</div><br>
+                        <div><i class="el-icon-check"></i>  近一年的核心企业回款记录；</div><br>
+                        <div><i class="el-icon-check"></i>  本次融资对应的发薪名单、金额；</div></br>
+                        <div><i class="el-icon-check"></i>  应收款对账凭证。</div>
+                    </div>
+                    <el-button type="success" @click="appliy('10001')">申请</el-button>
+                </li>
+                <li class="animated zoomIn">
+                    <div class="inner-box">
+                    <div><img src="../../assets/want.png" alt=""></div>
+                    <div class="pro-tit">敬请期待</div>
+                    </div>
+
+                    <div class="desc-inner">
+                        <div><i class="el-icon-check"></i>  敬请期待。</div>
+                    </div>
+                    <el-button type="success" disabled >申请</el-button>
+                </li>
+            </ul>
+
+          
         </el-card>
 
     </div>
@@ -47,25 +47,14 @@
 export default {
     data(){
         return{
-            activeName2:'first',
-            activeName:'',
-            productCd:'10001',//产品
+
         }
     },
     components:{
     },
     methods: {
-        handleChange(val){
-            if(val=='1'){
-                this.productCd='10001'
-            }else if(val=='2'){
-                this.productCd='10001'
-            }else{
-                this.productCd='10001'
-            }
-        },
-        appliy(){
-            var pro=this.productCd;
+        appliy(val){
+            var pro=val;
             sessionStorage.setItem("productCd", pro);//本地存储所选产品
 
             //判断产品跳转信息录入页面
@@ -76,6 +65,57 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+.pro-ul{
+    width: 100%;
+    display:inline-flex;
+    list-style: none;
+}
+.pro-ul li{
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+    border-radius: 6px;
+    width: 30%;
+    height: 548px;
+    margin: 10px;
+    overflow: hidden;
+    border: 1px solid rgb(224, 223, 223);
+    .el-button{
+        position: absolute;
+        width: 100%;
+        border-radius: 0;
+        height: 48px;
+        font-size:18px;
+        bottom: 0;
+        left: 0;
+    }
+    img{
+        width: 140px;
+    }
+    
+}
+.pro-ul li:hover{
+    box-shadow: 0px 0px 5px #8888889f;
+}
+.inner-box{
+    padding: 20px;
+    border-bottom: 1px dotted rgba(202, 199, 199, 0.712);
+    .pro-tit{
+        margin-top: 10px;
+        color: black;
+        font-weight: bolder;
+        font-size: 28px;
+    }
+}
+.pro-tit:hover{
+        color: rgb(52, 41, 214);
+    }
+.desc-inner{
+    text-align: left;
+    padding: 20px;
+    font-size: 12px;
+    color: rgb(117, 114, 114);
+}
 .loan-wapper{
     width:100%;
 }

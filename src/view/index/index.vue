@@ -34,7 +34,7 @@ export default {
   },
   mounted() {
     this.getName();
-    this.tologin();//判断是否登陆
+    // this.tologin();//判断是否登陆
     //登陆成功提示
     // this.openCenter();
     window.addEventListener('scroll', this.returntop, true);  // 监听（绑定）滚轮滚动事件
@@ -81,7 +81,7 @@ export default {
 
     //获取用户名，vue 本地存储数据 sessionStorage
     getName() {
-      let userName = sessionStorage.getItem("name");
+      let userName = sessionStorage.getItem("username");
       this.userName = userName;
     },
   },

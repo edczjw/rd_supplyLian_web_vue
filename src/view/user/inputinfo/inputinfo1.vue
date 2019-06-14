@@ -24,7 +24,7 @@
                 </el-row>
                 
                 <el-row>
-                <el-col :span="12">
+                <el-col :span="24">
                     <el-form-item label="企业名称：" prop="enterpriseName" >
                         {{form.enterpriseName}}
                     </el-form-item>
@@ -34,15 +34,12 @@
                         {{form.socialCode}}
                     </el-form-item>
                 </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
+                <el-col :span="24">
                     <el-form-item label="注册地址：" prop="registeredAddress">
                         {{form.registeredAddress}}
                     </el-form-item>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="24">
                     <el-form-item label="实际经营地址：" prop="businessAddress">
                         {{form.businessAddress}}
                     </el-form-item>
@@ -143,7 +140,7 @@
                 </el-row>
 
                 <el-row>
-                <el-col :span="12">
+                <el-col :span="24">
                     <el-form-item label="银行卡卡号：" prop="cardNo" :rules="rules.kong">
                         <el-input v-model.trim="form.cardNo"  size="mini" clearable></el-input>
                     </el-form-item>
@@ -153,9 +150,6 @@
                         <el-input v-model.trim="form.bankName"  size="mini" clearable></el-input>
                     </el-form-item>
                 </el-col>
-                </el-row>
-
-                <el-row>
                 <el-col :span="12">
                     <el-form-item label="账户户名：" prop="accountName" :rules="rules.kong">
                         <el-input v-model.trim="form.accountName"  size="mini" clearable></el-input>
@@ -348,7 +342,7 @@
             <!-- 第三页 -->
             <div v-if="thirdshow" >  
                 <el-row>
-                <h4>文件上传   <span slot="tip" class="el-upload__tip">（请将各项所需提供文件压缩成一份压缩包，每项至少上传一份，压缩包大小不得超过20M。）</span></h4>
+                <h4>文件上传 </h4>
                 
                 </el-row>
             <div class="thirdpage">
@@ -358,18 +352,19 @@
                         <el-upload
                         class="upload-demo"
                         drag
-                        accept="application/zip"
-                        :limit="5"
                         :http-request="Upload1"
                         :file-list='fileList1'
+                        :on-exceed="handleExceed1"
                         :before-upload="beforeAvatarUpload1"
                         :on-change="handleChange1"
                         action=""
-                        list-type="picture"
                         multiple>
                         <i class="el-icon-upload"></i>
                         <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                        <div slot="tip" class="el-upload__tip">（2份以内（含），每份20M以内（含），格式不限）</div>
                         </el-upload>
+                        <el-progress v-if="videoFlag1" :percentage="videoUploadPercent1" style="margin-top:30px;"></el-progress>
+                        
 
                     </el-form-item>
                 </el-col>
@@ -378,19 +373,21 @@
                         <el-upload
                         class="upload-demo"
                         drag
-                        accept="application/zip"
                         :limit="5"
                         :http-request="Upload2"
                         :file-list='fileList2'
+                        :on-exceed="handleExceed2"
                         :before-upload="beforeAvatarUpload2"
                         :on-change="handleChange2"
                         action=""
-                        list-type="picture"
                         multiple>
                         <i class="el-icon-upload"></i>
                         <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
                         <div class="el-upload__tip" slot="tip"> * 扫描件加盖公章</div>
+                        <div slot="tip" class="el-upload__tip">（5份以内（含），每份20M以内（含），格式不限）</div>
                         </el-upload>
+                        <el-progress v-if="videoFlag2" :percentage="videoUploadPercent2" style="margin-top:30px;"></el-progress>
+                        
                     </el-form-item>
                 </el-col>
                 </el-row>
@@ -401,20 +398,21 @@
                         <el-upload
                         class="upload-demo"
                         drag
-                        accept="application/zip"
                         :limit="5"
                         :http-request="Upload3"
                         :file-list='fileList3'
+                        :on-exceed="handleExceed3"
                         :before-upload="beforeAvatarUpload3"
                         :on-change="handleChange3"
                         action=""
-                        list-type="picture"
                         multiple>
                         <i class="el-icon-upload"></i>
                         <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
                         <div class="el-upload__tip" slot="tip"> * 扫描件加盖公章</div>
-                        <div slot="tip" class="el-upload__tip">此项压缩包中至少含有五份劳动合同</div>
+                        <div slot="tip" class="el-upload__tip">(5份以内（含），每份20M以内（含），格式不限)</div>
                         </el-upload>
+                        <el-progress v-if="videoFlag3" :percentage="videoUploadPercent3" style="margin-top:30px;"></el-progress>
+                        
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
@@ -422,19 +420,21 @@
                         <el-upload
                         class="upload-demo"
                         drag
-                        accept="application/zip"
-                        :limit="5"
+                        :limit="12"
                         :http-request="Upload4"
                         :file-list='fileList4'
+                        :on-exceed="handleExceed4"
                         :before-upload="beforeAvatarUpload4"
                         :on-change="handleChange4"
                         action=""
-                        list-type="picture"
                         multiple>
                         <i class="el-icon-upload"></i>
                         <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
                         <div class="el-upload__tip" slot="tip">* 银行水单或网银导出数据</div>
+                        <div slot="tip" class="el-upload__tip">(12份以内（含），每份20M以内（含），格式不限)</div>
                         </el-upload>
+                        <el-progress v-if="videoFlag4" :percentage="videoUploadPercent4" style="margin-top:30px;"></el-progress>
+                        
                     </el-form-item>
                 </el-col>
                 </el-row>
@@ -445,41 +445,45 @@
                         <el-upload
                         class="upload-demo"
                         drag
-                        accept="application/zip"
-                        :limit="5"
+                        :limit="10"
                         :http-request="Upload5"
                         :file-list='fileList5'
+                        :on-exceed="handleExceed5"
                         :before-upload="beforeAvatarUpload5"
                         :on-change="handleChange5"
                         action=""
-                        list-type="picture"
                         multiple>
                         <i class="el-icon-upload"></i>
                         <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
                         <div class="el-upload__tip" slot="tip">* 银行水单或网银导出数据</div>
+                        <div slot="tip" class="el-upload__tip">(10份以内（含），每份20M以内（含），格式不限)</div>
                         </el-upload>
+                        <el-progress v-if="videoFlag5" :percentage="videoUploadPercent5" style="margin-top:30px;"></el-progress>
+                        
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="应收款对账凭证：">
+                         
                         <el-upload
                         class="upload-demo"
                         drag
-                        accept="application/zip"
-                        :limit="5"
+                        :limit="12"
                         :http-request="Upload6"
                         :file-list='fileList6'
+                        :on-exceed="handleExceed6"
                         :before-upload="beforeAvatarUpload6"
                         :on-change="handleChange6"
-                        action=""
-                        list-type="picture"
-                        multiple>
+                        action="">
                         <i class="el-icon-upload"></i>
                         <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
                         <div class="el-upload__tip" slot="tip">* 原始邮件或对账单盖章</div>
+                        <div slot="tip" class="el-upload__tip">(12份以内（含），每份20M以内（含），格式不限)</div>
                         </el-upload>
-                       
+                        <el-progress v-if="videoFlag6" :percentage="videoUploadPercent6" style="margin-top:30px;"></el-progress>
+                        
                     </el-form-item>
+                       
                 </el-col>
                 </el-row>
             </div>
@@ -501,32 +505,26 @@
                 <el-form ref="form" :model="form" label-width="255px" status-icon>
                 <div class="thirdpage">
                 <el-row>
-                <el-col :span="12">
+                <el-col :span="24">
                     <el-form-item label="企业名称：" >
                         {{form.enterpriseName}}
                     </el-form-item>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="24">
                     <el-form-item label="统一社会征信号码或营业执照号码：">
                         {{form.socialCode}}
                     </el-form-item>
                 </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
+                <el-col :span="24">
                     <el-form-item label="注册地址：">
                         {{form.registeredAddress}}
                     </el-form-item>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="24">
                     <el-form-item label="实际经营地址：">
                         {{form.businessAddress}}
                     </el-form-item>
                 </el-col>
-                </el-row>
-
-                <el-row>
                 <el-col :span="12">
                     <el-form-item label="注册资本（元）：">
                         {{form.registeredCapital}}
@@ -537,36 +535,27 @@
                         {{form.paidCapital}}
                     </el-form-item>
                 </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
+                <el-col :span="8">
                     <el-form-item label="成立开始日期：">
                         {{form.startingDate}}
                     </el-form-item>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="8">
                     <el-form-item label="成立有效截止日期：">
                         {{form.endingDate}}
                     </el-form-item>
                 </el-col>
-
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
+                <el-col :span="8">
                     <el-form-item label="是否为一般纳税人：">
                         <span v-if="form.generalTaxpayers=='1'">是</span>
                         <span v-if="form.generalTaxpayers=='0'">否</span>
                     </el-form-item>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="8">
                     <el-form-item label="法定代表人姓名：">
                         {{form.legalName}}
                     </el-form-item>
                 </el-col>
-                </el-row>
-                <el-row>
                 <el-col :span="12">
                     <el-form-item label="法定代表人身份证号码：">
                         {{form.legalIdCard}}
@@ -622,9 +611,6 @@
                         {{form.bankName}}
                     </el-form-item>
                 </el-col>
-                </el-row>
-
-                <el-row>
                 <el-col :span="12">
                     <el-form-item label="账户户名：">
                         {{form.accountName}}
@@ -655,9 +641,6 @@
                         {{form.threeYearProfit}}
                     </el-form-item>
                 </el-col>
-                </el-row>
-
-                <el-row>
                 <el-col :span="12">
                     <el-form-item label="近三年的开票金额（元）：">
                         {{form.threeYearInvoice}}
@@ -668,9 +651,6 @@
                         {{form.threeYearTaxes}}
                     </el-form-item>
                 </el-col>
-                </el-row>
-
-                <el-row>
                 <el-col :span="12">
                     <el-form-item label="当前金融机构借贷余额（元）：">
                         {{form.financialLendingBalance}}
@@ -685,7 +665,7 @@
 
                 <span v-if="form.externalGuarantees == '1'">
                 <el-row>
-                    <el-col :span="12">
+                    <el-col :span="8">
                         <el-form-item label="对外担保情况：">
                             <span v-if="form.externalGuarantees == '否'">
                             否
@@ -695,20 +675,17 @@
                             </span>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="12">
+                    <el-col :span="8">
                         <el-form-item label="担保人：">
                             {{form.guarantee}}
                         </el-form-item>
                     </el-col>
-                    </el-row>
-
-                    <el-row>
-                    <el-col :span="12">
+                    <el-col :span="8">
                         <el-form-item label="担保金额（元）：">
                             {{form.guaranteeAmount}}
                         </el-form-item>
                     </el-col>
-                    <el-col :span="12">
+                    <el-col :span="8">
                         <el-form-item label="担保期限：">
                             {{form.guaranteePeriod}}
                         </el-form-item>
@@ -719,7 +696,7 @@
                 <!-- 判断是否显示 -->
                 <span v-if="form.externalGuarantees == '0'">
                 <el-row>
-                    <el-col :span="12">
+                    <el-col :span="8">
                         <el-form-item label="对外担保情况：">
                             <span v-if="form.externalGuarantees == '0'">
                             否
@@ -740,59 +717,47 @@
 
                 <div class="thirdpage">
                 <el-row>
-                <el-col :span="12">
+                <el-col :span="8">
                     <el-form-item label="付款主体名称：">
                         {{form.paymentSubject}}
                     </el-form-item>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="8">
                     <el-form-item label="开始合作期限：">
                         {{form.periodCooperation}}
                     </el-form-item>
                 </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
+                <el-col :span="8">
                     <el-form-item label="过去两年交易额（元）：">
                         {{form.turnover}}
                     </el-form-item>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="8">
                     <el-form-item label="付款账期：">
                         {{form.paymentPeriod}}
                     </el-form-item>
                 </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
+                <el-col :span="8">
                     <el-form-item label="项目当前应收款总额（元）：">
                         {{form.totalReceivables}}
                     </el-form-item>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="8">
                     <el-form-item label="项目员工总数：">
                         {{form.projectEmployees}}
                     </el-form-item>
                 </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
+                <el-col :span="8">
                     <el-form-item label="平均员工薪资（元）：">
                         {{form.averageEmployeeSalary}}
                     </el-form-item>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="8">
                     <el-form-item label="单个员工薪资上限（元）：">
                         {{form.capEmployeeSalary}}
                     </el-form-item>
                 </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
+                <el-col :span="8">
                     <el-form-item label="本次申请借款总额（元）：">
                         {{form.totalApplication}}
                     </el-form-item>
@@ -802,9 +767,6 @@
                         {{form.applicationDeadline}}
                     </el-form-item>
                 </el-col>
-                </el-row>
-                <el-row>
-
                 <el-col :span="12">
                     <el-form-item label="本次借款指定回款及还款账户：">
                         {{form.repaymentAccount}}
@@ -815,8 +777,6 @@
                         {{form.pledgedReceivables}}
                     </el-form-item>
                 </el-col>
-                </el-row>
-                <el-row>
 
                 <el-col :span="12">
                     <el-form-item label="本次借款担保方式：">
@@ -832,38 +792,32 @@
 
             <div class="thirdpage">
                 <el-row>
-                <el-col :span="12">
+                <el-col :span="24">
                     <el-form-item label="前十大合作客户名单及年交易额：">
                         {{this.cooperativeClients}}
                     </el-form-item>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="24">
                     <el-form-item label="人力服务合同：">
                         {{this.manpowerServiceContract}}
                     </el-form-item>
                 </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
+                <el-col :span="24">
                     <el-form-item label="5份以上劳动合同：">
                         {{this.laborContract}}
                     </el-form-item>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="24">
                     <el-form-item label="近一年的核心企业回款记录：">
                         {{this.returnRecords}}
                     </el-form-item>
                 </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
+                <el-col :span="24">
                     <el-form-item label="本次融资对应的发薪名单、金额：">
                         {{this.paymentList}}
                     </el-form-item>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="24">
                     <el-form-item label="应收款对账凭证：">
                         {{this.receivables}}
                     </el-form-item>
@@ -918,6 +872,18 @@ export default {
             deleteshow2:false,
             addshow3:true,
             deleteshow3:false,
+            videoFlag1:false,//进度条
+            videoFlag2:false,//进度条
+            videoFlag3:false,//进度条
+            videoFlag4:false,//进度条
+            videoFlag5:false,//进度条
+            videoFlag6:false,//进度条
+            videoUploadPercent1:0,
+            videoUploadPercent2:0,
+            videoUploadPercent3:0,
+            videoUploadPercent4:0,
+            videoUploadPercent5:0,
+            videoUploadPercent6:0,
 
             //表单
             form:{
@@ -1100,6 +1066,8 @@ export default {
 
     //上传
       Upload1(file) {
+          var _that=this;
+        this.videoFlag1= true;
         const OSS = require('ali-oss');
             let _self = this;
             var bucket;//OSS文件名称
@@ -1146,13 +1114,20 @@ export default {
                     this.form.cooperativeClients = 'http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs
 
                     //上传
-                    client.put(storeAs,file.file).then(res => {
+                    client.multipartUpload(storeAs,file.file,{
+                        progress:function (p) { //获取进度条的值
+                            // console.log(p)
+                            _that.videoUploadPercent1 = p*100
+                            
+                        }}).then(res => {
                         if(res.url!=null || res.url!=""){
                             
                             // console.log('服务器返回的文件url：')
 
                             //返回服务器文件url
                             // console.log(res.url)
+                            this.videoFlag1 = false;
+                            _that.videoUploadPercent1 = 0;
                             
                             this.$notify({
                             title: '上传结果',
@@ -1180,6 +1155,8 @@ export default {
 
     //上传
       Upload2(file) {
+          var _that=this;
+        this.videoFlag2= true;
         const OSS = require('ali-oss');
             let _self = this;
             var bucket;//OSS文件名称
@@ -1226,13 +1203,20 @@ export default {
                     this.form.manpowerServiceContract = 'http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs
 
                     //上传
-                    client.put(storeAs,file.file).then(res => {
+                    client.multipartUpload(storeAs,file.file,{
+                        progress:function (p) { //获取进度条的值
+                            // console.log(p)
+                            _that.videoUploadPercent2 = p*100
+                            
+                        }}).then(res => {
                         if(res.url!=null || res.url!=""){
                             
                             // console.log('服务器返回的文件url：')
 
                             //返回服务器文件url
                             // console.log(res.url)
+                            this.videoFlag2 = false;
+                            _that.videoUploadPercent2 = 0;
                             
                             this.$notify({
                             title: '上传结果',
@@ -1261,6 +1245,8 @@ export default {
 
     //上传
       Upload3(file) {
+          var _that=this;
+        this.videoFlag3= true;
         const OSS = require('ali-oss');
             let _self = this;
             var bucket;//OSS文件名称
@@ -1307,7 +1293,12 @@ export default {
                     this.form.laborContract = 'http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs
 
                     //上传
-                    client.put(storeAs,file.file).then(res => {
+                    client.multipartUpload(storeAs,file.file,{
+                        progress:function (p) { //获取进度条的值
+                            // console.log(p)
+                            _that.videoUploadPercent3 = p*100
+                            
+                        }}).then(res => {
                         if(res.url!=null || res.url!=""){
                             
                             // console.log('服务器返回的文件url：')
@@ -1315,6 +1306,8 @@ export default {
 
                             //返回服务器文件url
                             // console.log(res.url)
+                            this.videoFlag3 = false;
+                            _that.videoUploadPercent3 = 0;
                             
                             this.$notify({
                             title: '上传结果',
@@ -1342,6 +1335,8 @@ export default {
 
     //上传
       Upload4(file) {
+          var _that=this;
+        this.videoFlag4= true;
         const OSS = require('ali-oss');
             let _self = this;
             var bucket;//OSS文件名称
@@ -1388,7 +1383,12 @@ export default {
                     this.form.returnRecords = 'http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs
 
                     //上传
-                    client.put(storeAs,file.file).then(res => {
+                    client.multipartUpload(storeAs,file.file,{
+                        progress:function (p) { //获取进度条的值
+                            // console.log(p)
+                            _that.videoUploadPercent4 = p*100
+                            
+                        }}).then(res => {
                         if(res.url!=null || res.url!=""){
                             
                             // console.log('服务器返回的文件url：')
@@ -1396,6 +1396,8 @@ export default {
 
                             //返回服务器文件url
                             // console.log(res.url)
+                            this.videoFlag4 = false;
+                            _that.videoUploadPercent4 = 0;
                             
                             this.$notify({
                             title: '上传结果',
@@ -1423,6 +1425,8 @@ export default {
 
     //上传
       Upload5(file) {
+          var _that=this;
+        this.videoFlag5= true;
         const OSS = require('ali-oss');
             let _self = this;
             var bucket;//OSS文件名称
@@ -1469,13 +1473,20 @@ export default {
                     this.form.paymentList = 'http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs
 
                     //上传
-                    client.put(storeAs,file.file).then(res => {
+                    client.multipartUpload(storeAs,file.file,{
+                        progress:function (p) { //获取进度条的值
+                            // console.log(p)
+                            _that.videoUploadPercent5 = p*100
+                            
+                        }}).then(res => {
                         if(res.url!=null || res.url!=""){
                             
                             // console.log('服务器返回的文件url：')
 
                             //返回服务器文件url
                             // console.log(res.url)
+                            this.videoFlag5 = false;
+                            _that.videoUploadPercent5 = 0;
                             
                             this.$notify({
                             title: '上传结果',
@@ -1503,6 +1514,8 @@ export default {
 
     //上传
       Upload6(file) {
+          var _that=this;
+        this.videoFlag6= true;
         const OSS = require('ali-oss');
             let _self = this;
             var bucket;//OSS文件名称
@@ -1549,14 +1562,20 @@ export default {
                     this.form.receivables = 'http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs
 
                     //上传
-                    client.put(storeAs,file.file).then(res => {
+                    client.multipartUpload(storeAs,file.file,{
+                        progress:function (p) { //获取进度条的值
+                            // console.log(p)
+                            _that.videoUploadPercent6 = p*100
+                            
+                        }}).then(res => {
                         if(res.url!=null || res.url!=""){
                             
                             // console.log('服务器返回的文件url：')
 
                             //返回服务器文件url
                             // console.log(res.url)
-                            
+                            this.videoFlag6 = false;
+                            _that.videoUploadPercent6 = 0;
                             this.$notify({
                             title: '上传结果',
                             type: 'success',
@@ -1790,111 +1809,133 @@ Add1:function(m){
 
       //对文件列表进行控制
       handleChange1(file, fileList) {
-        this.fileList1 = fileList.slice(-1);
+        this.fileList1 = fileList.slice(-3);
       },
 
       //对文件列表进行控制
       handleChange2(file, fileList) {
-        this.fileList2 = fileList.slice(-1);
+        this.fileList2 = fileList.slice(-6);
       },
 
       //对文件列表进行控制
       handleChange3(file, fileList) {
-        this.fileList3 = fileList.slice(-1);
+        this.fileList3 = fileList.slice(-6);
       },
 
       //对文件列表进行控制
       handleChange4(file, fileList) {
-        this.fileList4 = fileList.slice(-1);
+        this.fileList4 = fileList.slice(-13);
       },
 
       //对文件列表进行控制
       handleChange5(file, fileList) {
-        this.fileList5 = fileList.slice(-1);
+        this.fileList5 = fileList.slice(-11);
       },
 
       //对文件列表进行控制
       handleChange6(file, fileList) {
-        this.fileList6 = fileList.slice(-1);
+        this.fileList6 = fileList.slice(-13);
       },
 
-    
+      handleExceed1(files, fileList) {
+        this.$message.warning(`当前限制选择 2 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+      },
+      handleExceed2(files, fileList) {
+        this.$message.warning(`当前限制选择 5 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+      },
+      handleExceed3(files, fileList) {
+        this.$message.warning(`当前限制选择 5 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+      },
+      handleExceed4(files, fileList) {
+        this.$message.warning(`当前限制选择 12 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+      },
+      handleExceed5(files, fileList) {
+        this.$message.warning(`当前限制选择 10 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+      },
+      handleExceed6(files, fileList) {
+        this.$message.warning(`当前限制选择 12 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+      },
+
       beforeAvatarUpload1(file) {
-        const iszip = file.type === 'application/zip';
+        const length = this.fileList1.length <= 2;
         const isLt20M = file.size / 1024 / 1024 < 20;
 
-        if (!iszip) {
-        this.$message.error('上传文件只能是压缩包(.zip)格式!');
-      }
-        if (!isLt20M) {
-          this.$message.error('上传文件大小不能超过 20MB!');
+        if (!length) {
+          this.$message.error('此项上传文件数量不得大于2份，上传第3份文件失败！');
         }
-        return iszip && isLt20M;
+
+        if (!isLt20M) {
+          this.$message.error('上传文件大小不能超过 20MB，此文件上传失败!');
+        }
+        return length && isLt20M;
       },
 
       beforeAvatarUpload2(file) {
-        const iszip = file.type === 'application/zip';
+        const length = this.fileList2.length <= 5;
         const isLt20M = file.size / 1024 / 1024 < 20;
 
-        if (!iszip) {
-        this.$message.error('上传文件只能是压缩包(.zip)格式!');
-      }
-        if (!isLt20M) {
-          this.$message.error('上传文件大小不能超过 20MB!');
+        
+        if (!length) {
+          this.$message.error('此项上传文件数量不得大于5份，上传第6份文件失败！');
         }
-        return iszip && isLt20M;
+
+        if (!isLt20M) {
+          this.$message.error('上传文件大小不能超过 20MB，此文件上传失败!');
+        }
+        return length && isLt20M;
       },
 
       beforeAvatarUpload3(file) {
-        const iszip = file.type === 'application/zip';
+        const length = this.fileList2.length <= 5;
         const isLt20M = file.size / 1024 / 1024 < 20;
 
-        if (!iszip) {
-        this.$message.error('上传文件只能是压缩包(.zip)格式!');
-      }
-        if (!isLt20M) {
-          this.$message.error('上传文件大小不能超过 20MB!');
+        if (!length) {
+          this.$message.error('此项上传文件数量不得大于5份，上传第6份文件失败！');
         }
-        return iszip && isLt20M;
+
+        if (!isLt20M) {
+          this.$message.error('上传文件大小不能超过 20MB，此文件上传失败!');
+        }
+        return length && isLt20M;
       },
 
       beforeAvatarUpload4(file) {
-        const iszip = file.type === 'application/zip';
+        const length = this.fileList2.length <= 12;
         const isLt20M = file.size / 1024 / 1024 < 20;
 
-        if (!iszip) {
-        this.$message.error('上传文件只能是压缩包(.zip)格式!');
-      }
-        if (!isLt20M) {
-          this.$message.error('上传文件大小不能超过 20MB!');
+        if (!length) {
+          this.$message.error('此项上传文件数量不得大于12份，上传第13份文件失败！');
         }
-        return iszip && isLt20M;
+        if (!isLt20M) {
+          this.$message.error('上传文件大小不能超过 20MB，此文件上传失败!');
+        }
+        return length && isLt20M;
       },
 
       beforeAvatarUpload5(file) {
-        const iszip = file.type === 'application/zip';
+        const length = this.fileList2.length <= 10;
         const isLt20M = file.size / 1024 / 1024 < 20;
 
-        if (!iszip) {
-        this.$message.error('上传文件只能是压缩包(.zip)格式!');
-      }
-        if (!isLt20M) {
-          this.$message.error('上传文件大小不能超过 20MB!');
+        if (!length) {
+          this.$message.error('此项上传文件数量不得大于10份，上传第11份文件失败！');
         }
-        return iszip && isLt20M;
+        if (!isLt20M) {
+          this.$message.error('上传文件大小不能超过 20MB，此文件上传失败!');
+        }
+        return length && isLt20M;
       },
 
       beforeAvatarUpload6(file) {
-        const iszip = file.type === 'application/zip';
+        const length = this.fileList2.length <= 12;
         const isLt20M = file.size / 1024 / 1024 < 20;
 
-        if (!iszip) {
-        this.$message.error('上传文件只能是压缩包(.zip)格式!');
-      }
-        if (!isLt20M) {
-          this.$message.error('上传文件大小不能超过 20MB!');
+        if (!length) {
+          this.$message.error('此项上传文件数量不得大于12份，上传第13份文件失败！');
         }
-        return iszip && isLt20M;
+        if (!isLt20M) {
+          this.$message.error('上传文件大小不能超过 20MB，此文件上传失败!');
+        }
+        return length && isLt20M;
       },
      
     }
@@ -1932,13 +1973,12 @@ Add1:function(m){
     padding: 30px;
     margin-bottom: 20px;
 }
-.thirdpage .el-row .el-col:nth-child(odd){
-    border-right: 1px solid rgba(197, 195, 195, 0.637);
-    padding-right: 40px;
-}
+// .thirdpage .el-row .el-col:nth-child(odd){
+//     border-right: 1px solid rgba(197, 195, 195, 0.37);
+// }
 .kelist{
     margin-top: 30px;
-    border-top: 1px dashed rgb(187, 185, 185);
+    border-top: 1px dashed rgba(187, 185, 185, 0.705);
     padding-top: 40px;
 }
 </style>

@@ -217,11 +217,19 @@ export default {
                         //开户状态、用户名、企业编号
                         var accountStatus = response.data.detail.accountStatus;
                         var username = response.data.detail.username;
+                        
 
                         //未开户时不返回
                         if(response.data.detail.enterpriseNo != '' || response.data.detail.enterpriseNo!=null){
                         var enterpriseNo = response.data.detail.enterpriseNo;
                         }
+
+                        console.log(username)
+
+                      //存储状态、用户名、企业编号
+                      sessionStorage.setItem("accountStatus", accountStatus);
+                      sessionStorage.setItem("username", username);
+                      sessionStorage.setItem("enterpriseNo", enterpriseNo);
 
                         //登录成功
                         this.$message({
@@ -247,12 +255,6 @@ export default {
                         }
 
                         
-
-
-                      //存储状态、用户名、企业编号
-                      sessionStorage.setItem("accountStatus", accountStatus);
-                      sessionStorage.setItem("username", username);
-                      sessionStorage.setItem("enterpriseNo", enterpriseNo);
 
                       }else{
                         this.$message.error(response.data.msg);
@@ -290,7 +292,7 @@ export default {
   position: absolute;;
   height: 100%;
   width: 100%;
-  background-image: url('../../assets/u0.jpg');
+  background-image: url('https://images.pexels.com/photos/459654/pexels-photo-459654.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -311,6 +313,7 @@ export default {
     height: 90%;
     float: left;
     text-align: center;
+    font-weight:bolder; 
 }
 .text-left h1,.text-left h2,.text-left span{
     display: block;
@@ -319,22 +322,22 @@ export default {
     color: rgba(38, 80, 128, 0.767);
 }
 .text-left h1{
-    font-size: 52px;
+    font-size: 58px;
 }
 .text-left h2{
-    font-size: 48px;
+    font-size: 52px;
 }
 .text-left span{
-    font-size: 32px;
+    font-size: 36px;
 }
 .text-left .ti{
     display: block;
     margin: 0 auto;
     height: 2px;
-    width: 270px;
+    width: 290px;
     margin-top: 30px;
     margin-bottom: 20px;
-    background-color: rgba(38, 80, 128, 0.767);
+    background-color: rgba(69, 108, 153, 0.753);
 }
 .inner-right{
     position: relative;
@@ -352,8 +355,8 @@ export default {
     border-radius: 12px; 
     text-align: center;
     padding: 50px 40px;
-    background-color: #fff;
-    border: 1px solid rgb(231, 229, 229);
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgba(189, 187, 187, 0.603);
     -moz-box-shadow: 10px 10px 5px #cde7f1;  /* 老的 Firefox */
 
     //  h-shadow:水平阴影的位置 v-shadow:垂直阴影的位置 blur:模糊距离 spread:阴影的尺寸 color inset:将外部阴影 (outset) 改为内部阴影;
@@ -368,7 +371,7 @@ export default {
     text-align: center;
     padding: 30px 40px;
     background-color: #fff;
-    border: 1px solid rgb(231, 229, 229);
+    border: 1px solid rgba(189, 187, 187, 0.603);
     -moz-box-shadow: 10px 10px 5px #cde7f1;  /* 老的 Firefox */
 
     //  h-shadow:水平阴影的位置 v-shadow:垂直阴影的位置 blur:模糊距离 spread:阴影的尺寸 color inset:将外部阴影 (outset) 改为内部阴影;
@@ -388,9 +391,6 @@ margin-top: 30px;
 .checkbox{
 margin-top: 15px;
 }
-// .ell {
-// width: 90%!important;
-// }
 
 .button-content {
 position: relative;
