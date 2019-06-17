@@ -2039,7 +2039,7 @@ Add1:function(m){
 .box-card h4 span{
     position: absolute;
     right: 0px;
-    top: 65px;
+    top: 68px;
     border-width:21px 21px 0;
     border-style:solid;
     border-color: rgb(80, 235, 222) transparent transparent;/*灰 透明 透明 */

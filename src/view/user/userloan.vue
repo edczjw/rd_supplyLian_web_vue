@@ -112,7 +112,7 @@ export default {
     }
 .desc-inner{
     text-align: left;
-    padding: 20px;
+    padding: 5px;
     font-size: 12px;
     color: rgb(117, 114, 114);
 }

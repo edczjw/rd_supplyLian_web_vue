@@ -35,7 +35,7 @@ export default {
   },
   mounted() {
     this.getName();
-    // this.tologin();//判断是否登陆
+    this.tologin();//判断是否登陆
       window.onresize = () => {
             // 全屏下监控是否按键了ESC
             if (!this.checkFull()) {
@@ -171,12 +171,10 @@ p {
   margin-right: 6px;
 
   cursor: pointer;
+  color: rgb(189, 40, 219);
 
 }
 
-.right:hover {
-  color: rgba(238, 238, 238, 0.699);
-}
 
 svg {
   width: 32px;
