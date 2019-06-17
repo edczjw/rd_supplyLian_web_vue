@@ -18,27 +18,39 @@
             <el-form ref="form" :model="form" label-width="255px" status-icon>
             <!-- 第一页 -->
             <div v-if="firstshow">
+                
                 <!-- 企业基本信息栏 -->
                 <el-row>
-                <h4>企业基本信息栏</h4>
+                <h4>企业基本信息栏<span></span></h4>
+                
                 </el-row>
                 
+                <div class="tab-out">
                 <el-row>
                 <el-col :span="24">
                     <el-form-item label="企业名称：" prop="enterpriseName" >
                         {{form.enterpriseName}}
                     </el-form-item>
                 </el-col>
+                </el-row>
+
+                <el-row>
                 <el-col :span="12">
                     <el-form-item label="统一社会征信号码或营业执照号码：" prop="socialCode">
                         {{form.socialCode}}
                     </el-form-item>
                 </el-col>
+                </el-row>
+
+                <el-row>
                 <el-col :span="24">
                     <el-form-item label="注册地址：" prop="registeredAddress">
                         {{form.registeredAddress}}
                     </el-form-item>
                 </el-col>
+                </el-row>
+
+                <el-row>
                 <el-col :span="24">
                     <el-form-item label="实际经营地址：" prop="businessAddress">
                         {{form.businessAddress}}
@@ -98,14 +110,16 @@
                         </el-form-item>
                 </el-col>
                 </el-row>
+                </div>
 
 
             <div class="thirdpage">
+                
+                <div class="tab-out">
                <el-row>
             <el-table
               :data="this.form.controlList"
               size="mini"
-              border
             >
               <el-table-column prop="controlName" label="实际控制人姓名" align="center"></el-table-column>
               <el-table-column prop="controlIdCard" label="实际控制人身份证号码" align="center"></el-table-column>
@@ -117,7 +131,6 @@
             <el-table
               :data="this.form.businessList"
               size="mini"
-              border
             >
               <el-table-column prop="businessName" label="业务对接人姓名" align="center"></el-table-column>
               <el-table-column prop="businessPhone" label="业务对接人联系电话" align="center"></el-table-column>
@@ -126,25 +139,31 @@
           </el-row>
 
           <el-row>
-            <el-table :data="this.form.financeList" size="mini" border>
+            <el-table :data="this.form.financeList" size="mini">
               <el-table-column prop="financeName" label="财务对接人姓名" align="center"></el-table-column>
               <el-table-column prop="financePhone" label="财务对接人联系电话" align="center"></el-table-column>
               <el-table-column prop="financeMail" label="财务对接人联系邮箱" align="center"></el-table-column>
             </el-table>
           </el-row>
+          </div>
             </div>
 
         <!-- 银行卡信息 -->
                 <el-row>
-                <h4>银行卡信息</h4>
+                <h4>银行卡信息<span></span></h4>
                 </el-row>
 
+
+                <div class="tab-out">
                 <el-row>
                 <el-col :span="24">
                     <el-form-item label="银行卡卡号：" prop="cardNo" :rules="rules.kong">
                         <el-input v-model.trim="form.cardNo"  size="mini" clearable></el-input>
                     </el-form-item>
                 </el-col>
+                </el-row>
+
+                <el-row>
                 <el-col :span="12">
                     <el-form-item label="银行名称：" prop="bankName" :rules="rules.kong">
                         <el-input v-model.trim="form.bankName"  size="mini" clearable></el-input>
@@ -155,44 +174,57 @@
                         <el-input v-model.trim="form.accountName"  size="mini" clearable></el-input>
                     </el-form-item>
                 </el-col>
+                </el-row>
+                <el-row>
                 <el-col :span="12">
                     <el-form-item label="银行支行名称：" prop="bankBranchName" :rules="rules.kong">
                         <el-input v-model.trim="form.bankBranchName"  size="mini" clearable></el-input>
                     </el-form-item>
                 </el-col>
                 </el-row>
+                </div>
 
                 <!-- 企业财务信息栏 -->
                 <el-row>
-                <h4>企业财务信息栏</h4>
+                <h4>企业财务信息栏<span></span></h4>
                 </el-row>
 
+                <div class="thirdpage">
+                    
+                <div class="tab-out">
                 <el-row>
-                <el-col :span="12">
-                    <el-form-item label="近三年经营收入金额（元）：" prop="threeYearIncome" :rules="rules.number">
-                        <el-input v-model.trim="form.threeYearIncome"  placeholder="填写数字值,按年度填写" size="mini" clearable></el-input>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item label="近三年的利润金额（元）：" prop="threeYearProfit" :rules="rules.number">
-                        <el-input v-model.trim="form.threeYearProfit"  placeholder="填写数字值,按年度填写" size="mini" clearable></el-input>
-                    </el-form-item>
-                </el-col>
-                </el-row>
+                     <el-table :data="detail" border highlight-current-row size="mini">
+                        <el-table-column prop="recentyear" label="年份" align="center">
+                        </el-table-column>
 
-                <el-row>
-                <el-col :span="12">
-                    <el-form-item label="近三年的开票金额（元）：" prop="threeYearInvoice" :rules="rules.number">
-                        <el-input v-model.trim="form.threeYearInvoice"  placeholder="填写数字值,按年度填写" size="mini" clearable></el-input>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item label="近三年的纳税金额（元）：" prop="threeYearTaxes" :rules="rules.number">
-                        <el-input v-model.trim="form.threeYearTaxes"  placeholder="填写数字值,按年度填写" size="mini" clearable></el-input>
-                    </el-form-item>
-                </el-col>
-                </el-row>
+                        <el-table-column prop="controlIdCard" label="经营收入金额（元）" align="center" :rules="rules.number">
+                            <template slot-scope="scope">
+                                <el-input size="mini" v-model="scope.row.controlIdCard" placeholder="填写数字值,按年度填写" ></el-input> 
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="controlPhone" label="利润金额（元）" align="center" :rules="rules.number">
+                            <template slot-scope="scope">
+                                <el-input size="mini" v-model="scope.row.controlPhone" placeholder="填写数字值,按年度填写" ></el-input> 
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="controlPhone" label="开票金额（元）" align="center" :rules="rules.number">
+                            <template slot-scope="scope">
+                                <el-input size="mini" v-model="scope.row.controlPhone" placeholder="填写数字值,按年度填写" ></el-input> 
+                            </template>
+                        </el-table-column>
 
+                        <el-table-column prop="controlPhone" label="纳税金额（元）" align="center" :rules="rules.number">
+                            <template slot-scope="scope">
+                                <el-input size="mini" v-model="scope.row.controlPhone" placeholder="填写数字值,按年度填写" ></el-input> 
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </el-row>
+                </div>
+                </div>
+
+                
+                <div class="tab-out">
                 <el-row>
                 <el-col :span="12">
                     <el-form-item label="当前金融机构借贷余额（元）：" prop="financialLendingBalance" :rules="rules.number">
@@ -234,6 +266,7 @@
                     </el-form-item>
                 </el-col>
                 </el-row>
+                </div>
                 
             <!-- 按钮 -->
             <div class="in-button">
@@ -244,9 +277,11 @@
             <!-- 第二页 -->
             <div v-if="secondshow">
                 <el-row>
-                <h4>人力薪资贷申请</h4>
+                <h4>人力薪资贷申请<span></span></h4>
                 </el-row>
 
+                
+                <div class="tab-out">
                 <el-row>
                 <el-col :span="12">
                     <el-form-item label="应收账款主体（债务人）：" prop="paymentSubject" :rules="rules.kong">
@@ -332,6 +367,7 @@
                     </el-form-item>
                 </el-col>
                 </el-row>
+                </div>
                 
             <!-- 按钮 -->
             <div class="in-button">
@@ -342,10 +378,12 @@
             <!-- 第三页 -->
             <div v-if="thirdshow" >  
                 <el-row>
-                <h4>文件上传 </h4>
+                <h4>文件上传<span></span> </h4>
                 
                 </el-row>
             <div class="thirdpage">
+                
+                <div class="tab-out">
                 <el-row>
                 <el-col :span="12">
                     <el-form-item label="前十大合作客户名单及年交易额：">
@@ -487,6 +525,7 @@
                        
                 </el-col>
                 </el-row>
+                </div>
             </div>
             <!-- 按钮 -->
             <div class="in-button">
@@ -500,32 +539,42 @@
             <div v-if="fourshow">
                 <!-- 企业基本信息栏 -->
                 <el-row>
-                <h4>企业基本信息栏</h4>
+                <h4>企业基本信息栏<span></span></h4>
                 </el-row>
 
                 <el-form ref="form" :model="form" label-width="255px" status-icon>
                 <div class="thirdpage">
+                    
+                <div class="tab-out">
                 <el-row>
                 <el-col :span="24">
                     <el-form-item label="企业名称：" >
                         {{form.enterpriseName}}
                     </el-form-item>
                 </el-col>
+                </el-row>
+                <el-row>
                 <el-col :span="24">
                     <el-form-item label="统一社会征信号码或营业执照号码：">
                         {{form.socialCode}}
                     </el-form-item>
                 </el-col>
+                </el-row>
+                <el-row>
                 <el-col :span="24">
                     <el-form-item label="注册地址：">
                         {{form.registeredAddress}}
                     </el-form-item>
                 </el-col>
+                </el-row>
+                <el-row>
                 <el-col :span="24">
                     <el-form-item label="实际经营地址：">
                         {{form.businessAddress}}
                     </el-form-item>
                 </el-col>
+                </el-row>
+                <el-row>
                 <el-col :span="12">
                     <el-form-item label="注册资本（元）：">
                         {{form.registeredCapital}}
@@ -536,6 +585,9 @@
                         {{form.paidCapital}}
                     </el-form-item>
                 </el-col>
+                </el-row>
+
+                <el-row>
                 <el-col :span="8">
                     <el-form-item label="成立开始日期：">
                         {{form.startingDate}}
@@ -552,6 +604,9 @@
                         <span v-if="form.generalTaxpayers=='0'">否</span>
                     </el-form-item>
                 </el-col>
+                </el-row>
+
+                <el-row>
                 <el-col :span="8">
                     <el-form-item label="法定代表人姓名：">
                         {{form.legalName}}
@@ -562,16 +617,20 @@
                         {{form.legalIdCard}}
                     </el-form-item>
                 </el-col>
+                </el-row>
 
+                <el-row>
                 <el-col :span="12">
                     <el-form-item label="法定代表人联系电话：">
                         {{form.legalPhone}}
                     </el-form-item>
                 </el-col>
                 </el-row>
+                </div>
 
+                <div class="tab-out">
                 <el-row>
-                <el-table :data="this.form.controlList" border>
+                <el-table :data="this.form.controlList">
                 <el-table-column property="controlName" label="实际控制人姓名" align="center"></el-table-column>
               <el-table-column prop="controlIdCard" label="实际控制人身份证号码" align="center"></el-table-column>
               <el-table-column prop="controlPhone" label="实际控制人联系电话" align="center"></el-table-column>
@@ -579,7 +638,7 @@
                 </el-row>
 
                 <el-row>
-                <el-table :data="this.form.businessList" border>
+                <el-table :data="this.form.businessList">
                 <el-table-column property="businessName" label="业务对接人姓名" align="center"></el-table-column>
               <el-table-column prop="businessPhone" label="业务对接人联系电话" align="center"></el-table-column>
               <el-table-column prop="businessMail" label="业务对接人联系邮箱" align="center"></el-table-column>
@@ -587,20 +646,22 @@
                 </el-row>
 
                 <el-row>
-                <el-table :data="this.form.financeList" border >
+                <el-table :data="this.form.financeList" >
                 <el-table-column property="financeName" label="财务对接人姓名" align="center"></el-table-column>
               <el-table-column prop="financePhone" label="财务对接人联系电话" align="center"></el-table-column>
               <el-table-column prop="financeMail" label="财务对接人联系邮箱" align="center"></el-table-column>
                 </el-table>
                 </el-row>
                 </div>
+                </div>
 
                 <!-- 银行卡信息 -->
                 <el-row>
-                <h4>银行卡信息</h4>
+                <h4>银行卡信息<span></span></h4>
                 </el-row>
 
                 <div class="thirdpage">
+                    <div class="tab-out">
                 <el-row>
                 <el-col :span="12">
                     <el-form-item label="银行卡卡号：">
@@ -612,6 +673,8 @@
                         {{form.bankName}}
                     </el-form-item>
                 </el-col>
+                </el-row>
+                <el-row>
                 <el-col :span="12">
                     <el-form-item label="账户户名：">
                         {{form.accountName}}
@@ -624,13 +687,15 @@
                 </el-col>
                 </el-row>
                 </div>
+                </div>
 
                 <!-- 企业财务信息栏 -->
                 <el-row >
-                <h4>企业财务信息栏</h4>
+                <h4>企业财务信息栏<span></span></h4>
                 </el-row>
 
                 <div class="thirdpage">
+                    <div class="tab-out">
                 <el-row>
                 <el-col :span="12">
                     <el-form-item label="近三年经营收入金额（元）：">
@@ -642,6 +707,8 @@
                         {{form.threeYearProfit}}
                     </el-form-item>
                 </el-col>
+                </el-row>
+                <el-row>
                 <el-col :span="12">
                     <el-form-item label="近三年的开票金额（元）：">
                         {{form.threeYearInvoice}}
@@ -652,6 +719,8 @@
                         {{form.threeYearTaxes}}
                     </el-form-item>
                 </el-col>
+                </el-row>
+                <el-row>
                 <el-col :span="12">
                     <el-form-item label="当前金融机构借贷余额（元）：">
                         {{form.financialLendingBalance}}
@@ -693,6 +762,7 @@
                     </el-col>
                 </el-row>
                 
+                
                 </span>
                 <!-- 判断是否显示 -->
                 <span v-if="form.externalGuarantees == '0'">
@@ -709,14 +779,15 @@
                     </el-col>
                 </el-row>
                 </span>
-
+                    </div>
                 </div>
 
                 <el-row>
-                <h4>人力薪资贷申请</h4>
+                <h4>人力薪资贷申请<span></span></h4>
                 </el-row>
 
                 <div class="thirdpage">
+                    <div class="tab-out">
                 <el-row>
                 <el-col :span="8">
                     <el-form-item label="付款主体名称：">
@@ -785,13 +856,15 @@
                     </el-form-item>
                 </el-col>
                 </el-row>
+                </div>
             </div>
 
                 <el-row>
-                <h4>影像信息</h4>
+                <h4>影像信息<span></span></h4>
                 </el-row>
 
             <div class="thirdpage">
+                <div class="tab-out">
                 <el-row>
                 <el-col :span="24">
                     <el-form-item label="前十大合作客户名单及年交易额：">
@@ -824,6 +897,7 @@
                     </el-form-item>
                 </el-col>
                 </el-row>
+                </div>
             </div>
                 
             <!-- 按钮 -->
@@ -1954,11 +2028,25 @@ Add1:function(m){
     border-top-right-radius: 4px;
 }
 .box-card h4{
+    position: relative;
     padding: 30px 0 10px 10px;
     margin-bottom: 30px;
+    font-size: 22px;
     color: rgb(245, 109, 30);
     border-bottom: 1px solid rgba(40, 144, 214, 0.199);
     }
+
+.box-card h4 span{
+    position: absolute;
+    right: 0px;
+    top: 65px;
+    border-width:21px 21px 0;
+    border-style:solid;
+    border-color: rgb(80, 235, 222) transparent transparent;/*灰 透明 透明 */
+    width: 21px;
+    height: 21px;
+    }
+
 .el-input{
     width: 90%;
 }
@@ -1971,15 +2059,26 @@ Add1:function(m){
 .thirdpage .el-row{
     border-bottom: 1px solid rgba(197, 195, 195, 0.637);
 
-    padding: 30px;
-    margin-bottom: 20px;
+    padding: 10px 15px;
 }
-// .thirdpage .el-row .el-col:nth-child(odd){
-//     border-right: 1px solid rgba(197, 195, 195, 0.37);
-// }
+
 .kelist{
     margin-top: 30px;
     border-top: 1px dashed rgba(187, 185, 185, 0.705);
     padding-top: 40px;
+}
+
+.tab-out{
+    border: 1px dashed rgba(139, 187, 231, 0.932);
+    overflow: hidden;
+    margin: 0px 15px 10px;
+    border-radius: 5px;
+
+}
+
+.tab-out .el-row{
+    border-bottom: 1px dashed rgba(139, 187, 231, 0.541);
+    font-family:'黑体';
+    padding-top: 20px;
 }
 </style>

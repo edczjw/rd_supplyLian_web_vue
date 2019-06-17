@@ -15,38 +15,42 @@
                 <el-row>
                    <el-col><div class="set-tit"><h3><i class="el-icon-view"></i>  企业基本信息栏</h3></div></el-col>
                 </el-row>
+
+                <div class="tab-out">
                 <el-row :gutter="24">
                 <el-col :span="8"><span>企业名称：</span>{{this.detail.enterpriseName}}</el-col>
                 <el-col :span="8"><span>是否为一般纳税人：</span>{{this.detail.generalTaxpayers}}</el-col>
-                <el-col :span="8"><span>实际经营地址：</span>{{this.detail.businessAddress}}</el-col>
+                <el-col :span="8"><span>注册资本（万元）：</span>{{this.detail.registeredCapital}}</el-col>
                 </el-row>
 
                 <el-row :gutter="24">
-                <el-col :span="8"><span>注册资本（万元）：</span>{{this.detail.registeredCapital}}</el-col>
                 <el-col :span="8"><span>实缴资本（万元）：</span>{{this.detail.paidCapital}}</el-col>
                 <el-col :span="8"><span>成立开始日：</span>{{this.detail.startingDate}}</el-col>
+                <el-col :span="8"><span>有效截止日：</span>{{this.detail.endingDate}}</el-col>
                 </el-row>
 
                 <el-row :gutter="24">
-                <el-col :span="8"><span>有效截止日：</span>{{this.detail.endingDate}}</el-col>
                 <el-col :span="8"><span>法定代表人姓名：</span>{{this.detail.legalName}}</el-col>
                 <el-col :span="8"><span>法定代表人联系电话：</span>{{this.detail.legalPhone}}</el-col>
-                </el-row>
-
-                <el-row :gutter="24">
                 <el-col :span="8"><span>法定代表人身份证号码：</span>{{this.detail.legalIdCard}}</el-col>
                 </el-row>
                 
                 <el-row :gutter="24">
                 <el-col :span="12"><span>注册地址：</span>{{this.detail.registeredAddress}}</el-col>
                 </el-row>
+                
+                <el-row :gutter="24">
+                <el-col :span="12"><span>实际经营地址：</span>{{this.detail.businessAddress}}</el-col>
+                </el-row>
 
                 <el-row :gutter="24">
                 <el-col :span="12"><span>统一社会征信号码或营业执照号码：</span>{{this.detail.socialCode}}</el-col>
                 </el-row>
+                </div>
 
+                <div class="tab-out">
                  <el-row>
-                <el-table :data="this.detail.controlList" border>
+                <el-table :data="this.detail.controlList" >
                 <el-table-column property="controlName" label="实际控制人姓名" align="center"></el-table-column>
                 <el-table-column property="controlIdCard" label="实际控制人身份证号码" align="center"></el-table-column>
                 <el-table-column property="controlPhone" label="实际控制人联系电话" align="center"></el-table-column>
@@ -54,7 +58,7 @@
                 </el-row>
 
                 <el-row>
-                <el-table :data="this.detail.businessList" border>
+                <el-table :data="this.detail.businessList" >
                 <el-table-column property="businessName" label="业务对接人姓名" align="center"></el-table-column>
                 <el-table-column property="businessPhone" label="业务对接人联系电话" align="center"></el-table-column>
                 <el-table-column property="businessMail" label="业务对接人联系邮箱" align="center"></el-table-column>
@@ -62,16 +66,19 @@
                 </el-row>
 
                 <el-row>
-                <el-table :data="this.detail.financeList" border >
+                <el-table :data="this.detail.financeList" >
                 <el-table-column property="financeName" label="财务对接人姓名" align="center"></el-table-column>
                 <el-table-column property="financePhone" label="财务对接人联系电话" align="center"></el-table-column>
                 <el-table-column property="financeMail" label="财务对接人联系邮箱" align="center"></el-table-column>
                 </el-table>
                 </el-row>
+                </div>
 
                 <el-row>
                    <el-col><div class="set-tits"><h3><i class="el-icon-message"></i>  银行卡信息</h3></div></el-col>
                 </el-row>
+                
+                <div class="tab-out">
                 <el-row :gutter="24">
                 <el-col :span="8"><span>银行名称：</span>{{this.bankdetail.bankName}}</el-col>
                 <el-col :span="8"><span>账户户名：</span>{{this.bankdetail.accountName}}</el-col>
@@ -81,6 +88,7 @@
                 <el-row :gutter="24">
                 <el-col :span="24"><span>银行卡卡号：</span>{{this.bankdetail.cardNo}}</el-col>
                 </el-row>
+                </div>
 
                 </el-card>
             </el-tab-pane>
@@ -89,6 +97,7 @@
                 <span slot="label"><i class="el-icon-edit-outline">  修改密码</i></span>
                 <el-card class="box-card">
                     <el-form ref="form" :model="this.form" status-icon :rules="rules" label-width="155px" class="demo-ruleForm">
+                <div class="tab-out">
                         <el-row>
                         <el-col :span="24">
                             <el-form-item label="登录账号：" prop="username" :rules="rules.username">
@@ -126,6 +135,7 @@
                             <el-button type="primary" @click="submit('form')">确认修改</el-button>
                         </el-col>
                         </el-row>
+                </div>
                     </el-form>
 
                     
@@ -379,10 +389,8 @@ export default {
     font-weight: bolder;
     }
 .box-card .el-row{
-    margin:10px 0;
     font-size: 14px;
-    padding: 10px 120px;
-    font-family: '苹方'
+    padding: 10px 25px;
     
 }
 
@@ -413,6 +421,18 @@ export default {
 .return{
     margin-bottom: 30px;
     font-size: 14px;
+}
+.tab-out{
+    border: 1px dashed rgb(231, 185, 139);
+    overflow: hidden;
+    margin: 0px 15px 10px;
+    border-radius: 15px;
+
+}
+
+.tab-out .el-row{
+    border-bottom: 1px dashed rgba(231, 185, 139, 0.678);
+    font-family:'黑体'
 }
 </style>
 
