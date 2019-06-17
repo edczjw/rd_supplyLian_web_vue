@@ -352,6 +352,7 @@
                         <el-upload
                         class="upload-demo"
                         drag
+                        :limit="2"
                         :http-request="Upload1"
                         :file-list='fileList1'
                         :on-exceed="handleExceed1"
