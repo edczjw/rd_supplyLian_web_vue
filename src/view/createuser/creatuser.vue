@@ -2,13 +2,13 @@
 <div>
 <div class="topBanner">
     <div class="side-tit">
-      <p class='left'><span>民盛小贷</span> 创建账户
+      <p class='left'><img src="../../assets/1.png"/><b class="fg">创建账户</b>
       </p>
     </div>
     <p class='right' @click="goBack" title="安全退出">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-shouye"></use>
-      </svg>返回登录</p>
+      </svg></p>
       <p class='right' title="用户名">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-character"></use>
@@ -532,7 +532,7 @@ export default {
     text-align: center;
 }
 .topBanner {
-  line-height: 50px;
+  line-height: 59px;
 
   position: fixed;
   left: 0;
@@ -540,9 +540,9 @@ export default {
   z-index: 99;
 
   width: 100%;
-  height: 50px;
-  background: #72d0eb;
-  border-bottom: 1px solid #a0d9ea;
+  height: 59px;
+  background: #eedd41;
+  border-bottom: 1px solid #e4b865;
 }
 
 .topBanner p {
@@ -550,19 +550,19 @@ export default {
 }
 
 .left {
-  font-family: '黑体';
-  font-size: 21px;
-  color: #f3faef;
   float: left;
   font-weight: bolder;
 }
-.left span{
-     font-size: 28px;
-     color: #b86e0e;
-     opacity: 1;
-     padding-right: 10px;
-     border-right: 2px solid rgba(175, 105, 105, 0.63);
- }
+.left img{
+  width: 54px;
+}
+.left .fg{
+  float: right;
+  font-family: '黝黑';
+  font-size: 24px;
+  color: #1682c0;
+  padding-left: 10px;
+}
 .left .icon-tip{
   width: 40px;
   height: 40px;
@@ -578,22 +578,18 @@ export default {
   line-height: 50px;
   cursor: pointer;
 
-  color: #eee;
-}
-
-.right:hover {
-  color: #eee;
+  color: #1682c0;
 }
 
 svg {
   width: 32px;
   height: 32px;
   padding: 3px 8px;
-  color: #fff;
+  color: rgb(80, 78, 78);
 }
 
 svg:hover {
-  color: #eee;
+  color: #1682c0;
 }
 .kelist .kespan{
     position: relative;

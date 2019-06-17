@@ -75,8 +75,8 @@ export default {
     position: relative;
     text-align: center;
     border-radius: 6px;
-    width: 30%;
-    height: 548px;
+    width: 26%;
+    height: 448px;
     margin: 10px;
     overflow: hidden;
     border: 1px solid rgb(224, 223, 223);
@@ -90,7 +90,7 @@ export default {
         left: 0;
     }
     img{
-        width: 140px;
+        width: 90px;
     }
     
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="topBanner">
     <div class="side-tit">
-      <p class='left'><span>民盛小贷</span> 捷易融供应链金融服务系统
+      <p class='left'><img src="../assets/1.png"/><b class="fg">供应链金融服务平台</b>
       </p>
     </div>
     <p class='right' @click="goBack" title="安全退出">
@@ -126,7 +126,7 @@ export default {
   color: rgba(223, 186, 20, .842);
 }
 .topBanner {
-  line-height: 50px;
+  line-height: 59px;
 
   position: fixed;
   left: 0;
@@ -134,9 +134,9 @@ export default {
   z-index: 99;
 
   width: 100%;
-  height: 50px;
-  background: #6abbd1;
-  border-bottom: 1px solid #92c5d4;
+  height: 59px;
+  background: #eedd41;
+  border-bottom: 1px solid #e4b865;
 }
 
 p {
@@ -144,19 +144,19 @@ p {
 }
 
 .left {
-  font-family: '黑体';
-  font-size: 21px;
-  color: #f3faef;
   float: left;
   font-weight: bolder;
 }
-.left span{
-     font-size: 28px;
-     color: #f1b35c;
-     opacity: 1;
-     padding-right: 10px;
-     border-right: 1px solid rgba(230, 228, 228, 0.952);
- }
+.left img{
+  width: 54px;
+}
+.left .fg{
+  float: right;
+  font-family: '黝黑';
+  font-size: 24px;
+  color: #1682c0;
+  padding-left: 10px;
+}
 .left .icon-tip{
   width: 40px;
   height: 40px;
@@ -175,7 +175,7 @@ p {
 }
 
 .right:hover {
-  color: #eee;
+  color: rgba(238, 238, 238, 0.699);
 }
 
 svg {
@@ -186,6 +186,6 @@ svg {
 }
 
 svg:hover {
-  color: #eee;
+  color: #1682c0;
 }
 </style>

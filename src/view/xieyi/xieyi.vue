@@ -2,13 +2,13 @@
 <div>
   <div class="topBanner">
     <div class="side-tit">
-      <p class='left'><span>民盛小贷</span> 用户服务协议
+      <p class='left'><img src="../../assets/1.png"/><b class="fg">用户服务协议</b>
       </p>
     </div>
     <p class='right' @click="goBack" title="安全退出">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-shouye"></use>
-      </svg>返回登录</p>
+      </svg></p>
     <p class='right' @click="screenfull" title="全屏显示">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-quanping4"></use>
@@ -16,7 +16,7 @@
     <p class='right' title="联系客服">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-atm"></use>
-      </svg>112</p>
+      </svg></p>
   </div>
 
   <div class="page">
@@ -193,7 +193,7 @@ export default {
     background: rgb(243, 243, 243);
     margin: 0 auto;
     width: 60%;
-    top: 55px;
+    top: 62px;
     margin-bottom: 20px;
     line-height:40px;
     
@@ -224,7 +224,7 @@ export default {
   color: rgba(223, 186, 20, .842);
 }
 .topBanner {
-  line-height: 50px;
+  line-height: 59px;
 
   position: fixed;
   left: 0;
@@ -232,9 +232,9 @@ export default {
   z-index: 99;
 
   width: 100%;
-  height: 50px;
-  background: #72d0eb;
-  border-bottom: 1px solid #a0d9ea;
+  height: 59px;
+  background: #eedd41;
+  border-bottom: 1px solid #e4b865;
 }
 
 .topBanner p {
@@ -248,13 +248,16 @@ export default {
   float: left;
   font-weight: bolder;
 }
-.left span{
-     font-size: 28px;
-     color: #b86e0e;
-     opacity: 1;
-     padding-right: 10px;
-     border-right: 2px solid rgba(175, 105, 105, 0.63);
- }
+.left img{
+  width: 54px;
+}
+.left .fg{
+  float: right;
+  font-family: '黝黑';
+  font-size: 24px;
+  color: #1682c0;
+  padding-left: 10px;
+}
 .left .icon-tip{
   width: 40px;
   height: 40px;
@@ -274,17 +277,17 @@ export default {
 }
 
 .right:hover {
-  color: #eee;
+  color: rgba(238, 238, 238, 0.699);
 }
 
 svg {
   width: 38px;
   height: 35px;
   padding: 8px 8px;
-  color: #fff;
+  color: rgb(80, 78, 78);
 }
 
 svg:hover {
-  color: #eee;
+  color: #1682c0;
 }
 </style>
