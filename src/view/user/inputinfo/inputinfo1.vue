@@ -87,8 +87,8 @@
                 <el-row>
                 <el-col :span="12">
                     <el-form-item label="是否为一般纳税人：" prop="generalTaxpayers" :rules="rules.kong">
-                        <span v-if="form.generalTaxpayers=='1'">是</span>
-                        <span v-if="form.generalTaxpayers=='0'">否</span>
+                        <span v-if="form.generalTaxpayers=='是'">是</span>
+                        <span v-if="form.generalTaxpayers=='否'">否</span>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
@@ -192,6 +192,16 @@
                 <div class="thirdpage">
                     
                 <div class="tab-out">
+                    
+                    <el-row>
+                        <el-switch
+                        v-model="value"
+                        @change="selectyear"
+                        active-text="包含今年"
+                        inactive-text="不包含今年">
+                        </el-switch>
+                    </el-row>
+
                 <el-row>
                      <el-table :data="form.threeYearDevelopmentSituation" border highlight-current-row size="mini">
                         <el-table-column prop="nearlyYears" label="年份" align="center">
@@ -284,7 +294,7 @@
                 <div class="tab-out">
                 <el-row>
                 <el-col :span="12">
-                    <el-form-item label="应收账款主体（债务人）：" prop="paymentSubject" :rules="rules.kong">
+                    <el-form-item label="应收账款主体（债务人）全称：" prop="paymentSubject" :rules="rules.kong">
                         <el-input v-model.trim="form.paymentSubject" size="mini" clearable></el-input>
                     </el-form-item>
                 </el-col>
@@ -297,6 +307,14 @@
 
                 
                 <div class="thirdpage">
+                    <el-row>
+                        <el-switch
+                        v-model="value2"
+                        @change="selectyear2"
+                        active-text="包含今年"
+                        inactive-text="不包含今年">
+                        </el-switch>
+                    </el-row>
                 <el-row>
                      <el-table :data="form.turnover" border highlight-current-row size="mini">
                         <el-table-column prop="turnoverYear" label="年份" align="center">
@@ -612,8 +630,8 @@
                 </el-col>
                 <el-col :span="8">
                     <el-form-item label="是否为一般纳税人：">
-                        <span v-if="form.generalTaxpayers=='1'">是</span>
-                        <span v-if="form.generalTaxpayers=='0'">否</span>
+                        <span v-if="form.generalTaxpayers=='是'">是</span>
+                        <span v-if="form.generalTaxpayers=='否'">否</span>
                     </el-form-item>
                 </el-col>
                 </el-row>
@@ -708,7 +726,6 @@
 
                 <div class="thirdpage">
                     <div class="tab-out">
-
                 <el-row>
                      <el-table :data="form.threeYearDevelopmentSituation" border highlight-current-row size="mini">
                         <el-table-column prop="nearlyYears" label="年份" align="center">
@@ -931,6 +948,9 @@ import rules from '../../../untils/rules'
 export default {
     data(){
         return{
+            value: true,
+            value2: true,
+
             rules,  
             active: 0,
             firstshow:true,//第一页显示
@@ -989,7 +1009,7 @@ export default {
                 paidCapital:"",             //实缴资本
                 startingDate:"",              //成立开始日
                 endingDate:"",                  //成立有效截止日期
-                generalTaxpayers:"1",                //是否为一般纳税人
+                generalTaxpayers:"是",                //是否为一般纳税人
                 legalName:"",               //法定代表人姓名
                 legalIdCard:"",              //身份证号码
                 legalPhone:"",               //联系电话
@@ -1066,23 +1086,64 @@ export default {
                 warrantyPeriod:""                //担保期限
 
             },
+      
 
         }
     },
     components:{
     },
     mounted() {
-        
-        this.getthreeyear()
-        this.gettwoyear()
+        this.selectyear()
+        this.selectyear2()
         this.getdetail()
     },
     methods: {
+        selectyear(){
+            this.$axios({
+                    method: 'post',
+                    url: this.$store.state.domain +"/biz/nearlyThreeYears"
+                    })
+                    .then(
+                        response => {
+                                    this.form.threeYearDevelopmentSituation = response.data
+                                    
+                                    if(this.value == true){
+                                        //删除最后一组
+                                        this.form.threeYearDevelopmentSituation.splice(this.form.threeYearDevelopmentSituation.length-1, 1);
+                                
+                                    }else if(this.value == false){
+                                        this.form.threeYearDevelopmentSituation.splice(0, 1);
+                                        
+                                    }
+                            }, response => {
+                                console.log(response);
+                            });
+        },
+        selectyear2(){
+            this.$axios({
+                    method: 'post',
+                    url: this.$store.state.domain +"/biz/nearlyTwoYears"
+                    })
+                    .then(
+                        response => {
+                                    this.form.turnover = response.data
+                                    
+                                    if(this.value2 == true){
+                                        //删除最后一组
+                                        this.form.turnover.splice(this.form.turnover.length-1, 1);
+                                
+                                    }else if(this.value2 == false){
+                                        this.form.turnover.splice(0, 1);
+                                        
+                                    }
+                            }, response => {
+                                console.log(response);
+                            });
+        },
         gettwoyear(){
             this.$axios({
                     method: 'post',
-                    url: this.$store.state.domain +"/biz/nearlyTwoYears",
-                    data:this.form
+                    url: this.$store.state.domain +"/biz/nearlyTwoYears"
                     })
                     .then(
                         response => {
@@ -1094,8 +1155,7 @@ export default {
         getthreeyear(){
             this.$axios({
                     method: 'post',
-                    url: this.$store.state.domain +"/biz/nearlyThreeYears",
-                    data:this.form
+                    url: this.$store.state.domain +"/biz/nearlyThreeYears"
                     })
                     .then(
                         response => {
@@ -1241,6 +1301,7 @@ export default {
                     +fileName
 
                     this.form.cooperativeClients.push('http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs)
+                    console.log(this.form.cooperativeClients)
 
                     //上传
                     client.multipartUpload(storeAs,file.file,{
