@@ -331,7 +331,7 @@
 
                 <el-row>
                 <el-col :span="12">
-                    <el-form-item label="付款账期（天）：" prop="paymentPeriod" :rules="rules.number">
+                    <el-form-item label="结算账期（天）：" prop="paymentPeriod" :rules="rules.number">
                         <el-input v-model.trim="form.paymentPeriod" placeholder="填写数字值" size="mini" clearable></el-input>
                     </el-form-item>
                 </el-col>
