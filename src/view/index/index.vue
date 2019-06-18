@@ -96,13 +96,13 @@ export default {
 <style lang='less'>
 .top {
   width: 100%;
-  height: 50px;
+  height: 65px;
 }
 
 //右边部分整个大页面
 .main-ten {
   margin-left: 200px;
-  padding: 15px 15px;
+  padding: 25px 25px;
   transition: all .5s;
 }
 
@@ -110,16 +110,17 @@ export default {
 .container-width {
   
   transition: all .5s;
-  margin-left: 60px;
-  padding: 0 8px;
+  margin-left: 70px;
+  padding: 10px 8px;
 }
 
 // 整个页面
 .wrapper-inner {
   width: 100%;
-  height: 100%;
+  height: 0;
+  padding-bottom: 70%;
 
-  background: #fff;
+  background: rgb(238, 237, 237);
 }
 
 .icon{
@@ -129,7 +130,6 @@ export default {
     vertical-align: -.9em;
     fill: currentColor;
     padding: 3px 5px;
-    color: red;
 }
 
 </style>

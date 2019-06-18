@@ -21,6 +21,11 @@ Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(animate)
 
+// 跳转后返回顶部
+router.afterEach((to,from,next) => {
+  window.scrollTo(0,0);
+});
+
 //$axios替换axios
 Vue.prototype.$axios = axios
 

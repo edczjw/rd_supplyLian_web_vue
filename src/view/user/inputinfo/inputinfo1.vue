@@ -193,29 +193,29 @@
                     
                 <div class="tab-out">
                 <el-row>
-                     <el-table :data="detail" border highlight-current-row size="mini">
-                        <el-table-column prop="recentyear" label="年份" align="center">
+                     <el-table :data="form.threeYearDevelopmentSituation" border highlight-current-row size="mini">
+                        <el-table-column prop="nearlyYears" label="年份" align="center">
                         </el-table-column>
 
-                        <el-table-column prop="controlIdCard" label="经营收入金额（元）" align="center" :rules="rules.number">
+                        <el-table-column prop="incomeSum" label="经营收入金额（元）" align="center" :rules="rules.number">
                             <template slot-scope="scope">
-                                <el-input size="mini" v-model="scope.row.controlIdCard" placeholder="填写数字值,按年度填写" ></el-input> 
+                                <el-input size="mini" v-model="scope.row.incomeSum" placeholder="填写数字值,按年度填写" ></el-input> 
                             </template>
                         </el-table-column>
-                        <el-table-column prop="controlPhone" label="利润金额（元）" align="center" :rules="rules.number">
+                        <el-table-column prop="profitSum" label="利润金额（元）" align="center" :rules="rules.number">
                             <template slot-scope="scope">
-                                <el-input size="mini" v-model="scope.row.controlPhone" placeholder="填写数字值,按年度填写" ></el-input> 
+                                <el-input size="mini" v-model="scope.row.profitSum" placeholder="填写数字值,按年度填写" ></el-input> 
                             </template>
                         </el-table-column>
-                        <el-table-column prop="controlPhone" label="开票金额（元）" align="center" :rules="rules.number">
+                        <el-table-column prop="invoiceSum" label="开票金额（元）" align="center" :rules="rules.number">
                             <template slot-scope="scope">
-                                <el-input size="mini" v-model="scope.row.controlPhone" placeholder="填写数字值,按年度填写" ></el-input> 
+                                <el-input size="mini" v-model="scope.row.invoiceSum" placeholder="填写数字值,按年度填写" ></el-input> 
                             </template>
                         </el-table-column>
 
-                        <el-table-column prop="controlPhone" label="纳税金额（元）" align="center" :rules="rules.number">
+                        <el-table-column prop="taxesSum" label="纳税金额（元）" align="center" :rules="rules.number">
                             <template slot-scope="scope">
-                                <el-input size="mini" v-model="scope.row.controlPhone" placeholder="填写数字值,按年度填写" ></el-input> 
+                                <el-input size="mini" v-model="scope.row.taxesSum" placeholder="填写数字值,按年度填写" ></el-input> 
                             </template>
                         </el-table-column>
                     </el-table>
@@ -295,12 +295,23 @@
                 </el-col>
                 </el-row>
 
+                
+                <div class="thirdpage">
                 <el-row>
-                <el-col :span="12">
-                    <el-form-item label="过去两年交易额（元）：" prop="turnover" :rules="rules.number">
-                        <el-input v-model.trim="form.turnover" placeholder="填写数字值" size="mini" clearable></el-input>
-                    </el-form-item>
-                </el-col>
+                     <el-table :data="form.turnover" border highlight-current-row size="mini">
+                        <el-table-column prop="turnoverYear" label="年份" align="center">
+                        </el-table-column>
+
+                        <el-table-column prop="turnoverSum" label="交易额（元）" align="center" :rules="rules.number">
+                            <template slot-scope="scope">
+                                <el-input size="mini" v-model="scope.row.turnoverSum" placeholder="填写数字值,按年度填写" ></el-input> 
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </el-row>
+                </div>
+
+                <el-row>
                 <el-col :span="12">
                     <el-form-item label="付款账期（天）：" prop="paymentPeriod" :rules="rules.number">
                         <el-input v-model.trim="form.paymentPeriod" placeholder="填写数字值" size="mini" clearable></el-input>
@@ -513,6 +524,7 @@
                         :on-exceed="handleExceed6"
                         :before-upload="beforeAvatarUpload6"
                         :on-change="handleChange6"
+                        multiple
                         action="">
                         <i class="el-icon-upload"></i>
                         <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
@@ -696,30 +708,22 @@
 
                 <div class="thirdpage">
                     <div class="tab-out">
+
                 <el-row>
-                <el-col :span="12">
-                    <el-form-item label="近三年经营收入金额（元）：">
-                        {{form.threeYearIncome}}
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item label="近三年的利润金额（元）：">
-                        {{form.threeYearProfit}}
-                    </el-form-item>
-                </el-col>
+                     <el-table :data="form.threeYearDevelopmentSituation" border highlight-current-row size="mini">
+                        <el-table-column prop="nearlyYears" label="年份" align="center">
+                        </el-table-column>
+                        <el-table-column prop="incomeSum" label="经营收入金额（元）" align="center" :rules="rules.number">                          
+                        </el-table-column>
+                        <el-table-column prop="profitSum" label="利润金额（元）" align="center" :rules="rules.number">
+                        </el-table-column>
+                        <el-table-column prop="invoiceSum" label="开票金额（元）" align="center" :rules="rules.number">
+                        </el-table-column>
+                        <el-table-column prop="taxesSum" label="纳税金额（元）" align="center" :rules="rules.number">
+                        </el-table-column>
+                    </el-table>
                 </el-row>
-                <el-row>
-                <el-col :span="12">
-                    <el-form-item label="近三年的开票金额（元）：">
-                        {{form.threeYearInvoice}}
-                    </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                    <el-form-item label="近三年的纳税金额：">
-                        {{form.threeYearTaxes}}
-                    </el-form-item>
-                </el-col>
-                </el-row>
+
                 <el-row>
                 <el-col :span="12">
                     <el-form-item label="当前金融机构借贷余额（元）：">
@@ -799,11 +803,21 @@
                         {{form.periodCooperation}}
                     </el-form-item>
                 </el-col>
-                <el-col :span="8">
-                    <el-form-item label="过去两年交易额（元）：">
-                        {{form.turnover}}
-                    </el-form-item>
-                </el-col>
+                </el-row>
+
+                <div class="thirdpage">
+                <el-row>
+                     <el-table :data="form.turnover" border highlight-current-row size="mini">
+                        <el-table-column prop="turnoverYear" label="年份" align="center">
+                        </el-table-column>
+
+                        <el-table-column prop="turnoverSum" label="交易额（元）" align="center" :rules="rules.number">
+                        </el-table-column>
+                    </el-table>
+                </el-row>
+                </div>
+
+                <el-row>
                 <el-col :span="8">
                     <el-form-item label="付款账期：">
                         {{form.paymentPeriod}}
@@ -925,13 +939,13 @@ export default {
             fourshow:false,//第四页显示
             danbaoinput:false,//担保输入框是否禁用
             deleteshow:false,
-
-            cooperativeClients:"",//前十大合作客户名单及年交易额
-            manpowerServiceContract:"",//人力服务合同
-            laborContract:"",//5份以上劳动合同
-            returnRecords:"",//近一年的核心企业回款记录
-            paymentList:"",//本次融资对应的发薪名单、金额
-            receivables:"",//应收款对账凭证
+            
+            cooperativeClients:[],//前十大合作客户名单及年交易额
+            manpowerServiceContract:[],//人力服务合同
+            laborContract:[],//5份以上劳动合同
+            returnRecords:[],//近一年的核心企业回款记录
+            paymentList:[],//本次融资对应的发薪名单、金额
+            receivables:[],//应收款对账凭证
 
             fileList1:[],//文件容器
             fileList2:[],//文件容器
@@ -959,6 +973,7 @@ export default {
             videoUploadPercent4:0,
             videoUploadPercent5:0,
             videoUploadPercent6:0,
+            
 
             //表单
             form:{
@@ -1000,37 +1015,47 @@ export default {
                     mail:"",                //联系邮箱
                 }],             
                 
-
-
                 cardNo:"",              //银行卡卡号
                 bankName:"",                //银行名称
                 accountName:"",             //账户户名
                 bankBranchName:"",              //银行支行名称
 
                 // 企业财务信息栏
-                threeYearIncome:"",             //近三年经营收入金额
-                threeYearProfit:"",             //近三年的利润金额
-                threeYearInvoice:"",                //近三年的开票金额
-                threeYearTaxes:"",              //近三年的纳税金额  
+                threeYearDevelopmentSituation:[{
+                    nearlyYears:"",         //年份
+                    incomeSum:"",       //近三年经营收入金额
+                    profitSum:"",     //近三年的利润金额
+                    invoiceSum:"",     //近三年的开票金额
+                    taxesSum:""     //近三年的纳税金额
+                }],
+                
+                
                 financialLendingBalance:"",             //当前金融机构借贷余额
                 unfinancialLendingBalance:"",               //当前非金融机构融资余额
-                cooperativeClients:"",              //前十大合作客户名单及年交易额
+
+                cooperativeClients:[],              //前十大合作客户名单及年交易额
                 externalGuarantees:"1",              //对外担保情况
 
                 // 人力薪资贷申请
-                manpowerServiceContract:"",             //人力服务合同
-                laborContract:"",               //5份以上劳动合同
+                manpowerServiceContract:[],             //人力服务合同
+                laborContract:[],               //5份以上劳动合同
                 paymentSubject:"",              //付款主体名称
                 periodCooperation:"",               //开始合作期限
-                turnover:"",                //过去两年交易额
+
+                //过去两年交易额
+                turnover:[{
+                    turnoverYear:"",            //年份
+                    turnoverSum:"",             //交易额
+                }],
+
                 paymentPeriod:"",               //付款账期
-                returnRecords:"",               //近一年的核心企业回款记录
+                returnRecords:[],               //近一年的核心企业回款记录
                 totalReceivables:"",                //项目当前应收款总额
                 projectEmployees:"",                //项目员工总数
                 averageEmployeeSalary:"",               //平均员工薪资
                 capEmployeeSalary:"",               //单个员工薪资上限
-                paymentList:"",             //本次融资对应的发薪名单、金额
-                receivables:"",             //应收款对账凭证
+                paymentList:[],             //本次融资对应的发薪名单、金额
+                receivables:[],             //应收款对账凭证
                 totalApplication:"",                //本次申请借款总额
                 applicationDeadline:"",             //本次申请借款最长期限
                 repaymentAccount:"",                //本次借款指定回款及还款账户
@@ -1047,9 +1072,38 @@ export default {
     components:{
     },
     mounted() {
+        
+        this.getthreeyear()
+        this.gettwoyear()
         this.getdetail()
     },
     methods: {
+        gettwoyear(){
+            this.$axios({
+                    method: 'post',
+                    url: this.$store.state.domain +"/biz/nearlyTwoYears",
+                    data:this.form
+                    })
+                    .then(
+                        response => {
+                                    this.form.turnover = response.data
+                            }, response => {
+                                console.log(response);
+                            });
+        },
+        getthreeyear(){
+            this.$axios({
+                    method: 'post',
+                    url: this.$store.state.domain +"/biz/nearlyThreeYears",
+                    data:this.form
+                    })
+                    .then(
+                        response => {
+                                    this.form.threeYearDevelopmentSituation = response.data
+                            }, response => {
+                                console.log(response);
+                            });
+        },
         getdetail(){
             this.form.enterpriseNo = sessionStorage.getItem("enterpriseNo");
             //把上传图片的url发给后台做记录
@@ -1169,7 +1223,7 @@ export default {
                     // 存储路径，并且给图片改成唯一名字
                     var fileName = file.file.name 
                     
-                    this.cooperativeClients = fileName
+                    this.cooperativeClients.push(fileName)
 
                     //后缀名
                     const suffix = fileName.substr(fileName.indexOf("."));
@@ -1186,7 +1240,7 @@ export default {
                     const storeAs = 'test/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
                     +fileName
 
-                    this.form.cooperativeClients = 'http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs
+                    this.form.cooperativeClients.push('http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs)
 
                     //上传
                     client.multipartUpload(storeAs,file.file,{
@@ -1258,7 +1312,7 @@ export default {
                     // 存储路径，并且给图片改成唯一名字
                     var fileName = file.file.name 
 
-                    this.manpowerServiceContract = fileName
+                    this.manpowerServiceContract.push(fileName)
 
                     //后缀名
                     const suffix = fileName.substr(fileName.indexOf("."));
@@ -1275,7 +1329,7 @@ export default {
                     const storeAs = 'test/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
                     +fileName
 
-                    this.form.manpowerServiceContract = 'http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs
+                    this.form.manpowerServiceContract.push('http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs)
 
                     //上传
                     client.multipartUpload(storeAs,file.file,{
@@ -1348,7 +1402,7 @@ export default {
                     // 存储路径，并且给图片改成唯一名字
                     var fileName = file.file.name 
 
-                    this.laborContract = fileName
+                    this.laborContract.push(fileName)
 
                     //后缀名
                     const suffix = fileName.substr(fileName.indexOf("."));
@@ -1365,7 +1419,7 @@ export default {
                     const storeAs = 'test/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
                     +fileName
 
-                    this.form.laborContract = 'http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs
+                    this.form.laborContract.push('http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs)
 
                     //上传
                     client.multipartUpload(storeAs,file.file,{
@@ -1438,7 +1492,7 @@ export default {
                     // 存储路径，并且给图片改成唯一名字
                     var fileName = file.file.name 
 
-                    this.returnRecords = fileName
+                    this.returnRecords.push(fileName)
 
                     //后缀名
                     const suffix = fileName.substr(fileName.indexOf("."));
@@ -1455,7 +1509,7 @@ export default {
                     const storeAs = 'test/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
                     +fileName
 
-                    this.form.returnRecords = 'http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs
+                    this.form.returnRecords.push('http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs)
 
                     //上传
                     client.multipartUpload(storeAs,file.file,{
@@ -1528,7 +1582,7 @@ export default {
                     // 存储路径，并且给图片改成唯一名字
                     var fileName = file.file.name 
 
-                    this.paymentList = fileName
+                    this.paymentList.push(fileName)
 
                     //后缀名
                     const suffix = fileName.substr(fileName.indexOf("."));
@@ -1545,7 +1599,7 @@ export default {
                     const storeAs = 'test/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
                     +fileName
 
-                    this.form.paymentList = 'http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs
+                    this.form.paymentList.push('http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs)
 
                     //上传
                     client.multipartUpload(storeAs,file.file,{
@@ -1617,7 +1671,7 @@ export default {
                     // 存储路径，并且给图片改成唯一名字
                     var fileName = file.file.name 
 
-                    this.receivables = fileName
+                    this.receivables.push(fileName)
 
                     //后缀名
                     const suffix = fileName.substr(fileName.indexOf("."));
@@ -1634,7 +1688,7 @@ export default {
                     const storeAs = 'test/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/cooperative/'+obj2+'-'
                     +fileName
 
-                    this.form.receivables = 'http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs
+                    this.form.receivables.push('http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs)
 
                     //上传
                     client.multipartUpload(storeAs,file.file,{

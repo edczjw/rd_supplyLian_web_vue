@@ -531,8 +531,9 @@ export default {
 .creat-button{
     text-align: center;
 }
+
 .topBanner {
-  line-height: 59px;
+  line-height: 66px;
 
   position: fixed;
   left: 0;
@@ -540,9 +541,9 @@ export default {
   z-index: 99;
 
   width: 100%;
-  height: 59px;
-  background: #eedd41;
-  border-bottom: 1px solid #e4b865;
+  height: 66px;
+  background: #fff;
+  border-bottom: 1px solid rgba(207, 206, 206, 0.596);
 }
 
 .topBanner p {
@@ -551,10 +552,13 @@ export default {
 
 .left {
   float: left;
+  height: 65px;
+  padding-top: 2px;
   font-weight: bolder;
+  background: #fff;
 }
 .left img{
-  width: 54px;
+  width: 55px;
 }
 .left .fg{
   float: right;
@@ -562,6 +566,7 @@ export default {
   font-size: 24px;
   color: #1682c0;
   padding-left: 10px;
+  padding-right: 15px;
 }
 .left .icon-tip{
   width: 40px;
@@ -569,18 +574,17 @@ export default {
 }
 
 .right {
-  font-family: '宋体';
-  font-size: xx-small;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 12px;
 
   float: right;
 
-  margin-right: 5px;
-  line-height: 50px;
+  margin-right: 6px;
+
   cursor: pointer;
+  color: rgb(189, 40, 219);
 
-  color: #1682c0;
 }
-
 svg {
   width: 32px;
   height: 32px;

@@ -126,7 +126,7 @@ export default {
   color: rgba(223, 186, 20, .842);
 }
 .topBanner {
-  line-height: 59px;
+  line-height: 66px;
 
   position: fixed;
   left: 0;
@@ -134,9 +134,9 @@ export default {
   z-index: 99;
 
   width: 100%;
-  height: 59px;
-  background: #eedd41;
-  border-bottom: 1px solid #e4b865;
+  height: 66px;
+  background: #fff;
+  border-bottom: 1px solid rgba(207, 206, 206, 0.596);
 }
 
 p {
@@ -145,10 +145,13 @@ p {
 
 .left {
   float: left;
+  height: 65px;
+  padding-top: 2px;
   font-weight: bolder;
+  background: #fff;
 }
 .left img{
-  width: 54px;
+  width: 55px;
 }
 .left .fg{
   float: right;
@@ -156,10 +159,11 @@ p {
   font-size: 24px;
   color: #1682c0;
   padding-left: 10px;
+  padding-right: 15px;
 }
 .left .icon-tip{
   width: 40px;
-  height: 40px;
+  height: 66px;
 }
 
 .right {

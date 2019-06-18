@@ -193,7 +193,7 @@ export default {
     background: rgb(243, 243, 243);
     margin: 0 auto;
     width: 60%;
-    top: 62px;
+    top: 69px;
     margin-bottom: 20px;
     line-height:40px;
     
@@ -224,7 +224,7 @@ export default {
   color: rgba(223, 186, 20, .842);
 }
 .topBanner {
-  line-height: 59px;
+  line-height: 66px;
 
   position: fixed;
   left: 0;
@@ -232,9 +232,9 @@ export default {
   z-index: 99;
 
   width: 100%;
-  height: 59px;
-  background: #eedd41;
-  border-bottom: 1px solid #e4b865;
+  height: 66px;
+  background: #fff;
+  border-bottom: 1px solid rgba(207, 206, 206, 0.596);
 }
 
 .topBanner p {
@@ -242,14 +242,14 @@ export default {
 }
 
 .left {
-  font-family: '黑体';
-  font-size: 21px;
-  color: #f3faef;
   float: left;
+  height: 65px;
+  padding-top: 2px;
   font-weight: bolder;
+  background: #fff;
 }
 .left img{
-  width: 54px;
+  width: 55px;
 }
 .left .fg{
   float: right;
@@ -257,6 +257,7 @@ export default {
   font-size: 24px;
   color: #1682c0;
   padding-left: 10px;
+  padding-right: 15px;
 }
 .left .icon-tip{
   width: 40px;

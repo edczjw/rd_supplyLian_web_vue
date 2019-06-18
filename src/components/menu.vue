@@ -3,7 +3,7 @@
 <div class="side" :class="{'side-menu' : this.$store.state.isLeftHiden}">
    <el-row>
       <el-col>
-        <el-menu default-active="1" class="el-menu-vertical-demo" background-color="#2a3542" text-color="rgb(226, 228, 229)" active-text-color="rgb(68, 196, 235)"
+        <el-menu default-active="1" class="el-menu-vertical-demo" background-color="#fff" text-color="black" active-text-color="#1682c0"
         :collapse="this.$store.state.isLeftHiden">
         
             <router-link to="/user/usergoods" >
@@ -45,7 +45,7 @@
 
 <style scoped  lang=less>
   .el-menu {
-      border-color: #2a3542;
+      border-color: #fff;
   }
 
 /* 菜单 */
@@ -55,20 +55,20 @@
   width: 199px;
   height: 100%;
   transition: all .5s;
-
-  background-color: #2a3542;
+  background-color: #fff;
+      border:1px solid rgba(223, 220, 220, 0.568);
 }
 
 .side-menu {
-  width: 64px;
+  width: 66px;
   transition: all .5s;
-  background-color: #2a3542;
+  background-color: #fff;
 }
 
 /* 修边 */
 .el-menu {
   /* important的意义在于优先于它内部定义的样式 */
-  margin: -.3px !important;
+  margin: -.2px !important;
 }
 
 .el-menu-item {

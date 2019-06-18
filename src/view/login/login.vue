@@ -352,7 +352,6 @@ export default {
     margin-top:5%;
     margin-left: 10%;
     width: 70%;
-    border-radius: 12px; 
     text-align: center;
     padding: 50px 40px;
     background-color: rgb(255, 255, 255);
@@ -367,7 +366,6 @@ export default {
     margin-top:5%;
     margin-left: 10%;
     width: 85%;
-    border-radius: 12px; 
     text-align: center;
     padding: 30px 40px;
     background-color: #fff;

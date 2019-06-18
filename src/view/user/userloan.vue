@@ -11,7 +11,9 @@
                 <li class="animated zoomIn">
                     <div class="inner-box">
                     <div><img src="../../assets/pro1.png" alt=""></div>
+                <el-badge value="hot" class="item">
                     <div class="pro-tit">人力薪资贷</div>
+                </el-badge>
                     </div>
 
                     <div class="desc-inner">

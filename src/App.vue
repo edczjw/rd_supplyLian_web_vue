@@ -40,10 +40,10 @@ body {
     font-size: 12px;
     line-height: 24px;
     margin-bottom: 10px;
-    background-color: #c9cccf;
+    background-color: #3384d4;
     border-radius: 4px;
-    border: 1px solid #eee;
-    color: #777;
+    border: 1px solid #3384d4;
+    color: #fff;
 }
 
 /* 返回顶部 */
