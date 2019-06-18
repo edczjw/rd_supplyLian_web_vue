@@ -199,7 +199,7 @@
                         @change="selectyear"
                         active-text="包含今年"
                         inactive-text="不包含今年">
-                        </el-switch>
+                        </el-switch>    |    需填写近三年数据 
                     </el-row>
 
                 <el-row>
@@ -313,7 +313,7 @@
                         @change="selectyear2"
                         active-text="包含今年"
                         inactive-text="不包含今年">
-                        </el-switch>
+                        </el-switch>    |    需填写近两年交易额 
                     </el-row>
                 <el-row>
                      <el-table :data="form.turnover" border highlight-current-row size="mini">

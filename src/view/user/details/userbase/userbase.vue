@@ -122,21 +122,13 @@
                 </el-row>
 
                 <el-row>
-                <el-col :span="12">
-                    近三年经营收入金额：{{detail.threeYearIncome}}
-                </el-col>
-                <el-col :span="12">
-                    近三年的利润金额：{{detail.threeYearProfit}}
-                </el-col>
-                </el-row>
-
-                <el-row>
-                <el-col :span="12">
-                    近三年的开票金额：{{detail.threeYearInvoice}}
-                </el-col>
-                <el-col :span="12">
-                    近三年的纳税金额：{{detail.threeYearTaxes}}
-                </el-col>
+                <el-table :data="detail.threeYearDevelopmentSituation" border >
+                <el-table-column property="nearlyYears" label="年份" align="center"></el-table-column>
+                <el-table-column property="incomeSum" label="经营收入金额（元）" align="center"></el-table-column>
+                <el-table-column property="profitSum" label="利润金额（元）" align="center"></el-table-column>
+                <el-table-column property="invoiceSum" label="开票金额（元）" align="center"></el-table-column>
+                <el-table-column property="taxesSum" label="纳税金额（元）" align="center"></el-table-column>
+                </el-table>
                 </el-row>
 
                 <el-row>
@@ -150,7 +142,9 @@
 
                 <el-row>
                 <el-col :span="12">
-                    对外担保情况：{{detail.externalGuarantees}}
+                    对外担保情况：
+                    <span v-if="detail.externalGuarantees=='1'">有</span>
+                    <span v-if="detail.externalGuarantees=='0'">无</span>
                 </el-col>
                 <el-col :span="12">
                     担保人：{{detail.warrantorName}}
@@ -173,7 +167,7 @@
 
                 <el-row>
                 <el-col :span="12">
-                    付款主体名称：{{detail.paymentSubject}}
+                    应收账款主体（债务人）全称：{{detail.paymentSubject}}
                 </el-col>
                 <el-col :span="12">
                     开始合作期限：{{detail.periodCooperation}}
@@ -181,50 +175,52 @@
                 </el-row>
 
                 <el-row>
-                <el-col :span="12">
-                    过去两年交易额：{{detail.turnover}}
-                </el-col>
-                <el-col :span="12">
-                    付款账期：{{detail.paymentPeriod}}
-                </el-col>
+                <el-table :data="detail.turnover" border >
+                <el-table-column property="turnoverYear" label="年份" align="center"></el-table-column>
+                <el-table-column property="turnoverSum" label="交易金额（元）" align="center"></el-table-column>
+                </el-table>
                 </el-row>
 
                 <el-row>
+                <el-col :span="12">
+                    结算账期（天）：{{detail.paymentPeriod}}
+                </el-col>
                 <el-col :span="12">
                     项目当前应收款总额：{{detail.totalReceivables}}
                 </el-col>
+                </el-row>
+
+                <el-row>
                 <el-col :span="12">
                     项目员工总数：{{detail.projectEmployees}}
                 </el-col>
-                </el-row>
-
-                <el-row>
                 <el-col :span="12">
                     平均员工薪资：{{detail.averageEmployeeSalary}}
                 </el-col>
+                </el-row>
+
+                <el-row>
                 <el-col :span="12">
                     单个员工薪资上限：{{detail.capEmployeeSalary}}
+                </el-col>
+                <el-col :span="12">
+                    本次申请借款总额：{{detail.totalApplication}}
                 </el-col>
                 </el-row>
 
                 <el-row>
                 <el-col :span="12">
-                    本次申请借款总额：{{detail.totalApplication}}
-                </el-col>
-                <el-col :span="12">
                     本次申请借款最长期限：{{detail.applicationDeadline}}
                 </el-col>
-                </el-row>
-                <el-row>
 
                 <el-col :span="12">
                     本次借款指定回款及还款账户：{{detail.repaymentAccount}}
                 </el-col>
+                </el-row>
+                <el-row>
                 <el-col :span="12">
                     本次借款质押的应收款金额：{{detail.pledgedReceivables}}
                 </el-col>
-                </el-row>
-                <el-row>
 
                 <el-col :span="12">
                     本次借款担保方式：{{detail.borrowingGuarantee}}
