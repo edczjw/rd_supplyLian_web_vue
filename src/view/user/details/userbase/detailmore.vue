@@ -70,6 +70,7 @@
                         :limit="5"
                         :http-request="Upload"
                         :file-list='fileList'
+                        :on-exceed="handleExceed"
                         :before-upload="beforeAvatarUpload"
                         :on-change="handleChange"
                         action=""
@@ -79,6 +80,11 @@
                         <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
                         <div class="el-upload__tip" slot="tip">只能上传jpg/png/pdf文件格式，每个文件大小5M以内，上传文件总数量限制1-5份，至少上传1份</div>
                         </el-upload>
+                        <el-progress v-if="videoFlag2" :percentage="videoUploadPercent2" style="margin-top:30px;"></el-progress>
+
+                        <el-row style="margin-top:20px;">
+                            <el-button type="success" @click="makesure">确认上传</el-button>
+                        </el-row>
                     </el-card>
                 </div>
             </div>
@@ -91,21 +97,26 @@
 export default {
   data() {
     return {
+            videoFlag2:false,//进度条
+            videoUploadPercent2:0,
         buttonshow:true,//显示隐藏按钮
         show:true,
         statues:"",//订单状态
         detail:"",
         fileList:[],//文件容器
-        auditingImage:"",//存储文件url
+        auditingImage:[],//存储文件url
     };
   },
   mounted() {
       this.godetail();//获取信息
   },
   methods: {
+      handleExceed(files, fileList) {
+        this.$message.warning(`当前限制选择 5 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+      },
       //对文件列表进行控制
       handleChange(file, fileList) {
-        this.fileList = fileList.slice(-1);
+        this.fileList = fileList.slice(-5);
       },
        // 图片上传前验证:限制用户上传的图片格式和大小
       beforeAvatarUpload (file) {
@@ -124,6 +135,7 @@ export default {
 
     //上传
       Upload(file) {
+        this.videoFlag2= true;
         const OSS = require('ali-oss');
             let _self = this;
             var bucket;//OSS文件名称
@@ -167,49 +179,36 @@ export default {
                     const storeAs = 'prod/meson/msscloan/file/enterprise/'+obj+'/'+enterpriseNo+'/repaymentvoucher/'+obj2+'-'
                     +fileName
 
+                    
+                            //保存
+                    _self.auditingImage.push('http://mssaas.oss-cn-shenzhen.aliyuncs.com/'+storeAs)
+
                     //上传
-                    client.put(storeAs,file.file).then(res => {
+                    client.multipartUpload(storeAs,file.file,{
+                        progress:function (p) { //获取进度条的值
+                            // console.log(p)
+                            _self.videoUploadPercent2 = p*100
+                            
+                        }}).then(res => {
                         if(res.url!=null || res.url!=""){
                             
-                            console.log('服务器返回的文件url：')
-                            //返回服务器文件url
-                            console.log(res.url)
+                            // console.log('服务器返回的文件url：')
+                            // //返回服务器文件url
+                            // console.log(res.url)
+                            
+                            this.videoFlag2 = false;
+                            _self.videoUploadPercent2 = 0;
                             
                             this.$notify({
                             title: '上传结果',
                             type: 'success',
                             offset: 100,
                             dangerouslyUseHTMLString: true,
-                            message: '<strong>'+file.file.name+'文件上传成功！</strong>',
+                            message: '<strong>'+file.file.name+'文件已选择！</strong>',
                             position: 'bottom-left'
                             });
                             console.log(file.file.name+'文件上传成功！')
                         }
-
-                            //保存
-                            _self.auditingImage = res.url;
-
-                            //把上传图片的url发给后台做记录
-                            _self.$axios({
-                                    method: 'post',
-                                    url: _self.$store.state.domain +"/biz/saveVoucher",
-                                    data:{
-                                        processNo:_self.$route.query.processNo,
-                                        imagesUrl:_self.auditingImage
-                                    }
-                                    })
-                                    .then(
-                                        response => {
-                                                if(response.data.code==0){
-                                                    console.log(response.data.msg);
-                                                    console.log(response.data.detail.result);
-                                                }else{
-                                                    console.log(response.data.msg);
-                                                }
-                                            }, response => {
-                                                console.log(response);
-                                            });
-
                             }).catch(err => {
                                 this.$message.error('上传文件异常');
                                 console.log('上传文件异常：');
@@ -222,6 +221,34 @@ export default {
                     console.log(response);
                     }
             )
+    },
+
+    makesure(){
+         //把上传图片的url发给后台做记录
+        this.$axios({
+                method: 'post',
+                url: this.$store.state.domain +"/biz/saveVoucher",
+                data:{
+                    processNo:this.$route.query.processNo,
+                    imagesUrl:this.auditingImage
+                }
+                })
+                .then(
+                    response => {
+                            if(response.data.code==0){
+                                this.$alert('所有凭证文件上传完成', '上传结果', {
+                                    confirmButtonText: '确定',
+                                    callback: action => {
+                                        console.log(response.data.msg);
+                                        console.log(response.data.detail.result);
+                                    }
+                                    });
+                            }else{
+                                console.log(response.data.msg);
+                            }
+                        }, response => {
+                            console.log(response);
+                        });
     },
      
 
