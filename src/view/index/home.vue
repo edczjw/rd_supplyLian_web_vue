@@ -10,9 +10,10 @@
                 用
                 </h1>
             <h2 class="animated zoomIn">
-                捷
-                易
-                融
+                民
+                盛
+                小
+                贷
                 </h2>
             <h3 class="animated zoomIn">
                 供

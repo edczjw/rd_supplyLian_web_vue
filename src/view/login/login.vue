@@ -2,10 +2,10 @@
   <div class="wrapper ">
     <div class="contain">
     <div class="text-left">
-        <h1 class="animated zoomIn">捷易融供应链</h1>
+        <h1 class="animated zoomIn">供应链</h1>
             <h2 class="animated zoomIn">金融服务平台</h2>
             <span class="ti animated zoomIn"></span>
-        <span class="animated zoomIn">JieYiRong Credit Supply Chain <br> Financial Service Platform</span>
+        <span class="animated zoomIn">Credit Supply Chain <br> Financial Service Platform</span>
     </div>
 
     <div class="inner-right">

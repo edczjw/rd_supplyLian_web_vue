@@ -2,7 +2,8 @@
 <div>
 <div class="topBanner">
     <div class="side-tit">
-      <p class='left'><img src="../../assets/1.png"/><b class="fg">创建账户</b>
+      <!-- <p class='left'><img src="../../assets/1.png"/><b class="fg">创建账户</b> -->
+      <p class='left'><b class="fg">供应链金融服务平台</b>
       </p>
     </div>
     <p class='right' @click="goBack" title="安全退出">
