@@ -444,7 +444,7 @@
                         :limit="5"
                         :http-request="Upload2"
                         :file-list='fileList2'
-                        :on-exceed="handleExceed2"
+                        :on-exce  ed="handleExceed2"
                         :before-upload="beforeAvatarUpload2"
                         :on-change="handleChange2"
                         action=""
